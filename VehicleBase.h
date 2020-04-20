@@ -15,7 +15,9 @@ class VehicleBase
       int         vehicleID;
       VehicleType vehicleType;
       Direction   vehicleDirection;
-    
+      int         vehicleSize;
+      bool        turnRight;   
+ 
     public:
        VehicleBase(VehicleType type, Direction originalDirection);
        VehicleBase(const VehicleBase& other);
@@ -25,6 +27,9 @@ class VehicleBase
 
        inline VehicleType getVehicleType() const { return this->vehicleType; }
        inline Direction   getVehicleOriginalDirection() const { return this->vehicleDirection; }
+
+       inline int getVehicleSize() {return this->vehicleSize;}
+       inline bool getTurn() {return this->turnRight;}
 };
 
 #endif
