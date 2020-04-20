@@ -18,7 +18,8 @@ VehicleBase::VehicleBase(VehicleType type, Direction direction)
    }
    
    //call random number generator- work in progress
-   double randNum = 0.5;
+   double randNum = Random::generateNum();
+   //double randNum = 0.5;
 
    if (randNum < 0.4) //replace with input file values
    {
