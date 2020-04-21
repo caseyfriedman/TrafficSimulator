@@ -1,6 +1,8 @@
 #ifndef __VEHICLE_BASE_H__
 #define __VEHICLE_BASE_H__
 
+#include "Parameters.cpp"
+
 // enum: see http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-enum
 enum class Direction   {north, south, east, west};
 enum class VehicleType {car, suv, truck};
@@ -20,6 +22,7 @@ class VehicleBase
  
     public:
        VehicleBase(VehicleType type, Direction originalDirection);
+       VehicleBase(VehicleType type, Direction originalDirection, Parameters param);
        VehicleBase(const VehicleBase& other);
        ~VehicleBase();
 

@@ -9,7 +9,8 @@ Could be command line argument later, but right now you just need to call
 Parameters parameters("input_file_format.txt");
 
 */
-
+#ifndef __PERAMETERS_CPP__
+#define __PERAMETERS_CPP__
 
 #include <fstream>
 #include <iostream>
@@ -157,7 +158,7 @@ void error(std::string msg, string filename)
 
 };
 
-
+#endif
 
 
 
