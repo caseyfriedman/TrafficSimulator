@@ -1,21 +1,43 @@
+/**
+
+Created by Casey
+
+Parameter constructor takes in the file name. 
+
+Could be command line argument later, but right now you just need to call
+
+Parameters parameters("input_file_format.txt");
+
+*/
+
+
 #include <fstream>
 #include <iostream>
 #include <vector>
 #include <string>
 using namespace std;
 
+
 class Parameters{
 
-
-	public:
+private:
 		vector<string> params;	
+public:
+
+Parameters(string filename){
 
 
+ifstream infile {filename};
+if (!infile)
+    {
+        error("Unable to open file: ", filename);
 
-Parameters(std::ifstream &infile){
+    }
 
-string next;
-string param;
+
+	string next;
+	string param;
+
 	while(!infile.eof()){
 		
 	infile >> next;
@@ -24,14 +46,11 @@ string param;
 
 	}
 
-	/**
-	string param;
-	string next;
-
-	infile >> maximum_simulated_time;
-	infile >> next;
-	infile >> green_north_south;
-*/
+	if (infile.fail() && !infile.eof())
+    {
+        std::cerr << "Error: bad file format: " << std::endl;
+        std::exit(1);
+    }
 }
 
 int get_max_simulated_time(){
@@ -128,20 +147,16 @@ double get_proportion_left_turn_trucks(){
 	return stod(params[17]);
 }
 
+
+
+void error(std::string msg, string filename)
+{
+    std::cerr << msg << filename << std::endl;
+    exit(0);
+}
+
 };
 
-int main(int argc, char *argv[])
-{
-
-	
-ifstream infile {argv[1]};
-
-Parameters parameters(infile);
-
-cout << parameters.get_proportion_left_turn_SUVs() << endl;
-
-return 0;
-}
 
 
 
