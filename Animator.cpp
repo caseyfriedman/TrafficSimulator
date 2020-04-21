@@ -442,5 +442,3 @@ void Animator::drawSouthPortion()
 }
 
 #endif
-}
-

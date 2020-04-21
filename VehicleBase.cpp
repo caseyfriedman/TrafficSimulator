@@ -2,6 +2,7 @@
 #define __VEHICLE_BASE_CPP__
 
 #include "VehicleBase.h"
+#include "Random.h"
 
 int VehicleBase::vehicleCount = 0;
 
