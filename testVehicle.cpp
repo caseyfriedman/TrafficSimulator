@@ -8,6 +8,7 @@
 #include "VehicleBase.h"
 #include "Section.h"
 #include "Parameters.cpp"
+#include "TrafficLight.h"
 
 int main ()
 {
@@ -58,6 +59,16 @@ int main ()
    std::cout << "Is section intersection: " << sec1.isIntersection() << std::endl;
    sec1.setIntersection();
    std::cout << "Is section intersection: " << sec1.isIntersection() << std::endl;
+
+   TrafficLight lightEW(LightDirection::EW, params);
+   TrafficLight lightNS(LightDirection::NS, params);
+   std::cout << "Is light EW red: " << lightEW.getIsRed() << std::endl;
+   std::cout << "Is light NS red: " << lightNS.getIsRed() << std::endl;
+   for (int i=0; i<=50; i++)
+   {
+      lightEW.update();
+      //lightNS.update();
+   }
 
    return 0;
 }
