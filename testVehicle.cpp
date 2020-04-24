@@ -11,6 +11,7 @@
 #include "TrafficLight.h"
 //#include "Lane.h"
 #include <string>
+#include "Road.h"
 
 int main ()
 {
@@ -76,6 +77,12 @@ int main ()
 
  //  std::string str = "NB";
  //  Lane laneNorth(8, Direction::north);
+
+
+   std::cout << "************************************************"<<std::endl;
+
+   Road road();
+
 
    return 0;
 }
