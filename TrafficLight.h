@@ -1,7 +1,7 @@
 #ifndef __TRAFFIC_LIGHT_H__
 #define __TRAFFIC_LIGHT_H__
 
-#include "Parameters.cpp"
+#include "Parameters.h"
 
 enum class LightDirection   {EW, NS};
 

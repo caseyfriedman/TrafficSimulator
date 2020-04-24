@@ -1,20 +1,30 @@
-#include "Section.h"
-#include "TrafficLight.h"
+#ifndef ROAD_H
+#define ROAD_H
 
+
+
+#include "Section.h"
+#include "Lane.h"
+#include "Parameters.h"
+using namespace std;
 
 class Road
 {
 	public:
 		Road();
 		Road(Parameters params);
+		Section NEIntersection;
 	private:
 		int roadSize;
-		TrafficLight tl_NS;
-		TrafficLight tl_EW;
-		Section NEIntersection;
+		
+		
 		Section NWIntersection;
 		Section SEIntersection;
 		Section SWIntersection;
-
+		Lane northBound;
+		Lane southBound;
+		Lane eastBound;
+		Lane westBound;
 
 };
+#endif

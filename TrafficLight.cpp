@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "TrafficLight.h"
-#include "Parameters.cpp"
+#include "Parameters.h"
 
 TrafficLight::TrafficLight(LightDirection lightDir, Parameters params)
 {
