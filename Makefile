@@ -1,5 +1,5 @@
-EXECS = testAnimator
-OBJS = testAnimator.o Animator.o VehicleBase.o Random.o
+EXECS = testVehicle
+OBJS = testVehicle.o VehicleBase.o Random.o Parameters.o Section.o Lane.o Road.o
 
 #### use next two lines for Mac
 #CC = clang++

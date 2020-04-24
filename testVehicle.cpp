@@ -7,9 +7,9 @@
 #include <iostream>
 #include "VehicleBase.h"
 #include "Section.h"
-#include "Parameters.cpp"
+#include "Parameters.h"
 #include "TrafficLight.h"
-#include "Lane.h"
+//#include "Lane.h"
 #include <string>
 
 int main ()
@@ -74,8 +74,8 @@ int main ()
       //lightNS.update();
    }
 
-   std::string str = "NB";
-   Lane laneNorth(8, Direction::north);
+ //  std::string str = "NB";
+ //  Lane laneNorth(8, Direction::north);
 
    return 0;
 }
