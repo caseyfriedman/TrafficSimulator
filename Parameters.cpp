@@ -9,23 +9,13 @@ Could be command line argument later, but right now you just need to call
 Parameters parameters("input_file_format.txt");
 
 */
-#ifndef __PERAMETERS_CPP__
-#define __PERAMETERS_CPP__
-
-#include <fstream>
-#include <iostream>
-#include <vector>
-#include <string>
-using namespace std;
 
 
-class Parameters{
+#include "Parameters.h"
 
-private:
-		vector<string> params;	
-public:
+	
 
-Parameters(string filename){
+Parameters::Parameters(string filename){
 
 
 ifstream infile {filename};
@@ -54,111 +44,108 @@ if (!infile)
     }
 }
 
-int get_max_simulated_time(){
+int Parameters::get_max_simulated_time(){
 
 	return stoi(params[0]);
 }
 
-int get_number_of_sections_before_intersection(){
+int Parameters::get_number_of_sections_before_intersection(){
 
 	
 	return stoi(params[1]);
 
 }
 
-int get_green_north_south(){
+int Parameters::get_green_north_south(){
 
 	return stoi(params[2]);
 }
 
-int get_yellow_north_south(){
+int Parameters::get_yellow_north_south(){
 
 	return stoi(params[3]);
 
 }
 
-int get_green_east_west(){
+int Parameters::get_green_east_west(){
 	
 	return stoi(params[4]);
 
 }
 
-int get_yellow_east_west(){
+int Parameters::get_yellow_east_west(){
 
 	return stoi(params[5]);
 
 }
 
-double get_prob_new_vehicle_northbound(){
+double Parameters::get_prob_new_vehicle_northbound(){
 
 	return stod(params[6]);
 
 }
 
 
-double get_prob_new_vehicle_southbound(){
+double Parameters::get_prob_new_vehicle_southbound(){
 
 	return stod(params[7]);
 
 }
 
 
-double get_prob_new_vehicle_eastbound(){
+double Parameters::get_prob_new_vehicle_eastbound(){
 
 	return stod(params[8]);
 		
 }
 
-double get_prob_new_vehicle_westbound(){
+double Parameters::get_prob_new_vehicle_westbound(){
 
 	return stod(params[9]);
 
 }
 
 
-double get_proportion_of_cars(){
+double Parameters::get_proportion_of_cars(){
 	return stod(params[10]);
 }
 
-double get_proportion_of_SUVs(){
+double Parameters::get_proportion_of_SUVs(){
 	return stod(params[11]);
 }
 
-double get_proportion_right_turn_cars(){
+double Parameters::get_proportion_right_turn_cars(){
 	return stod(params[12]);
 }
 
-double get_proportion_left_turn_cars(){
+double Parameters::get_proportion_left_turn_cars(){
 	return stod(params[13]);
 }
 
-double get_proportion_right_turn_SUVs(){
+double Parameters::get_proportion_right_turn_SUVs(){
 	return stod(params[14]);
 }
 
-double get_proportion_left_turn_SUVs(){
+double Parameters::get_proportion_left_turn_SUVs(){
 	return stod(params[15]);
 }
 
-double get_proportion_right_turn_trucks(){
+double Parameters::get_proportion_right_turn_trucks(){
 	return stod(params[16]);
 }
 
-double get_proportion_left_turn_trucks(){
+double Parameters::get_proportion_left_turn_trucks(){
 	return stod(params[17]);
 }
 
 
 
-void error(std::string msg, string filename)
+void Parameters::error(std::string msg, string filename)
 {
     std::cerr << msg << filename << std::endl;
     exit(0);
 }
 
-};
-
-#endif
 
 
 

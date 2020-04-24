@@ -1,7 +1,7 @@
 #ifndef __VEHICLE_BASE_H__
 #define __VEHICLE_BASE_H__
 
-#include "Parameters.cpp"
+#include "Parameters.h"
 
 // enum: see http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#S-enum
 enum class Direction   {north, south, east, west};
