@@ -12,7 +12,7 @@ class Lane
     private:
         Direction type;
         int roadSize;
-        vector<Section> lane;
+        vector<Section*> lane;
     
     public:
         Lane();
@@ -20,9 +20,9 @@ class Lane
         ~Lane();
     
         void advanceLane();
-        void turnRight();
-        bool canMakeLight();
-        int timeToCross();
+        void makeRight();
+        bool canMakeLight(VehicleBase vehicle);
+        int timeToCross(VehicleBase vehicle);
         bool canNewCarCome();
 };
 #endif

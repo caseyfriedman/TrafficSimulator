@@ -17,7 +17,7 @@ Lane::Lane()
     for(int i = 0; i < numSections/2; i++)
     {
         Section* sec = new Section();
-        lane.push_back(&sec);
+        lane.push_back(sec);
     }
     
         lane.push_back(&NEIntersection);
@@ -26,7 +26,7 @@ Lane::Lane()
     for(int i = 0; i < numSections/2; i++)
     {
         Section* sec = new Section();
-        lane.push_back(&sec);
+        lane.push_back(sec);
     }
 }
 
@@ -38,7 +38,7 @@ Lane::Lane(int size, Direction type)
     for(int i = 0; i < numSections/2; i++)
     {
         Section* sec = new Section();
-        lane.push_back(&sec);
+        lane.push_back(sec);
     }
     
     if(type == Direction::north)
@@ -65,7 +65,7 @@ Lane::Lane(int size, Direction type)
     for(int i = 0; i < numSections/2; i++)
     {
         Section* sec = new Section();
-        lane.push_back(&sec);
+        lane.push_back(sec);
     }
 }
 
@@ -78,54 +78,54 @@ void Lane::advanceLane()
     
     for(int i = lane.size() - 1; i >= 0; i--)
     {
-        if(lane[i].isOccupied())
+        if(lane[i]->isOccupied())
         {
-            if(lane[i].getVehicle().getVehicleID() != currVehicle)
+            if(lane[i]->getVehicle().getVehicleID() != currVehicle)
             {
-                currVehicle = lane[i].getVehicle().getVehicleID();
+                currVehicle = lane[i]->getVehicle().getVehicleID();
                 vehicleHead = true;
             }
             
             if(i == lane.size() - 1)
             {
-                lane[i].setVehicle(nullptr);
+                lane[i]->setVehicle(nullptr);
             }
             else if(i > lane.size()/2)
             {
-                lane[index + 1].setVehicle(currVehicle);
-                lane[i].setVehicle(nullptr);
+                lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+                lane[i]->setVehicle(nullptr);
             }
-            else if(i = lane.size()/2)
+            else if(i == lane.size()/2)
             {
-                if(lane[i].turnRight())
+                if(lane[i]->getVehicle().getTurn())
                 {
-                    lane[i].makeRight();
+                    makeRight();
                 }
                 else
                 {
-                    lane[index + 1].setVehicle(currVehicle);
-                    lane[i].setVehicle(nullptr);
+                    lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+                    lane[i]->setVehicle(nullptr);
                 }
             }
             else if(i == lane.size()/2 - 1)
             {
-                if(vehicleHead && lane[i].canMakeLight())
+                if(vehicleHead && canMakeLight(lane[i]->getVehicle()))
                 {
-                    lane[index + 1].setVehicle(currVehicle);
-                    lane[i].setVehicle(nullptr);
+                    lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+                    lane[i]->setVehicle(nullptr);
                 }
                 else
                 {
-                    lane[index + 1].setVehicle(currVehicle);
-                    lane[i].setVehicle(nullptr);
+                    lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+                    lane[i]->setVehicle(nullptr);
                 }
             }
             else
             {
-                if(!lane[i+1].isOccupied())
+                if(!lane[i+1]->isOccupied())
                 {
-                    lane[index + 1].setVehicle(currVehicle);
-                    lane[i].setVehicle(nullptr);
+                    lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+                    lane[i]->setVehicle(nullptr);
                 }
             }
         }
@@ -134,43 +134,43 @@ void Lane::advanceLane()
     
 }
 
-void Lane::turnRight()
+void Lane::makeRight()
 {
     if(type == Direction::north)
     {
         //right turn onto east
-        eastBound.lane[lane.size()/2 + 2].setVehicle(lane[i].getVehicle());
-        lane[i].setVehicle(nullptr);
+        eastBound.lane[lane.size()/2 + 2].setVehicle(lane[lane.size()/2]->getVehicle());
+        lane[lane.size()/2]->setVehicle(nullptr);
     }
     else if(type == Direction::east)
     {
         //right turn onto south
-        southBound.lane[lane.size()/2 + 2].setVehicle(lane[i].getVehicle());
-        lane[i].setVehicle(nullptr);
+        southBound.lane[lane.size()/2 + 2]->setVehicle(lane[lane.size()/2]->getVehicle());
+        lane[lane.size()/2]->setVehicle(nullptr);
     }
     else if(type == Direction::south)
     {
         //right turn onto west
-        westBound.lane[lane.size()/2 + 2].setVehicle(lane[i].getVehicle());
-        lane[i].setVehicle(nullptr);
+        westBound.lane[lane.size()/2 + 2].setVehicle(lane[lane.size()/2]->getVehicle());
+        lane[lane.size()/2]->setVehicle(nullptr);
     }
     else if(type == Direction::west)
     {
         //right turn onto north
-        northBound.lane[lane.size()/2 + 2].setVehicle(lane[i].getVehicle());
-        lane[i].setVehicle(nullptr);
+        northBound.lane[lane.size()/2 + 2]->setVehicle(lane[lane.size()/2]->getVehicle());
+        lane[lane.size()/2]->setVehicle(nullptr);
     }
 }
 
-bool Lane::CanMakeLight()
+bool Lane::canMakeLight(VehicleBase vehicle)
 {
-    if(type == Direction::north || Direction::south)
+    if((type == Direction::north) || (type == Direction::south))
     {
         if(trafficLightNS.getIsRed())
         {
             return false;
         }
-        return timeToCross >= trafficLightNS.timeUntilRed();
+        return timeToCross(vehicle) >= trafficLightNS.timeUntilRed();
     }
     else
     {
@@ -178,17 +178,17 @@ bool Lane::CanMakeLight()
         {
             return false;
         }
-        return timeToCross >= trafficLightNS.timeUntilRed();
+        return timeToCross(vehicle) >= trafficLightNS.timeUntilRed();
     }
 }
 
-int Lane::timeToCross()
+int Lane::timeToCross(VehicleBase vehicle)
 {
     int timeToCross = 2;
     
-    timeToCross += vehiclePtr.getVehicle().getSize();
+    timeToCross += vehicle.getVehicleSize();
     
-    if(vehiclePtr.getVehicle().turnRight())
+    if(vehicle.getTurn())
     {
         timeToCross -= 1;
     }
@@ -197,7 +197,7 @@ int Lane::timeToCross()
 
 bool Lane::canNewCarCome()
 {
-    return !lane[4].isOccupied();
+    return !lane[4]->isOccupied();
 }
             
 #endif
