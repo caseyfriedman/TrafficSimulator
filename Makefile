@@ -1,5 +1,5 @@
 EXECS = testVehicle
-OBJS = testVehicle.o VehicleBase.o Random.o Parameters.o Section.o Lane.o Road.o
+OBJS = testVehicle.o VehicleBase.o Random.o Parameters.o Section.o TrafficLight.o
 
 #### use next two lines for Mac
 #CC = clang++
@@ -11,7 +11,7 @@ CCFLAGS = -std=c++11
 
 all: $(EXECS)
 
-testAnimator: $(OBJS)
+testVehicle: $(OBJS)
 	$(CC) $(CCFLAGS) $^ -o $@
 
 %.o: %.cpp *.h
