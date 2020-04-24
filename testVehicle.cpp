@@ -9,6 +9,8 @@
 #include "Section.h"
 #include "Parameters.cpp"
 #include "TrafficLight.h"
+#include "Lane.h"
+#include <string>
 
 int main ()
 {
@@ -55,6 +57,8 @@ int main ()
    std::cout << "Vehicle turn (truck): " << v3.getTurn() << std::endl;
 */
    Section sec1(&v1);
+   Section sec2(&v2);
+   Section sec3(&v3);
    std::cout << "Section count:" << sec1.getNumOfSecs() << std::endl;
    std::cout << "Is section intersection: " << sec1.isIntersection() << std::endl;
    sec1.setIntersection();
@@ -66,9 +70,12 @@ int main ()
    std::cout << "Is light NS red: " << lightNS.getIsRed() << std::endl;
    for (int i=0; i<=50; i++)
    {
-      lightEW.update();
+      //lightEW.update();
       //lightNS.update();
    }
+
+   std::string str = "NB";
+   Lane laneNorth(8, Direction::north);
 
    return 0;
 }

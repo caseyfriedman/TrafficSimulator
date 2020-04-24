@@ -5,9 +5,8 @@
 #include "Section.h"
 #include <vector>
 
-private string Lane::type;
-private int Lane::roadSize;
-private vector<Section*> Lane::lane;
+//int Lane::roadSize;
+//vector<Section*> Lane::lane;
 
 Lane::Lane()
 {
@@ -31,7 +30,7 @@ Lane::Lane()
     }
 }
 
-Lane::Lane(int size, string type)
+Lane::Lane(int size, Direction type)
 {
     roadSize = size;
     int numSections = roadSize + 6;
@@ -42,22 +41,22 @@ Lane::Lane(int size, string type)
         lane.push_back(&sec);
     }
     
-    if(type == "NB")
+    if(type == Direction::north)
     {
         lane.push_back(&NEIntersection);
         lane.push_back(&NWIntersection);
     }
-    else if(type == "EB")
+    else if(type == Direction::east)
     {
         lane.push_back(&SEIntersection);
         lane.push_back(&NEIntersection);
     }
-    else if(type == "SB")
+    else if(type == Direction::south)
     {
         lane.push_back(&SWIntersection);
         lane.push_back(&SEIntersection);
     }
-    else if(type == "WB")
+    else if(type == Direction::west)
     {
         lane.push_back(&NWIntersection);
         lane.push_back(&SWIntersection);
@@ -72,14 +71,14 @@ Lane::Lane(int size, string type)
 
 Lane::~Lane() {}
 
-Lane::advanceLane()
+void Lane::advanceLane()
 {
     int currVehicle = -1;
     bool vehicleHead = false;
     
     for(int i = lane.size() - 1; i >= 0; i--)
     {
-        if(lane[i].isOccupied)
+        if(lane[i].isOccupied())
         {
             if(lane[i].getVehicle().getVehicleID() != currVehicle)
             {
@@ -123,7 +122,7 @@ Lane::advanceLane()
             }
             else
             {
-                if(!lane[i+1].isOccupied)
+                if(!lane[i+1].isOccupied())
                 {
                     lane[index + 1].setVehicle(currVehicle);
                     lane[i].setVehicle(nullptr);
@@ -137,25 +136,25 @@ Lane::advanceLane()
 
 void Lane::turnRight()
 {
-    if(type = "NB")
+    if(type == Direction::north)
     {
         //right turn onto east
         eastBound.lane[lane.size()/2 + 2].setVehicle(lane[i].getVehicle());
         lane[i].setVehicle(nullptr);
     }
-    else if(type = "EB")
+    else if(type == Direction::east)
     {
         //right turn onto south
         southBound.lane[lane.size()/2 + 2].setVehicle(lane[i].getVehicle());
         lane[i].setVehicle(nullptr);
     }
-    else if(type = "SB")
+    else if(type == Direction::south)
     {
         //right turn onto west
         westBound.lane[lane.size()/2 + 2].setVehicle(lane[i].getVehicle());
         lane[i].setVehicle(nullptr);
     }
-    else if(type = "WB")
+    else if(type == Direction::west)
     {
         //right turn onto north
         northBound.lane[lane.size()/2 + 2].setVehicle(lane[i].getVehicle());
@@ -165,7 +164,7 @@ void Lane::turnRight()
 
 bool Lane::CanMakeLight()
 {
-    if(type == "NB" || "SB")
+    if(type == Direction::north || Direction::south)
     {
         if(trafficLightNS.getIsRed())
         {

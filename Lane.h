@@ -3,19 +3,20 @@
 
 #include <vector>
 #include <string>
+#include "Section.h"
 
 using namespace std;
 
 class Lane
 {
     private:
-        string type;
+        Direction type;
         int roadSize;
         vector<Section> lane;
     
     public:
         Lane();
-        Lane(int size, string type);
+        Lane(int size, Direction type);
         ~Lane();
     
         void advanceLane();

@@ -19,6 +19,8 @@ class Section
 
       void setIntersection() {intersection = true;}
 
+      inline void setVehicle(VehicleBase* obj){vehiclePtr = obj;}
+
       inline bool isOccupied() {return (vehiclePtr != nullptr);}
       inline bool isIntersection() {return this->intersection;}
 
