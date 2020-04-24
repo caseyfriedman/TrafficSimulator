@@ -1,5 +1,5 @@
 EXECS = testVehicle
-OBJS = testVehicle.o VehicleBase.o Random.o Parameters.o Section.o TrafficLight.o
+OBJS = testVehicle.o VehicleBase.o Random.o Parameters.o Section.o TrafficLight.o Road.o Lane.o
 
 #### use next two lines for Mac
 #CC = clang++
