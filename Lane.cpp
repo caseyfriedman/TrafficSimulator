@@ -16,12 +16,12 @@ Lane::Lane()
     
     for(int i = 0; i < numSections/2; i++)
     {
-        Section* sec = new Section();
+        Section* sec = new See3ction();
         lane.push_back(sec);
     }
     
-        lane.push_back(&NEIntersection);
-        lane.push_back(&NWIntersection);
+        lane.push_back(nullptr);
+        lane.push_back(nullptr);
     
     for(int i = 0; i < numSections/2; i++)
     {
@@ -30,7 +30,17 @@ Lane::Lane()
     }
 }
 
-Lane::Lane(int size, Direction type)
+
+
+/*
+intersection[0] = NE
+intersection[1] = NW
+intersection[2] = SE
+intersection[3] = SW
+
+
+*/
+Lane::Lane(int size, Direction type, vector<Section*> intersections)
 {
     roadSize = size;
     int numSections = roadSize + 6;
@@ -43,23 +53,23 @@ Lane::Lane(int size, Direction type)
     
     if(type == Direction::north)
     {
-        lane.push_back(&NEIntersection);
-        lane.push_back(&NWIntersection);
+        lane.push_back(intersections[2]);//SE //double check that the order is right
+        lane.push_back(intersections[0]); //SW
     }
     else if(type == Direction::east)
     {
-        lane.push_back(&SEIntersection);
-        lane.push_back(&NEIntersection);
+        lane.push_back(intersections[1]); //NW
+        lane.push_back(intersections[0]); //NE
     }
     else if(type == Direction::south)
     {
-        lane.push_back(&SWIntersection);
-        lane.push_back(&SEIntersection);
+        lane.push_back(intersections[0]); //NW
+        lane.push_back(intersections[3]); //SW
     }
     else if(type == Direction::west)
     {
-        lane.push_back(&NWIntersection);
-        lane.push_back(&SWIntersection);
+        lane.push_back(intersections[2]); //SE
+        lane.push_back(intersections[3]); //SW
     }
 
     for(int i = 0; i < numSections/2; i++)
