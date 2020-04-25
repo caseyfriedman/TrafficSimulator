@@ -13,10 +13,11 @@ class Lane
         Direction type;
         int roadSize;
         vector<Section*> lane;
+        Lane* rigthTurnOnto;
     
     public:
         Lane();
-        Lane(int size, Direction type);
+        Lane(int size, Direction type, vector<Section*> intersections);
         ~Lane();
     
         void advanceLane();

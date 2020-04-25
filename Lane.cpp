@@ -16,7 +16,7 @@ Lane::Lane()
     
     for(int i = 0; i < numSections/2; i++)
     {
-        Section* sec = new See3ction();
+        Section* sec = new Section();
         lane.push_back(sec);
     }
     
@@ -141,7 +141,7 @@ void Lane::advanceLane()
         }
         vehicleHead = false;
     }
-    
+
 }
 
 void Lane::makeRight()
@@ -149,31 +149,32 @@ void Lane::makeRight()
     if(type == Direction::north)
     {
         //right turn onto east
-        eastBound.lane[lane.size()/2 + 2].setVehicle(lane[lane.size()/2]->getVehicle());
+        //eastBound.lane[lane.size()/2 + 2].setVehicle(lane[lane.size()/2]->getVehicle()); //individual lanes don't have acccess to other lanes
         lane[lane.size()/2]->setVehicle(nullptr);
     }
     else if(type == Direction::east)
     {
         //right turn onto south
-        southBound.lane[lane.size()/2 + 2]->setVehicle(lane[lane.size()/2]->getVehicle());
+        //southBound.lane[lane.size()/2 + 2]->setVehicle(lane[lane.size()/2]->getVehicle());
         lane[lane.size()/2]->setVehicle(nullptr);
     }
     else if(type == Direction::south)
     {
         //right turn onto west
-        westBound.lane[lane.size()/2 + 2].setVehicle(lane[lane.size()/2]->getVehicle());
+        //westBound.lane[lane.size()/2 + 2].setVehicle(lane[lane.size()/2]->getVehicle());
         lane[lane.size()/2]->setVehicle(nullptr);
     }
     else if(type == Direction::west)
     {
         //right turn onto north
-        northBound.lane[lane.size()/2 + 2]->setVehicle(lane[lane.size()/2]->getVehicle());
+        ///northBound.lane[lane.size()/2 + 2]->setVehicle(lane[lane.size()/2]->getVehicle());
         lane[lane.size()/2]->setVehicle(nullptr);
     }
 }
 
 bool Lane::canMakeLight(VehicleBase vehicle)
 {
+    /*
     if((type == Direction::north) || (type == Direction::south))
     {
         if(trafficLightNS.getIsRed())
@@ -190,6 +191,9 @@ bool Lane::canMakeLight(VehicleBase vehicle)
         }
         return timeToCross(vehicle) >= trafficLightNS.timeUntilRed();
     }
+*/
+    return false;
+
 }
 
 int Lane::timeToCross(VehicleBase vehicle)
