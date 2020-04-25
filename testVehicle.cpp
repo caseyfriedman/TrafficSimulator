@@ -75,8 +75,10 @@ int main ()
       //lightNS.update();
    }
 
- //  std::string str = "NB";
- //  Lane laneNorth(8, Direction::north);
+   
+   vector<Section*> intersections;
+   intersections.push_back(&sec1);
+   Lane laneNorth(8, Direction::north, intersections);
 
 
    std::cout << "************************************************"<<std::endl;
