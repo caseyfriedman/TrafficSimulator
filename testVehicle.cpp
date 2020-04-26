@@ -40,9 +40,13 @@ int main ()
    std::cout << "Vehicle turn (truck): " << v3.getTurn() << std::endl;
  
    std::cout << "Testing Section" << std::endl;  
+
+
    Section sec1(&v1);
    Section sec2(&v2);
    Section sec3(&v3);
+
+
    std::cout << "Section count:" << sec1.getNumOfSecs() << std::endl;
    std::cout << "Is section intersection: " << sec1.isIntersection() << std::endl;
    sec1.setIntersection();
@@ -61,8 +65,46 @@ int main ()
 
    std::cout << "Testing Lane" << std::endl;
    vector<Section*> intersections;
-   intersections.push_back(&sec1);
-   Lane laneNorth(8, Direction::north, intersections);
+
+   Section intersec1;
+   Section intersec2;
+   Section intersec3;
+   Section intersec4;
+
+
+   intersec1.setIntersection(); 
+   intersec2.setIntersection();
+   intersec3.setIntersection();
+   intersec4.setIntersection();
+
+
+
+   intersections.push_back(&intersec1);
+   intersections.push_back(&intersec2);
+   intersections.push_back(&intersec3);
+   intersections.push_back(&intersec4);
+
+
+
+
+
+
+
+
+std::cout << "************ VISIUAL BREAKUP AFTER LANE TESTS *************" << std::endl;
+
+
+
+
+
+
+   
+
+
+
+
+
+   Lane laneNorth(8, Direction::north, intersections, 10);
 
    std::cout << "Can new car come: " << laneNorth.canNewCarCome() << std::endl;
 

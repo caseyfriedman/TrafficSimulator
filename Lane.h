@@ -17,11 +17,11 @@ class Lane
     
     public:
         Lane();
-        Lane(int size, Direction type, vector<Section*> intersections);
+        Lane(int size, Direction type, vector<Section*> intersections, int timeUntilRed); //road is gonna tell us how much time until red
         ~Lane();
     
         void advanceLane();
-        void makeRight();
+      
         bool canMakeLight(VehicleBase vehicle);
         int timeToCross(VehicleBase vehicle);
         bool canNewCarCome();

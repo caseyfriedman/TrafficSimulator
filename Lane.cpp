@@ -40,7 +40,7 @@ intersection[3] = SW
 
 
 */
-Lane::Lane(int size, Direction type, vector<Section*> intersections)
+Lane::Lane(int size, Direction type, vector<Section*> intersections, int timeUntilRed)
 {
     roadSize = size;
     int numSections = roadSize + 6;
@@ -53,7 +53,7 @@ Lane::Lane(int size, Direction type, vector<Section*> intersections)
     
     if(type == Direction::north)
     {
-        lane.push_back(intersections[2]);//SE //double check that the order is right
+        lane.push_back(intersections[2]); //SE
         lane.push_back(intersections[0]); //SW
     }
     else if(type == Direction::east)
@@ -109,7 +109,7 @@ void Lane::advanceLane()
             {
                 if(lane[i]->getVehicle().getTurn())
                 {
-                    makeRight();
+                   // makeRight();   //I don't think it should do this 
                 }
                 else
                 {
@@ -144,6 +144,9 @@ void Lane::advanceLane()
 
 }
 
+
+/*
+
 void Lane::makeRight()
 {
     if(type == Direction::north)
@@ -172,6 +175,9 @@ void Lane::makeRight()
     }
 }
 
+
+*/
+
 bool Lane::canMakeLight(VehicleBase vehicle)
 {
     /*
@@ -196,7 +202,7 @@ bool Lane::canMakeLight(VehicleBase vehicle)
 
 }
 
-int Lane::timeToCross(VehicleBase vehicle)
+int Lane::timeToCross(VehicleBase vehicle)   //should this be a pointer???
 {
     int timeToCross = 2;
     
