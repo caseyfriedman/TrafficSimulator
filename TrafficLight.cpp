@@ -38,6 +38,12 @@ void TrafficLight::update()
    {
       isRed = true;  //count to red finished, light is now red
       counter = timeRed + timeGreen + timeYellow;   //counter reset
+      std::cout << "Light set red" << std::endl;
+   }
+   else if (counter == timeGreen + timeYellow)
+   {
+      isRed = false; //counter has past red portion, light is not red
+      std::cout << "Light set green" << std::endl;  
    }
    else
    {

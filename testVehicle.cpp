@@ -114,7 +114,7 @@ for (int i=0; i < laneN.size();i++)
 }
 */
 //move the vehicle through lane
-for (int i=0; i<7; i++)
+for (int i=0; i<9; i++)
 {
    testLaneEast.advanceLane();
    lightEW.update();
@@ -126,21 +126,40 @@ for (int i=0; i < laneE.size();i++)
    std::cout << "The value in section " << i << " is" << laneE[i]->isOccupied() << std::endl;
 }
 //check they all share the ID correctly
-std::cout << "The ID in section " << 7 << " is" << laneE[7]->getVehicle().getVehicleID() << std::endl;
-std::cout << "The ID in section " << 8 << " is" << laneE[8]->getVehicle().getVehicleID() << std::endl;
-std::cout << "The ID in section " << 9 << " is" << laneE[9]->getVehicle().getVehicleID() << std::endl;
-/*
-//check if new vehicle is allowed, add it
-   std::cout << "Can new car come: " << testLaneNorth.canNewCarCome() << std::endl;
+//std::cout << "The ID in section " << 8 << " is" << laneE[8]->getVehicle().getVehicleID() << std::endl;
+//std::cout << "The ID in section " << 9 << " is" << laneE[9]->getVehicle().getVehicleID() << std::endl;
+//std::cout << "The ID in section " << 10 << " is" << laneE[10]->getVehicle().getVehicleID() << std::endl;
 
-   testLaneNorth.addVehicle(&v3);
+//check if new vehicle is allowed, add it
+   std::cout << "Can new car come: " << testLaneEast.canNewCarCome() << std::endl;
+
+   testLaneEast.addVehicle(&v3);
 
 //new truck should be in first few spots
-for (int i=0; i < laneN.size();i++)
+for (int i=0; i < laneE.size();i++)
 {
-   std::cout << "The value in lane " << i << " is" << laneN[i]->isOccupied() << std::endl;
+   std::cout << "The value in section " << i << " is" << laneE[i]->isOccupied() << std::endl;
 }
-*/
+//check they all share the ID correctly
+std::cout << "The ID in section " << 0 << " is" << laneE[0]->getVehicle().getVehicleID() << std::endl;
+std::cout << "The ID in section " << 1 << " is" << laneE[1]->getVehicle().getVehicleID() << std::endl;
+std::cout << "The ID in section " << 2 << " is" << laneE[2]->getVehicle().getVehicleID() << std::endl;
+std::cout << "The ID in section " << 3 << " is" << laneE[3]->getVehicle().getVehicleID() << std::endl;
+
+lightEW.setTimeUntilRed(3);
+//move 2 vehicles
+for (int i=0; i<7; i++)
+{
+   testLaneEast.advanceLane();
+   lightEW.update();
+   //lightNS.update();
+}
+
+for (int i=0; i < laneE.size();i++)
+{
+   std::cout << "The value in section " << i << " is" << laneE[i]->isOccupied() << std::endl;
+}
+
 std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << std::endl;
 
    std::cout << "Testing Road" << std::endl;
