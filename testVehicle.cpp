@@ -66,23 +66,55 @@ int main ()
    std::cout << "Testing Lane" << std::endl;
    vector<Section*> intersections;
 
+   Section intersec0;
    Section intersec1;
    Section intersec2;
    Section intersec3;
-   Section intersec4;
 
 
-   intersec1.setIntersection(); 
+   intersec0.setIntersection(); 
+   intersec1.setIntersection();
    intersec2.setIntersection();
    intersec3.setIntersection();
-   intersec4.setIntersection();
 
 
 
+
+   /*
+intersection[0] = NE
+intersection[1] = NW
+intersection[2] = SE
+intersection[3] = SW
+*/
+   intersections.push_back(&intersec0); 
    intersections.push_back(&intersec1);
    intersections.push_back(&intersec2);
    intersections.push_back(&intersec3);
-   intersections.push_back(&intersec4);
+
+
+Lane testLaneNorth(8, Direction::north, intersections, 10);
+
+
+
+
+testLaneNorth.addVehicle(&v1);
+
+
+
+vector<Section*> lane = testLaneNorth.getLane();
+
+
+
+
+for (int i=0; i<16; i++){
+
+testLaneNorth.advanceLane();
+}
+for (int i=0; i < lane.size();i++){
+
+   std::cout << "The value in lane " << i << " is" << lane[i]->isOccupied() << std::endl;
+
+}
 
 
 
@@ -91,7 +123,9 @@ int main ()
 
 
 
-std::cout << "************ VISIUAL BREAKUP AFTER LANE TESTS *************" << std::endl;
+
+
+std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << std::endl;
 
 
 

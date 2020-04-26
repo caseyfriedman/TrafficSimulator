@@ -5,9 +5,6 @@
 #include "Section.h"
 #include <vector>
 
-//int Lane::roadSize;
-//vector<Section*> Lane::lane;
-
 Lane::Lane()
 {
     //assume it is NB lane with roadSize 10
@@ -90,7 +87,7 @@ void Lane::advanceLane()
     {
         if(lane[i]->isOccupied())
         {
-            if(lane[i]->getVehicle().getVehicleID() != currVehicle)
+            if(lane[i]->getVehicle().getVehicleID() != currVehicle) //what's this for?
             {
                 currVehicle = lane[i]->getVehicle().getVehicleID();
                 vehicleHead = true;
@@ -105,18 +102,25 @@ void Lane::advanceLane()
                 lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
                 lane[i]->setVehicle(nullptr);
             }
-            else if(i == lane.size()/2)
+
+
+            /*
+            else if(i == lane.size()/2) //if we're in the intersection
             {
-                if(lane[i]->getVehicle().getTurn())
-                {
-                   // makeRight();   //I don't think it should do this 
-                }
+            
                 else
                 {
                     lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
                     lane[i]->setVehicle(nullptr);
                 }
+                
+                continue;
+
             }
+
+            */
+
+
             else if(i == lane.size()/2 - 1)
             {
                 if(vehicleHead && canMakeLight(lane[i]->getVehicle()))
@@ -218,6 +222,24 @@ int Lane::timeToCross(VehicleBase vehicle)   //should this be a pointer???
 bool Lane::canNewCarCome()
 {
     return !lane[4]->isOccupied();
+}
+
+
+void Lane::addVehicle(VehicleBase* vehicleptr){ //might want it not to be a pointer, will wait and see
+
+
+    switch(vehicleptr->getVehicleSize()){
+        case 2:
+            for (int i = 0; i < 2; i++){
+                lane[i]->setVehicle(vehicleptr);
+
+            }
+
+    }
+
+
+
+
 }
             
 #endif

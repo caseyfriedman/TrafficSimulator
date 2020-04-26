@@ -19,11 +19,18 @@ class Lane
         Lane();
         Lane(int size, Direction type, vector<Section*> intersections, int timeUntilRed); //road is gonna tell us how much time until red
         ~Lane();
-    
+ 
         void advanceLane();
+        void addVehicle(VehicleBase* vehicle); //maybe should be boolean and return false if there's a vehicle there?
       
         bool canMakeLight(VehicleBase vehicle);
         int timeToCross(VehicleBase vehicle);
         bool canNewCarCome();
+
+
+        //TESTING
+
+        vector<Section*> getLane() {return lane;}
+    
 };
 #endif
