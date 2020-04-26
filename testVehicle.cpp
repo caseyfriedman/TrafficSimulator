@@ -92,7 +92,7 @@ intersection[3] = SW
    intersections.push_back(&intersec3);
 
 
-Lane testLaneNorth(8, Direction::north, intersections, 10);
+Lane testLaneNorth(8, Direction::north, intersections, &lightNS);
 
 
 
@@ -106,9 +106,9 @@ vector<Section*> lane = testLaneNorth.getLane();
 
 
 
-for (int i=0; i<16; i++){
-
+for (int i=0; i<10; i++){
 testLaneNorth.advanceLane();
+
 }
 for (int i=0; i < lane.size();i++){
 
@@ -138,7 +138,7 @@ std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << s
 
 
 
-   Lane laneNorth(8, Direction::north, intersections, 10);
+   Lane laneNorth(8, Direction::north, intersections, &lightNS);
 
    std::cout << "Can new car come: " << laneNorth.canNewCarCome() << std::endl;
 

@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "Section.h"
+#include "TrafficLight.h"
 
 using namespace std;
 
@@ -14,10 +15,10 @@ class Lane
         int roadSize;
         vector<Section*> lane;
         Lane* rigthTurnOnto;
-    
+        TrafficLight* light;
     public:
         Lane();
-        Lane(int size, Direction type, vector<Section*> intersections, int timeUntilRed); //road is gonna tell us how much time until red
+        Lane(int size, Direction type, vector<Section*> intersections, TrafficLight* light); //road is gonna tell us how much time until red
         ~Lane();
  
         void advanceLane();

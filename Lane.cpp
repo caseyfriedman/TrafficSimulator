@@ -5,6 +5,10 @@
 #include "Section.h"
 #include <vector>
 
+
+
+
+
 Lane::Lane()
 {
     //assume it is NB lane with roadSize 10
@@ -37,7 +41,7 @@ intersection[3] = SW
 
 
 */
-Lane::Lane(int size, Direction type, vector<Section*> intersections, int timeUntilRed)
+Lane::Lane(int size, Direction type, vector<Section*> intersections, TrafficLight* light) : light(light)
 {
     roadSize = size;
     int numSections = roadSize + 6;
@@ -80,6 +84,9 @@ Lane::~Lane() {}
 
 void Lane::advanceLane()
 {
+
+
+
     int currVehicle = -1;
     bool vehicleHead = false;
     
@@ -184,25 +191,12 @@ void Lane::makeRight()
 
 bool Lane::canMakeLight(VehicleBase vehicle)
 {
-    /*
-    if((type == Direction::north) || (type == Direction::south))
-    {
-        if(trafficLightNS.getIsRed())
+    
+        if(light->getIsRed()) //every lane only needs 1 traffic light
         {
             return false;
         }
-        return timeToCross(vehicle) >= trafficLightNS.timeUntilRed();
-    }
-    else
-    {
-        if(trafficLightEW.getIsRed())
-        {
-            return false;
-        }
-        return timeToCross(vehicle) >= trafficLightNS.timeUntilRed();
-    }
-*/
-    return false;
+        return timeToCross(vehicle) >= light->timeUntilRed();
 
 }
 
