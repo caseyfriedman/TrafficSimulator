@@ -42,6 +42,7 @@ void TrafficLight::update()
    }
    else if (counter == timeGreen + timeYellow)
    {
+      counter--;
       isRed = false; //counter has past red portion, light is not red
       std::cout << "Light set green" << std::endl;  
    }
