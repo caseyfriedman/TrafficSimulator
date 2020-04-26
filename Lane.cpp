@@ -100,9 +100,9 @@ void Lane::advanceLane()
             }
             else if(i > midLane)
             {
-                //lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
-                //lane[i]->setVehicle(nullptr);
-                moveForward(i);
+                lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+                lane[i]->setVehicle(nullptr);
+                //moveForward(i);
             }
 
 
@@ -112,9 +112,9 @@ void Lane::advanceLane()
             
                 else
                 {
-                    //lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
-                    //lane[i]->setVehicle(nullptr);
-                    moveForward(i);
+                    lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+                    lane[i]->setVehicle(nullptr);
+                    //moveForward(i);
                 }
                 
                 continue;
@@ -130,9 +130,9 @@ void Lane::advanceLane()
                 {
                     if(canMakeLight(lane[i]->getVehicle())) //move if can make it
                     {
-                        //lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
-                        //lane[i]->setVehicle(nullptr);
-                        moveForward(i);
+                        lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+                        lane[i]->setVehicle(nullptr);
+                        //moveForward(i);
                         
                         cout << "we movin it" << endl;
                     }
@@ -144,9 +144,9 @@ void Lane::advanceLane()
                 }
                 else //is a body of car, no decisions to be made (can assume its safe to move) 
                 {
-                    //lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
-                    //lane[i]->setVehicle(nullptr);
-                    moveForward(i);
+                    lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+                    lane[i]->setVehicle(nullptr);
+                    //moveForward(i);
                     
                     cout << "we movin it" << endl;
                     //continue; // the light is red and we don't 
@@ -156,9 +156,9 @@ void Lane::advanceLane()
             {
                 if(!lane[i+1]->isOccupied())
                 {
-                    moveForward(i);
-                    //lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
-                    //lane[i]->setVehicle(nullptr);
+                    //moveForward(i);
+                    lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+                    lane[i]->setVehicle(nullptr);
                 }
             }
         }
@@ -167,11 +167,11 @@ void Lane::advanceLane()
 }
 
 
-void moveForward(int index)
-{
-    lane[index + 1]->setVehicle(lane[index]->vehiclePtr);
-    lane[index]->setVehicle(nullptr);
-}
+//void moveForward(int index)
+//{
+//    lane[index + 1]->setVehicle(lane[index].vehiclePtr);
+//    lane[index]->setVehicle(nullptr);
+//}
 
 /*
 
