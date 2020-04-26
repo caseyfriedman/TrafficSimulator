@@ -87,8 +87,8 @@ intersection[3] = SW
    intersections.push_back(&intersec2);
    intersections.push_back(&intersec3);
 
+Lane testLaneNorth(8, Direction::north, intersections, &lightNS);
 
-Lane testLaneNorth(8, Direction::north, intersections, 10);
 testLaneNorth.addVehicle(&v1);
 
 vector<Section*> lane = testLaneNorth.getLane();

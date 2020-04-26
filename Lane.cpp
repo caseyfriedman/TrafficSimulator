@@ -27,15 +27,13 @@ Lane::Lane()
     }
 }
 
-
-
 /*
 intersection[0] = NE
 intersection[1] = NW
 intersection[2] = SE
 intersection[3] = SW
 */
-Lane::Lane(int size, Direction type, vector<Section*> intersections, int timeUntilRed)
+Lane::Lane(int size, Direction type, vector<Section*> intersections, TrafficLight* light) : light(light)
 {
     roadSize = size;
     int numSections = roadSize + 6;
@@ -182,25 +180,12 @@ void Lane::makeRight()
 
 bool Lane::canMakeLight(VehicleBase vehicle)
 {
-    /*
-    if((type == Direction::north) || (type == Direction::south))
-    {
-        if(trafficLightNS.getIsRed())
+    
+        if(light->getIsRed()) //every lane only needs 1 traffic light
         {
             return false;
         }
-        return timeToCross(vehicle) >= trafficLightNS.timeUntilRed();
-    }
-    else
-    {
-        if(trafficLightEW.getIsRed())
-        {
-            return false;
-        }
-        return timeToCross(vehicle) >= trafficLightNS.timeUntilRed();
-    }
-*/
-    return false;
+        return timeToCross(vehicle) >= light->timeUntilRed();
 
 }
 
