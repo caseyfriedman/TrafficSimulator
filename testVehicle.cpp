@@ -87,48 +87,60 @@ intersection[3] = SW
    intersections.push_back(&intersec2);
    intersections.push_back(&intersec3);
 
-
-
-
-
-lightEW.setTimeUntilRed(30);
-
-
-
+lightEW.setTimeUntilRed(7);
 Lane testLaneEast(8, Direction::north, intersections, &lightEW);
 
-
-
 v1.setVehicleID(420);
-
-
 std::cout << v1.getVehicleID() << std::endl;
+
 Lane testLaneNorth(8, Direction::north, intersections, &lightNS);
 
+//add vehicles
 testLaneNorth.addVehicle(&v1);
+testLaneEast.addVehicle(&v2);
 
-vector<Section*> lane = testLaneNorth.getLane();
+vector<Section*> laneE = testLaneEast.getLane();
+//vector<Section*> laneN = testLaneNorth.getLane();
 
+//check that the vehichles initial poisitioning and size is correct
+for (int i=0; i < laneE.size();i++)
+{
+   std::cout << "The value in section " << i << " is" << laneE[i]->isOccupied() << std::endl;
+}
+/*
+for (int i=0; i < laneN.size();i++)
+{
+   std::cout << "The value in section " << i << " is" << laneN[i]->isOccupied() << std::endl;
+}
+*/
 //move the vehicle through lane
-for (int i=0; i<16; i++)
+for (int i=0; i<7; i++)
 {
    testLaneEast.advanceLane();
+   lightEW.update();
+   //lightNS.update();
 }
-//all should be empty because vehicle exited
-for (int i=0; i < lane.size();i++)
+//determine behavior here- vehicles do not seem to be moving correctly
+for (int i=0; i < laneE.size();i++)
 {
-   std::cout << "The value in lane " << i << " is" << lane[i]->isOccupied() << std::endl;
+   std::cout << "The value in section " << i << " is" << laneE[i]->isOccupied() << std::endl;
 }
-
-   std::cout << "Can new car come: " << testLaneEast.canNewCarCome() << std::endl;
+//check they all share the ID correctly
+std::cout << "The ID in section " << 7 << " is" << laneE[7]->getVehicle().getVehicleID() << std::endl;
+std::cout << "The ID in section " << 8 << " is" << laneE[8]->getVehicle().getVehicleID() << std::endl;
+std::cout << "The ID in section " << 9 << " is" << laneE[9]->getVehicle().getVehicleID() << std::endl;
+/*
+//check if new vehicle is allowed, add it
+   std::cout << "Can new car come: " << testLaneNorth.canNewCarCome() << std::endl;
 
    testLaneNorth.addVehicle(&v3);
-//truck should be in first few spots
-for (int i=0; i < lane.size();i++)
-{
-   std::cout << "The value in lane " << i << " is" << lane[i]->isOccupied() << std::endl;
-}
 
+//new truck should be in first few spots
+for (int i=0; i < laneN.size();i++)
+{
+   std::cout << "The value in lane " << i << " is" << laneN[i]->isOccupied() << std::endl;
+}
+*/
 std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << std::endl;
 
    std::cout << "Testing Road" << std::endl;
