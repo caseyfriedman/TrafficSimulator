@@ -71,16 +71,12 @@ int main ()
    Section intersec2;
    Section intersec3;
 
-
    intersec0.setIntersection(); 
    intersec1.setIntersection();
    intersec2.setIntersection();
    intersec3.setIntersection();
 
-
-
-
-   /*
+/*
 intersection[0] = NE
 intersection[1] = NW
 intersection[2] = SE
@@ -92,12 +88,14 @@ intersection[3] = SW
    intersections.push_back(&intersec3);
 
 
+
+
+
 lightEW.setTimeUntilRed(30);
 
 
 
-Lane testLaneNorth(8, Direction::north, intersections, &lightEW);
-
+Lane testLaneEast(8, Direction::north, intersections, &lightEW);
 
 
 
@@ -105,52 +103,34 @@ v1.setVehicleID(420);
 
 
 std::cout << v1.getVehicleID() << std::endl;
+Lane testLaneNorth(8, Direction::north, intersections, &lightNS);
+
 testLaneNorth.addVehicle(&v1);
-
-
 
 vector<Section*> lane = testLaneNorth.getLane();
 
-
-
-
-for (int i=0; i<10; i++){
-testLaneNorth.advanceLane();
-
+//move the vehicle through lane
+for (int i=0; i<16; i++)
+{
+   testLaneEast.advanceLane();
 }
-for (int i=0; i < lane.size();i++){
-
+//all should be empty because vehicle exited
+for (int i=0; i < lane.size();i++)
+{
    std::cout << "The value in lane " << i << " is" << lane[i]->isOccupied() << std::endl;
-
 }
 
+   std::cout << "Can new car come: " << testLaneEast.canNewCarCome() << std::endl;
 
-
-
-
-
-
-
-
+   testLaneNorth.addVehicle(&v3);
+//truck should be in first few spots
+for (int i=0; i < lane.size();i++)
+{
+   std::cout << "The value in lane " << i << " is" << lane[i]->isOccupied() << std::endl;
+}
 
 std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << std::endl;
 
-
-
-
-
-
-   
-
-
-
-
-
-   Lane laneNorth(8, Direction::north, intersections, &lightNS);
-
-   std::cout << "Can new car come: " << laneNorth.canNewCarCome() << std::endl;
-
-   std::cout << "************************************************"<<std::endl;
    std::cout << "Testing Road" << std::endl;
 
    Road road();

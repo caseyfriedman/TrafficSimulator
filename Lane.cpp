@@ -5,10 +5,6 @@
 #include "Section.h"
 #include <vector>
 
-
-
-
-
 Lane::Lane()
 {
     //assume it is NB lane with roadSize 10
@@ -31,15 +27,11 @@ Lane::Lane()
     }
 }
 
-
-
 /*
 intersection[0] = NE
 intersection[1] = NW
 intersection[2] = SE
 intersection[3] = SW
-
-
 */
 Lane::Lane(int size, Direction type, vector<Section*> intersections, TrafficLight* light) : light(light)
 {
@@ -84,9 +76,6 @@ Lane::~Lane() {}
 
 void Lane::advanceLane()
 {
-
-
-
     int currVehicle = -1;
     bool vehicleHead = false;
     
@@ -231,20 +220,20 @@ bool Lane::canNewCarCome()
 }
 
 
-void Lane::addVehicle(VehicleBase* vehicleptr){ //might want it not to be a pointer, will wait and see
-
-
-    switch(vehicleptr->getVehicleSize()){
-        case 2:
-            for (int i = 0; i < 2; i++){
-                lane[i]->setVehicle(vehicleptr);
-
-            }
-
+void Lane::addVehicle(VehicleBase* vehicleptr)
+{ //might want it not to be a pointer, will wait and see
+    for (int i = 0; i < vehicleptr->getVehicleSize(); i++)
+    {
+	lane[i]->setVehicle(vehicleptr);
     }
 
+    //switch(vehicleptr->getVehicleSize()){
+    //    case 2:
+    //        for (int i = 0; i < 2; i++){
+    //            lane[i]->setVehicle(vehicleptr);
+    //        }
 
-
+//}
 
 }
             
