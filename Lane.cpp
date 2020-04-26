@@ -205,7 +205,7 @@ bool Lane::canMakeLight(VehicleBase vehicle)
         
         cout <<"light is red " << light->getIsRed() << endl;
         cout <<"time left is " << light->timeUntilRed() << endl;
-        return timeToCross(vehicle) >= light->timeUntilRed();
+        return timeToCross(vehicle) <= light->timeUntilRed();
 }
 
 int Lane::timeToCross(VehicleBase vehicle)   //should this be a pointer???
