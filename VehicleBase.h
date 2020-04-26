@@ -28,6 +28,8 @@ class VehicleBase
 
        inline int getVehicleID() const { return this->vehicleID; }
 
+              void setVehicleID(int num) {vehicleID=num;}
+
        inline VehicleType getVehicleType() const { return this->vehicleType; }
        inline Direction   getVehicleOriginalDirection() const { return this->vehicleDirection; }
 

@@ -98,6 +98,8 @@ void Lane::advanceLane()
             {
                 currVehicle = lane[i]->getVehicle().getVehicleID();
                 vehicleHead = true;
+
+                cout << "assigning vehicle head, this should be done at the start" << endl;
             }
             
             if(i == lane.size() - 1)
@@ -130,15 +132,18 @@ void Lane::advanceLane()
 
             else if(i == lane.size()/2 - 1)
             {
-                if(vehicleHead && canMakeLight(lane[i]->getVehicle()))
+                if(vehicleHead && canMakeLight(lane[i]->getVehicle())) //what about the rest
                 {
                     lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
                     lane[i]->setVehicle(nullptr);
+
+                    cout << "we movin it" << endl;
                 }
-                else
+                else 
                 {
-                    lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
-                    lane[i]->setVehicle(nullptr);
+
+        
+                    continue; // the light is red and we don't 
                 }
             }
             else
@@ -194,9 +199,16 @@ bool Lane::canMakeLight(VehicleBase vehicle)
     
         if(light->getIsRed()) //every lane only needs 1 traffic light
         {
+
+    
             return false;
         }
+
+        cout <<"time left is " << light->timeUntilRed() << endl;
         return timeToCross(vehicle) >= light->timeUntilRed();
+
+
+
 
 }
 

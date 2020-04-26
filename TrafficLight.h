@@ -20,6 +20,16 @@ class TrafficLight
       void update();
       inline int timeUntilRed() {return this->counter;}
       bool getIsRed() {return this->isRed;}
+      /*
+
+         FOR TESTING
+
+      */
+
+      void setTimeUntilRed(int time) {counter = time;}
+
+
+
 };
 
 #endif

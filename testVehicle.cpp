@@ -92,11 +92,19 @@ intersection[3] = SW
    intersections.push_back(&intersec3);
 
 
-Lane testLaneNorth(8, Direction::north, intersections, &lightNS);
+lightEW.setTimeUntilRed(30);
+
+
+
+Lane testLaneNorth(8, Direction::north, intersections, &lightEW);
 
 
 
 
+v1.setVehicleID(420);
+
+
+std::cout << v1.getVehicleID() << std::endl;
 testLaneNorth.addVehicle(&v1);
 
 
