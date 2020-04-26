@@ -103,7 +103,7 @@ void Lane::advanceLane()
                 lane[i]->setVehicle(nullptr);
                 //moveForward(i);
             }
-            else if(i == midLane()) //if we're in the intersection
+            else if(i == midLane) //if we're in the intersection
             {
                 //else
                 //{
