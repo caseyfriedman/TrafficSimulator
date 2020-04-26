@@ -207,13 +207,6 @@ void Lane::makeRight()
 */
 
 bool Lane::canMakeLight(VehicleBase vehicle)
-<<<<<<< HEAD
-{
-        if(light->getIsRed()) //every lane only needs 1 traffic light
-        {
-            return false;
-        }
-=======
 {   
         if(light->getIsRed()) //every lane only needs 1 traffic light
         {   
@@ -221,7 +214,6 @@ bool Lane::canMakeLight(VehicleBase vehicle)
         }
         
         cout <<"light is red " << light->getIsRed() << endl;
->>>>>>> 3c7d532b2944de63e1ab64414831ebf8fbda5692
         cout <<"time left is " << light->timeUntilRed() << endl;
         return timeToCross(vehicle) >= light->timeUntilRed();
 }
@@ -246,13 +238,12 @@ bool Lane::canNewCarCome()
 
 void Lane::addVehicle(VehicleBase* vehiclePtr)
 { //might want it not to be a pointer, will wait and see
-    for (int i = 3; i > 3-vehicleptr->getVehicleSize(); i--) //vehicles always added at pos 3 (first visible pos in lane)
+    for (int i = 3; i > 3-vehiclePtr->getVehicleSize(); i--) //vehicles always added at pos 3 (first visible pos in lane)
     //truck will fill pos 3-0
     //suv will fill pos 3-1
     //car will fill pos 3-2
->>>>>>> 3c7d532b2944de63e1ab64414831ebf8fbda5692
     {
-        lane[i]->setVehicle(vehicleptr);
+        lane[i]->setVehicle(vehiclePtr);
     }
 }
             
