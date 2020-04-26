@@ -132,6 +132,7 @@ void Lane::advanceLane()
                     }
                     else
                     {
+                        cout << "we cannot make light" << endl;
                         continue; //cannot make light, no move 
                     }
                 }
@@ -193,21 +194,15 @@ void Lane::makeRight()
 */
 
 bool Lane::canMakeLight(VehicleBase vehicle)
-{
-    
+{   
         if(light->getIsRed()) //every lane only needs 1 traffic light
-        {
-
-    
+        {   
             return false;
         }
-
+        
+        cout <<"light is red " << light->getIsRed() << endl;
         cout <<"time left is " << light->timeUntilRed() << endl;
         return timeToCross(vehicle) >= light->timeUntilRed();
-
-
-
-
 }
 
 int Lane::timeToCross(VehicleBase vehicle)   //should this be a pointer???
@@ -231,7 +226,10 @@ bool Lane::canNewCarCome()
 
 void Lane::addVehicle(VehicleBase* vehicleptr)
 { //might want it not to be a pointer, will wait and see
-    for (int i = 0; i < vehicleptr->getVehicleSize(); i++)
+    for (int i = 3; i > 3-vehicleptr->getVehicleSize(); i--) //vehicles always added at pos 3 (first visible pos in lane)
+    //truck will fill pos 3-0
+    //suv will fill pos 3-1
+    //car will fill pos 3-2
     {
 	lane[i]->setVehicle(vehicleptr);
     }
