@@ -93,7 +93,6 @@ void Lane::advanceLane()
 
                 cout << "assigning vehicle head, this should be done at the start: curVehicle = " << currVehicle << ", newVehicle =" << lane[i]->getVehicle().getVehicleID() << endl;
             }
-            
             if(i == lane.size() - 1)
             {
                 lane[i]->setVehicle(nullptr);
@@ -104,26 +103,17 @@ void Lane::advanceLane()
                 lane[i]->setVehicle(nullptr);
                 //moveForward(i);
             }
-
-
-            /*
             else if(i == midLane()) //if we're in the intersection
             {
-            
-                else
-                {
+                //else
+                //{
                     lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
                     lane[i]->setVehicle(nullptr);
                     //moveForward(i);
-                }
+                //}
                 
-                continue;
-
+                //continue;
             }
-
-            */
-
-
             else if(i == midLane - 1)
             {
                 if(vehicleHead) //vehicle heads should check if they can go
