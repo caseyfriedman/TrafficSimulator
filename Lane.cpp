@@ -10,7 +10,7 @@ Lane::Lane()
     //assume it is NB lane with roadSize 10
     roadSize = 10;
     //int numSections = roadSize + 6;
-    int midLane = (roadSize+6)/2;
+    midLane = (roadSize+6)/2;
     
     for(int i = 0; i < midLane; i++)
     {
@@ -39,8 +39,9 @@ Lane::Lane(int size, Direction type, vector<Section*> intersections, TrafficLigh
 {
     roadSize = size;
     //int numSections = roadSize + 6;
-    int midLane = (roadSize+6)/2;
-    
+    midLane = (roadSize+6)/2;
+    cout <<"Road Size" << roadSize << "Middle" << midLane << endl;    
+
     for(int i = 0; i < midLane; i++)
     {
         Section* sec = new Section();
@@ -95,16 +96,19 @@ void Lane::advanceLane()
             }
             if(i == lane.size() - 1)
             {
+            cout <<"part of vehicle at end" << endl;
                 lane[i]->setVehicle(nullptr);
             }
             else if(i > midLane)
             {
+            cout <<"part of vehicle past intersection, i = " << i << "  midlane = "<< midLane << endl;
                 lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
                 lane[i]->setVehicle(nullptr);
                 //moveForward(i);
             }
-            else if(i == midLane) //if we're in the intersection
+            else if(i == midLane || i == midLane+1) //if we're in the intersection
             {
+            cout <<"part of vehicle in intersection" << endl;
                 //else
                 //{
                     lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
@@ -116,6 +120,7 @@ void Lane::advanceLane()
             }
             else if(i == midLane - 1)
             {
+                cout <<"part of vehicle at intersection" << endl;
                 if(vehicleHead) //vehicle heads should check if they can go
                 {
                     if(canMakeLight(lane[i]->getVehicle())) //move if can make it
@@ -200,7 +205,8 @@ bool Lane::canMakeLight(VehicleBase vehicle)
 {   
         if(light->getIsRed()) //every lane only needs 1 traffic light
         {   
-            return false;
+           cout <<"light is red. do not enter intersection " << endl; 
+           return false;
         }
         
         cout <<"light is red " << light->getIsRed() << endl;

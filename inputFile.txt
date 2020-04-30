@@ -1,9 +1,9 @@
 maximum_simulated_time:                 1000
 number_of_sections_before_intersection:   10
-green_north_south:                         3
-yellow_north_south:                        2
-green_east_west:                           4
-yellow_east_west:                          1
+green_north_south:                         2
+yellow_north_south:                        1
+green_east_west:                           5
+yellow_east_west:                          2
 prob_new_vehicle_northbound:               0.25
 prob_new_vehicle_southbound:               0.1
 prob_new_vehicle_eastbound:                0.15

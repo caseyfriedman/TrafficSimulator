@@ -57,10 +57,12 @@ int main ()
    TrafficLight lightNS(LightDirection::NS, params);
    std::cout << "Is light EW red: " << lightEW.getIsRed() << std::endl;
    std::cout << "Is light NS red: " << lightNS.getIsRed() << std::endl;
-   for (int i=0; i<=50; i++)
+   for (int i=0; i<=20; i++)
    {
-      //lightEW.update();
+      lightEW.update();
       //lightNS.update();
+      std::cout << "EW light" << lightEW.getIsRed() << std::endl;
+      //std::cout << "NS light" << lightNS.getIsRed() << std::endl;
    }
 
    std::cout << "Testing Lane" << std::endl;
@@ -87,7 +89,7 @@ intersection[3] = SW
    intersections.push_back(&intersec2);
    intersections.push_back(&intersec3);
 
-lightEW.setTimeUntilRed(7);
+//lightEW.setTimeUntilRed(7);
 Lane testLaneEast(8, Direction::north, intersections, &lightEW);
 
 v1.setVehicleID(420);
@@ -120,6 +122,7 @@ for (int i=0; i<9; i++)
    lightEW.update();
    //lightNS.update();
 }
+
 //determine behavior here- vehicles do not seem to be moving correctly
 for (int i=0; i < laneE.size();i++)
 {
@@ -146,9 +149,9 @@ std::cout << "The ID in section " << 1 << " is" << laneE[1]->getVehicle().getVeh
 std::cout << "The ID in section " << 2 << " is" << laneE[2]->getVehicle().getVehicleID() << std::endl;
 std::cout << "The ID in section " << 3 << " is" << laneE[3]->getVehicle().getVehicleID() << std::endl;
 
-lightEW.setTimeUntilRed(3);
+//lightEW.setTimeUntilRed(3);
 //move 2 vehicles
-for (int i=0; i<7; i++)
+for (int i=0; i<10; i++)
 {
    testLaneEast.advanceLane();
    lightEW.update();
@@ -166,6 +169,6 @@ std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << s
 
    Road road();
 
-
    return 0;
 }
+

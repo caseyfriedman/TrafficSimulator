@@ -37,7 +37,7 @@ void TrafficLight::update()
    if (counter == 0)
    {
       isRed = true;  //count to red finished, light is now red
-      counter = timeRed + timeGreen + timeYellow;   //counter reset
+      counter = timeRed + timeGreen + timeYellow - 1;   //counter reset
       std::cout << "Light set red" << std::endl;
    }
    else if (counter == timeGreen + timeYellow)
