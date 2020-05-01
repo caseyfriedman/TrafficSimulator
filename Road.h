@@ -17,7 +17,8 @@ class Road
 		Lane southBound;
 		Lane eastBound;
 		Lane westBound;
-		
+		TrafficLight nsLight;
+		TrafficLight ewLight;		
 	
 	public:
 		int roadSize;
