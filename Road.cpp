@@ -19,17 +19,3 @@ Road::Road(Parameters params){
 cout <<"test2" << endl;
 
 }
-
-/*
-int main(){
-
-
-Road road;
-
-
-return 0;
-
-
-}
-
-*/
