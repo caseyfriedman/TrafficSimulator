@@ -263,7 +263,7 @@ bool Lane::canNewCarCome()
 
 void Lane::addIntersections(vector<Section*> intersections){
 
-std::cout<<"SHOULD NOT GET HERE" << std::endl;
+
     if(type == Direction::north)
     {
         lane[midLane] = intersections[0]; //NE
