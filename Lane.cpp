@@ -2,8 +2,6 @@
 #define __LANE_CPP__
 
 #include "Lane.h"
-#include "Section.h"
-#include <vector>
 
 Lane::Lane()
 {
@@ -38,7 +36,7 @@ intersection[3] = SW
 Lane::Lane(Parameters params, Direction type, TrafficLight* light) : light(light)
 {
 
-    roadSize = params.get_number_of_sections_before_intersection();
+    roadSize = (params.get_number_of_sections_before_intersection() * 2) + 2;  //*2 because there are 2 sides, +2 because of the intersection
 
     //roadSize = size;
     int numSections = roadSize + 6;
@@ -123,7 +121,7 @@ void Lane::advanceLane()
             }
             else if ((i == midLane + 1) && !light->getIsRed())
             {
-                lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+                    //  lane[i + 1]->setVehicle(lane[i]->vehiclePtr); //this was the line that I edited
                 lane[i]->setVehicle(nullptr);
             }
             else if(i == midLane && !light->getIsRed()) //if we're in the intersection

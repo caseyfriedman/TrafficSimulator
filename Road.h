@@ -21,12 +21,15 @@ class Road
 		Lane westBound;
 		TrafficLight nsLight;
 		TrafficLight ewLight;
-		vector<VehicleBase> allcars;	
+		vector<VehicleBase> allcars;	//might be handled by driver so could be deleted???
 		int vehicleCount;
 		vector<Section*> intersections;
+
 	public:
 		int roadSize;
 		void setLanes();
+		void advanceLanes();
+		void addVehicle(VehicleBase* vehicle, Direction type);
 		Road();
 		Road(Parameters params);
 		vector<Section*> setIntersections();

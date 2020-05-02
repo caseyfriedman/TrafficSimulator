@@ -80,7 +80,7 @@ int main ()
 
 /*
 intersection[0] = NE
-intersection[1] = NW
+intersection[1] = NW;
 intersection[2] = SE
 intersection[3] = SW
 */
@@ -90,12 +90,14 @@ intersection[3] = SW
    intersections.push_back(&intersec3);
 
 //lightEW.setTimeUntilRed(7);
-Lane testLaneEast(8, Direction::north, intersections, &lightEW);
+Lane testLaneEast(params, Direction::north,&lightEW);
+testLaneEast.addIntersections(intersections);
 
 v1.setVehicleID(420);
 std::cout << v1.getVehicleID() << std::endl;
 
-Lane testLaneNorth(8, Direction::north, intersections, &lightNS);
+Lane testLaneNorth(params, Direction::north, &lightNS);
+testLaneNorth.addIntersections(intersections);
 
 //add vehicles
 testLaneNorth.addVehicle(&v1);
@@ -167,7 +169,14 @@ std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << s
 
    std::cout << "Testing Road" << std::endl;
 
-   Road road();
+   Road testRoad(params); //can't do default constructor for road 
+
+testRoad.addVehicle(&v1, Direction::north);
+   testRoad.addVehicle(&v2, Direction::east);
+
+ 
+      testRoad.advanceLanes();
+   
 
    return 0;
 }

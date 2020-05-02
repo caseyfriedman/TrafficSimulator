@@ -14,7 +14,7 @@ ewLight(LightDirection::EW,params), northBound(params, Direction::north,
 	params, Direction::east, &ewLight), westBound(params, Direction::east,
 	&ewLight){
 
-	vector<Section*> intersections = setIntersections();
+	intersections = setIntersections();
 
 	setLanes();
 
@@ -55,3 +55,32 @@ void Road::setLanes(){
 	
 
 }
+
+void Road::advanceLanes(){
+
+
+	northBound.advanceLane();
+	southBound.advanceLane();
+	eastBound.advanceLane();
+	westBound.advanceLane();
+
+}
+
+void Road::addVehicle(VehicleBase* vehicle, Direction type){
+
+	switch(type){
+
+		case Direction::north : northBound.addVehicle(vehicle);
+			break;
+		case Direction::south : southBound.addVehicle(vehicle);
+			break;
+		case Direction::east : eastBound.addVehicle(vehicle);
+			break;
+		case Direction::west : westBound.addVehicle(vehicle);
+			break;
+
+	}
+
+}
+
+//maybe clock tick will occur in driver 
