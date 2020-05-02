@@ -35,7 +35,7 @@ intersection[2] = SE
 intersection[3] = SW
 */
 
-Lane::Lane(Parameters params, Direction type, vector<Section*> intersections, TrafficLight* light) : light(light)
+Lane::Lane(Parameters params, Direction type, TrafficLight* light) : light(light)
 {
 
     roadSize = params.get_number_of_sections_before_intersection();
@@ -51,6 +51,8 @@ Lane::Lane(Parameters params, Direction type, vector<Section*> intersections, Tr
         lane.push_back(sec);
     }
     
+
+    /*
     if(type == Direction::north)
     {
         lane.push_back(intersections[0]); //NE
@@ -71,6 +73,13 @@ Lane::Lane(Parameters params, Direction type, vector<Section*> intersections, Tr
         lane.push_back(intersections[1]); //NW
         lane.push_back(intersections[3]); //SW
     }
+
+*/
+
+
+    lane.push_back(nullptr); //the intersections are created by Road but aren't available at initialization
+    lane.push_back(nullptr);
+
 
     for(int i = 0; i < midLane; i++)
     {
@@ -249,6 +258,36 @@ int Lane::timeToCross(VehicleBase vehicle)   //should this be a pointer???
 bool Lane::canNewCarCome()
 {
     return !lane[4]->isOccupied();
+}
+
+
+void Lane::addIntersections(vector<Section*> intersections){
+
+std::cout<<"SHOULD NOT GET HERE" << std::endl;
+    if(type == Direction::north)
+    {
+        lane[midLane] = intersections[0]; //NE
+        lane[midLane + 1] = intersections[1]; //NW
+    }
+    else if(type == Direction::east)
+    {
+        lane[midLane] = intersections[2]; //SE
+        lane[midLane + 1] = intersections[0]; //NE
+    }
+    else if(type == Direction::south)
+    {
+        lane[midLane] = intersections[3]; //SW
+        lane[midLane + 1] = intersections[2]; //SE
+    }
+    else if(type == Direction::west)
+    {
+        lane[midLane] = intersections[1]; //NW
+        lane[midLane] = intersections[3]; //SW
+    }
+
+    
+
+
 }
 
 #endif

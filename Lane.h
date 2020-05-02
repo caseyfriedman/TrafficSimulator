@@ -22,7 +22,7 @@ class Lane
     
     public:
         Lane();
-        Lane(Parameters params, Direction type, vector<Section*> intersections, TrafficLight* light); //road is gonna tell us how much time until red
+        Lane(Parameters params, Direction type, TrafficLight* light); //road is gonna tell us how much time until red
         ~Lane();
  
         void advanceLane();
@@ -36,6 +36,7 @@ class Lane
         int timeToCross(VehicleBase vehicle);
         bool canNewCarCome();
 
+        void addIntersections(vector<Section*> intersections);
 
         //TESTING
 
