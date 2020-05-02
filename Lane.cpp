@@ -35,11 +35,14 @@ intersection[2] = SE
 intersection[3] = SW
 */
 
-Lane::Lane(int size, Direction type, vector<Section*> intersections, TrafficLight* light) : light(light)
+Lane::Lane(Parameters params, Direction type, vector<Section*> intersections, TrafficLight* light) : light(light)
 {
-    roadSize = size;
-    //int numSections = roadSize + 6;
-    midLane = (roadSize+6)/2;
+
+    roadSize = params.get_number_of_sections_before_intersection();
+
+    //roadSize = size;
+    int numSections = roadSize + 6;
+    midLane = (numSections)/2;
     cout <<"Road Size" << roadSize << "Middle" << midLane << endl;    
 
     for(int i = 0; i < midLane; i++)
@@ -121,8 +124,8 @@ void Lane::advanceLane()
                 {
                     setMakingRight(true); //indicate a vehicle is making a right
                     
-                    //ERROR: Need to pass *VehicleBase not VehicleBase obj
-                    setTurningVehicle(lane[i].&getVehicle()); //store vehicle that is making a right
+                    //I changed it to be vehiclePtr because that's what the other methods seemed to do
+                    setTurningVehicle(lane[i]->vehiclePtr); //store vehicle that is making a right
                     //ERROR
                     
                     lane[i]->setVehicle(nullptr); //Remove vehicle and Road will add it to the appropriate lane

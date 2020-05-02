@@ -5,6 +5,7 @@
 #include <string>
 #include "Section.h"
 #include "TrafficLight.h"
+#include "Parameters.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ class Lane
     
     public:
         Lane();
-        Lane(int size, Direction type, vector<Section*> intersections, TrafficLight* light); //road is gonna tell us how much time until red
+        Lane(Parameters params, Direction type, vector<Section*> intersections, TrafficLight* light); //road is gonna tell us how much time until red
         ~Lane();
  
         void advanceLane();
