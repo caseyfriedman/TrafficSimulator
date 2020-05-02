@@ -102,14 +102,19 @@ void Lane::advanceLane()
                 cout <<"part of vehicle at end" << endl;
                 lane[i]->setVehicle(nullptr);
             }
-            else if(i > midLane)
+            else if(i > midLane + 1)
             {
                 cout <<"part of vehicle past intersection, i = " << i << "  midlane = "<< midLane << endl;
                 lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
                 lane[i]->setVehicle(nullptr);
                 //moveForward(i);
             }
-            else if(i == midLane) //if we're in the intersection
+            else if ((i == midLane + 1) && !light->getIsRed())
+            {
+                lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+                lane[i]->setVehicle(nullptr);
+            }
+            else if(i == midLane && !light->getIsRed()) //if we're in the intersection
             {
                 cout <<"part of vehicle in intersection" << endl;
                 if(lane[i]->getVehicle().getTurn())
