@@ -16,7 +16,7 @@ ewLight(LightDirection::EW,params), northBound(params, Direction::north,
 
 	vector<Section*> intersections = setIntersections();
 
-	//setLanes(intersections);
+	setLanes();
 
 
 
