@@ -16,15 +16,12 @@ class TrafficLight
 
    public: 
       TrafficLight(LightDirection lightDir, Parameters params);
+      TrafficLight();
       ~TrafficLight();
       void update();
+      void setValues(LightDirection lightDir, Parameters params);
       inline int timeUntilRed() {return this->counter;}
       bool getIsRed() {return this->isRed;}
-      /*
-
-         FOR TESTING
-
-      */
 
       void setTimeUntilRed(int time) {counter = time;}
 
