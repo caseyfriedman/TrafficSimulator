@@ -4,6 +4,7 @@
 #include "Section.h"
 #include "Lane.h"
 #include "Parameters.h"
+#include "TrafficLight.h"
 using namespace std;
 
 class Road
