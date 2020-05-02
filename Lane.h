@@ -14,8 +14,9 @@ class Lane
         Direction type;
         int roadSize;
         int midLane;
+        bool makingRight;
+        VehicleBase vehicleTurningRight;
         vector<Section*> lane;
-        Lane* rigthTurnOnto;
         TrafficLight* light;
     
     public:
@@ -24,7 +25,8 @@ class Lane
         ~Lane();
  
         void advanceLane();
-        void moveForward(int index);
+        inline bool isMakingRight() {return this->makingRight;}
+        inline VehicleBase getTurningVehicle() {return this->vehicleTurningRight;}
         void addVehicle(VehicleBase* vehicle); //maybe should be boolean and return false if there's a vehicle there?
       
         bool canMakeLight(VehicleBase vehicle);
