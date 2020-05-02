@@ -30,7 +30,7 @@ class Road
 		Road(Parameters params);
 		void setIntersections();
 		void moveTraffic(int currentTime);
-		int getVehicleCount(){return allcars.size()}
+		int getVehicleCount(){return allcars.size();}
 		
 
 
