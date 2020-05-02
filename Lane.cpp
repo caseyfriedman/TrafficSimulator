@@ -85,8 +85,8 @@ void Lane::advanceLane()
     
     for(int i = lane.size() - 1; i >= 0; i--)
     {
-        makingRight = false;
-        vehicleTurningRight = nullptr;
+        setMakingRight(false);
+        setTurningVehicle(nullptr);
         
         if(lane[i]->isOccupied())
         {
@@ -119,8 +119,12 @@ void Lane::advanceLane()
                 cout <<"part of vehicle in intersection" << endl;
                 if(lane[i]->getVehicle().getTurn())
                 {
-                    makingRight = true; //indicate a vehicle is making a right
-                    vehicleTurningRight = lane[i]->getVehicle(); //store vehicle that is making a right
+                    setMakingRight(true); //indicate a vehicle is making a right
+                    
+                    //ERROR: Need to pass *VehicleBase not VehicleBase obj
+                    setTurningVehicle(lane[i].&getVehicle()); //store vehicle that is making a right
+                    //ERROR
+                    
                     lane[i]->setVehicle(nullptr); //Remove vehicle and Road will add it to the appropriate lane
                 }
                 else
