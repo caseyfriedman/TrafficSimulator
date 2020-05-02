@@ -84,7 +84,7 @@ void Lane::advanceLane()
     bool vehicleHead = false;
     
     for(int i = lane.size() - 1; i >= 0; i--)
-    {
+    {                                             //could Possibly put this into another method called 'move section'
         if(lane[i]->isOccupied())
         {
             if(lane[i]->getVehicle().getVehicleID() != currVehicle) //what's this for?
