@@ -84,10 +84,13 @@ void Lane::advanceLane()
     bool vehicleHead = false;
     
     for(int i = lane.size() - 1; i >= 0; i--)
-    {                                             //could Possibly put this into another method called 'move section'
+    {
+        setMakingRight(false);
+        setTurningVehicle(nullptr);
+        
         if(lane[i]->isOccupied())
         {
-            if(lane[i]->getVehicle().getVehicleID() != currVehicle) //what's this for?
+            if(lane[i]->getVehicle().getVehicleID() != currVehicle)
             {
                 currVehicle = lane[i]->getVehicle().getVehicleID();
                 vehicleHead = true;
@@ -96,27 +99,40 @@ void Lane::advanceLane()
             }
             if(i == lane.size() - 1)
             {
-            cout <<"part of vehicle at end" << endl;
+                cout <<"part of vehicle at end" << endl;
                 lane[i]->setVehicle(nullptr);
             }
-            else if(i > midLane)
+            else if(i > midLane + 1)
             {
-            cout <<"part of vehicle past intersection, i = " << i << "  midlane = "<< midLane << endl;
+                cout <<"part of vehicle past intersection, i = " << i << "  midlane = "<< midLane << endl;
                 lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
                 lane[i]->setVehicle(nullptr);
                 //moveForward(i);
             }
-            else if(i == midLane || i == midLane+1) //if we're in the intersection
+            else if ((i == midLane + 1) && !light->getIsRed())
             {
-            cout <<"part of vehicle in intersection" << endl;
-                //else
-                //{
+                lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+                lane[i]->setVehicle(nullptr);
+            }
+            else if(i == midLane && !light->getIsRed()) //if we're in the intersection
+            {
+                cout <<"part of vehicle in intersection" << endl;
+                if(lane[i]->getVehicle().getTurn())
+                {
+                    setMakingRight(true); //indicate a vehicle is making a right
+                    
+                    //ERROR: Need to pass *VehicleBase not VehicleBase obj
+                    setTurningVehicle(lane[i].&getVehicle()); //store vehicle that is making a right
+                    //ERROR
+                    
+                    lane[i]->setVehicle(nullptr); //Remove vehicle and Road will add it to the appropriate lane
+                }
+                else
+                {
                     lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
                     lane[i]->setVehicle(nullptr);
-                    //moveForward(i);
-                //}
-                
-                //continue;
+                }
+                continue;
             }
             else if(i == midLane - 1)
             {
@@ -128,7 +144,6 @@ void Lane::advanceLane()
                         lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
                         lane[i]->setVehicle(nullptr);
                         //moveForward(i);
-                        
                         cout << "we movin it" << endl;
                     }
                     else
@@ -161,15 +176,7 @@ void Lane::advanceLane()
     }
 }
 
-
-//void moveForward(int index)
-//{
-//    lane[index + 1]->setVehicle(lane[index].vehiclePtr);
-//    lane[index]->setVehicle(nullptr);
-//}
-
 /*
-
 void Lane::makeRight()
 {
     if(type == Direction::north)
@@ -197,21 +204,30 @@ void Lane::makeRight()
         lane[midLane]->setVehicle(nullptr);
     }
 }
-
-
 */
 
+void Lane::addVehicle(VehicleBase* vehiclePtr)
+{ //might want it not to be a pointer, will wait and see
+    for (int i = 3; i > 3-vehiclePtr->getVehicleSize(); i--) //vehicles always added at pos 3 (first visible pos in lane)
+    //truck will fill pos 3-0
+    //suv will fill pos 3-1
+    //car will fill pos 3-2
+    {
+        lane[i]->setVehicle(vehiclePtr);
+    }
+}
+
 bool Lane::canMakeLight(VehicleBase vehicle)
-{   
-        if(light->getIsRed()) //every lane only needs 1 traffic light
-        {   
-           cout <<"light is red. do not enter intersection " << endl; 
-           return false;
-        }
-        
-        cout <<"light is red " << light->getIsRed() << endl;
-        cout <<"time left is " << light->timeUntilRed() << endl;
-        return timeToCross(vehicle) <= light->timeUntilRed();
+{
+    if(light->getIsRed()) //every lane only needs 1 traffic light
+    {
+        cout <<"light is red. do not enter intersection " << endl;
+        return false;
+    }
+    
+    cout <<"light is red " << light->getIsRed() << endl;
+    cout <<"time left is " << light->timeUntilRed() << endl;
+    return timeToCross(vehicle) <= light->timeUntilRed();
 }
 
 int Lane::timeToCross(VehicleBase vehicle)   //should this be a pointer???
@@ -232,15 +248,4 @@ bool Lane::canNewCarCome()
     return !lane[4]->isOccupied();
 }
 
-void Lane::addVehicle(VehicleBase* vehiclePtr)
-{ //might want it not to be a pointer, will wait and see
-    for (int i = 3; i > 3-vehiclePtr->getVehicleSize(); i--) //vehicles always added at pos 3 (first visible pos in lane)
-    //truck will fill pos 3-0
-    //suv will fill pos 3-1
-    //car will fill pos 3-2
-    {
-        lane[i]->setVehicle(vehiclePtr);
-    }
-}
-            
 #endif
