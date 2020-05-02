@@ -23,12 +23,13 @@ class Road
 		TrafficLight ewLight;
 		vector<VehicleBase> allcars;	
 		int vehicleCount;
+		vector<Section*> intersections;
 	public:
 		int roadSize;
-	
+		void setLanes();
 		Road();
 		Road(Parameters params);
-		void setIntersections();
+		vector<Section*> setIntersections();
 		void moveTraffic(int currentTime);
 		int getVehicleCount(){return allcars.size();}
 		

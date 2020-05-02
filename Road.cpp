@@ -5,13 +5,23 @@ using namespace std;
 
 Road::Road(){
 
-	cout<<"This is a test"<<endl;
+	
 }
 
 Road::Road(Parameters params) : nsLight(LightDirection::NS, params),
-ewLight(LightDirection::EW,params){
+ewLight(LightDirection::EW,params), northBound(params, Direction::north, 
+	&nsLight), southBound(params, Direction::south, &nsLight), eastBound(
+	params, Direction::east, &ewLight), westBound(params, Direction::east,
+	&ewLight){
 
-	setIntersections();
+	vector<Section*> intersections = setIntersections();
+
+	//setLanes(intersections);
+
+
+
+
+
 
 
 
@@ -19,9 +29,29 @@ ewLight(LightDirection::EW,params){
 }
 
 
-void Road::setIntersections(){
+vector<Section*> Road::setIntersections(){
 		neIntersection.setIntersection();
 		nwIntersection.setIntersection();
 		seIntersection.setIntersection();
 		swIntersection.setIntersection();
+	
+		intersections.push_back(&neIntersection);
+		intersections.push_back(&nwIntersection);
+		intersections.push_back(&seIntersection);
+		intersections.push_back(&swIntersection);
+
+}
+
+
+void Road::setLanes(){
+
+
+		northBound.addIntersections(intersections);
+		southBound.addIntersections(intersections);
+		eastBound.addIntersections(intersections);
+		westBound.addIntersections(intersections);
+
+
+	
+
 }
