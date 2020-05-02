@@ -5,6 +5,7 @@
 #include "Lane.h"
 #include "Parameters.h"
 #include "TrafficLight.h"
+#include <vector>
 using namespace std;
 
 class Road
@@ -19,13 +20,17 @@ class Road
 		Lane eastBound;
 		Lane westBound;
 		TrafficLight nsLight;
-		TrafficLight ewLight;		
-	
+		TrafficLight ewLight;
+		vector<VehicleBase> allcars;	
+		int vehicleCount;
 	public:
 		int roadSize;
+	
 		Road();
 		Road(Parameters params);
-
+		void setIntersections();
+		void moveTraffic(int currentTime);
+		int getVehicleCount(){return allcars.size()}
 		
 
 
