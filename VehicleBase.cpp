@@ -11,6 +11,7 @@ VehicleBase::VehicleBase(VehicleType type, Direction direction)
       vehicleType(type),
       vehicleDirection(direction)
 {
+   //set vehicle size based on vehicle type
    switch(vehicleType)
    {
       case VehicleType::car: vehicleSize = 2; break;
@@ -18,11 +19,11 @@ VehicleBase::VehicleBase(VehicleType type, Direction direction)
       case VehicleType::truck: vehicleSize = 4; break;
    }
    
-   //call random number generator- work in progress
+   //call random number generator
    double randNum = Random::generateNum();
-   //double randNum = 0.5;
 
-   if (randNum < 0.4) //replace with input file values
+   //determine whether vehicle will turn
+   if (randNum < 0.4)
    {
       turnRight = true;
    }
@@ -37,6 +38,7 @@ VehicleBase::VehicleBase(VehicleType type, Direction direction, Parameters param
       vehicleType(type),
       vehicleDirection(direction)
 {
+   //set vehicle size based on vehicle type
    switch(vehicleType)
    {
       case VehicleType::car: 

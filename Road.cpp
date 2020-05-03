@@ -73,7 +73,9 @@ void Road::advanceRoad(){
       //if true, calls another method in lane which will generate random number to determine whether that particular lane 
       //(based on its param values) should add a vehicle at that clock tick
       if (northBound.shouldNewCarCome())
-      {  //We need to give the car params but this doesn't currently have access- we should think about how we are using params
+      { 
+         //somewhere need to use RNG to determine whether new vehicle will be car, SUV or truck 
+         //We need to give the car params but this doesn't currently have access- we should think about how we are using params
          //northBound.addVehicle(VehicleBase (VehicleType::car, Direction::north, params)); //adds newly generated vehicle to lane and vector of vehicles and increments vehicle count   
       }  
    } //else does not add car

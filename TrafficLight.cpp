@@ -34,7 +34,7 @@ TrafficLight::TrafficLight(LightDirection lightDir, Parameters params)
 TrafficLight::TrafficLight(){}
 
 void TrafficLight::setValues(LightDirection lightDir, Parameters params){
-  switch(lightDir)
+   switch(lightDir)
    {  
       case LightDirection::EW: 
            {
@@ -54,7 +54,7 @@ void TrafficLight::setValues(LightDirection lightDir, Parameters params){
               isRed = true;  //defaults to NS being red first
               break;
            }
-}
+   }
 }
 
 
