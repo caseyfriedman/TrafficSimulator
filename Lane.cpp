@@ -27,12 +27,7 @@ Lane::Lane()
     }
 }
 
-/*
-intersection[0] = NE
-intersection[1] = NW
-intersection[2] = SE
-intersection[3] = SW
-*/
+
 
 Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
 {
@@ -285,13 +280,20 @@ bool Lane::shouldNewCarCome()
 void Lane::addIntersections(vector<Section*> intersections){
 
 
+/*
+intersection[0] = NE
+intersection[1] = NW
+intersection[2] = SE
+intersection[3] = SW
+*/
+
     cout << lane[midLane] << endl;
 
     if(type == Direction::north)
     {
         cout << "NorthBoundLane created" << endl;
         lane[midLane] = intersections[2]; //SE
-        lane[midLane + 1] = intersections[1]; //NE
+        lane[midLane + 1] = intersections[0]; //NE
     }
     else if(type == Direction::east)
     {
