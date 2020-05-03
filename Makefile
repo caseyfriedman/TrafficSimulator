@@ -7,7 +7,7 @@ OBJS = testVehicle.o VehicleBase.o Random.o Parameters.o Section.o TrafficLight.
 
 #### use next two lines for mathcs* machines:
 CC = g++
-CCFLAGS = -std=c++11
+CCFLAGS = -g -std=c++11
 
 all: $(EXECS)
 
