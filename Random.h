@@ -5,13 +5,11 @@
 
 class Random
 {
-   public:
+   private:
       static std::mt19937 rng;
 
    public:
-      Random();
-      Random(int seed);
-      ~Random();
+      inline static void setSeed(int seed){rng.seed(seed);}
 
      // generate a uniform(0,1) psuedo-random number
      static double generateNum();
