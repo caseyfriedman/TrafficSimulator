@@ -37,6 +37,7 @@ class Lane
         int timeToCross(VehicleBase vehicle);
         bool canNewCarCome();
         bool shouldNewCarCome();
+        void moveForward(int i);
 
         void addIntersections(vector<Section*> intersections);
 
