@@ -122,14 +122,11 @@ void Lane::advanceLane()
             else if(i > midLane + 1)
             {
                 cout <<"part of vehicle past intersection, i = " << i << "  midlane = "<< midLane << endl;
-                lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
-                lane[i]->setVehicle(nullptr);
-                //moveForward(i);
+                moveForward(i);
             }
             else if ((i == midLane + 1) && !light->getIsRed())
             {
-                    //  lane[i + 1]->setVehicle(lane[i]->vehiclePtr); //this was the line that I edited
-                lane[i]->setVehicle(nullptr);
+                moveForward(i);
             }
             else if(i == midLane && !light->getIsRed()) //if we're in the intersection
             {
@@ -146,8 +143,8 @@ void Lane::advanceLane()
                 }
                 else
                 {
-                    lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
-                    lane[i]->setVehicle(nullptr);
+                    
+                    moveForward(i);
                 }
                 continue;
             }
@@ -158,9 +155,8 @@ void Lane::advanceLane()
                 {
                     if(canMakeLight(lane[i]->getVehicle())) //move if can make it
                     {
-                        lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
-                        lane[i]->setVehicle(nullptr);
-                        //moveForward(i);
+                    
+                        moveForward(i);
                         cout << "we movin it" << endl;
                     }
                     else
@@ -171,9 +167,8 @@ void Lane::advanceLane()
                 }
                 else //is a body of car, no decisions to be made (can assume its safe to move) 
                 {
-                    lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
-                    lane[i]->setVehicle(nullptr);
-                    //moveForward(i);
+                    
+                    moveForward(i);
                     
                     cout << "we movin it" << endl;
                     //continue; // the light is red and we don't 
@@ -183,9 +178,7 @@ void Lane::advanceLane()
             {
                 if(!lane[i+1]->isOccupied())
                 {
-                    //moveForward(i);
-                    lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
-                    lane[i]->setVehicle(nullptr);
+                    moveForward(i);
                 }
             }
         }
@@ -291,36 +284,38 @@ intersection[3] = SW
 
     if(type == Direction::north)
     {
-        cout << "NorthBoundLane created" << endl;
+    
         lane[midLane] = intersections[2]; //SE
         lane[midLane + 1] = intersections[0]; //NE
     }
     else if(type == Direction::east)
     {
-         cout << "EastBoundLane created" << endl;
+   
         lane[midLane] = intersections[3]; //SW
         lane[midLane + 1] = intersections[2]; //SE
     }
     else if(type == Direction::south)
     {
-         cout << "SouthBoundLane created" << endl;
+      
         lane[midLane] = intersections[1]; //NW
         lane[midLane + 1] = intersections[3]; //SW
     }
     else if(type == Direction::west)
     {
-         cout << "WestBoundLane created" << endl;
+      
         lane[midLane] = intersections[0]; //NE
         lane[midLane + 1] = intersections[1]; //NW
     }
 
-    
-        //cout << lane[midLane] << endl;
+void Lane::moveForward(int i){
 
-        cout << intersections[0] << endl;
-        cout << intersections[1] << endl;
-        cout << intersections[2] << endl;
-        cout << intersections[3] << endl;
+     lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+     lane[i]->setVehicle(nullptr);
+} 
+    
+
 }
+
+
 
 #endif
