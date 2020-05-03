@@ -1,7 +1,8 @@
 #include <iostream>
 #include "Animator.h"
 #include "VehicleBase.h"
-#include "Parameters.cpp"
+#include "Parameters.h"
+#include "TrafficLight.h"
 
 int main()
 {
@@ -17,8 +18,9 @@ int main()
     Animator anim(halfSize);
 
     //Create instance of Road, which will create the Sections and Lanes
+    Road road(params);
 
-    // construct vectors of VehicleBase* of appropriate size, init to nullptr
+    //construct vectors of VehicleBase* of appropriate size, init to nullptr
     std::vector<VehicleBase*> westbound(halfSize * 2 + 2, nullptr);
     std::vector<VehicleBase*> eastbound(halfSize * 2 + 2, nullptr);
     std::vector<VehicleBase*> southbound(halfSize * 2 + 2, nullptr);
@@ -45,9 +47,19 @@ int main()
     int i = 0;
     int j = 0;
 
+    //set initial colors for animated traffic light
     anim.setLightNorthSouth(LightColor::red);
     anim.setLightEastWest(LightColor::green);
 
+/*
+    //while max simulation time is not met
+    while (i <= params.get_maximum_simulation_time())
+    {
+       //ask road to generate cars
+       //ask road to move each lane
+       //increment light and increment simulation time (i)
+    }
+*/
     for (; i < 4; i++)
     {
         eastbound[10+i] = eastbound[11+i] = &vb1;
