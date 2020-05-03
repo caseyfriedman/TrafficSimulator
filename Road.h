@@ -25,7 +25,7 @@ class Road
 	public:
 		int roadSize;
 		void setLanes();
-		void advanceLanes();
+		void advanceRoad();
 		void addVehicle(VehicleBase* vehicle, Direction type);
 		Road();
 		Road(Parameters params);
