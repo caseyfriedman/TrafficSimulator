@@ -36,13 +36,15 @@ intersection[3] = SW
 
 Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
 {
-    roadSize = (params.get_number_of_sections_before_intersection() * 2) + 2;  //*2 because there are 2 sides, +2 because of the intersection
+    roadSize = (params.get_number_of_sections_before_intersection() * 2);  //*2 because there are 2 sides, +2 because of the intersection
+
+    //I thought we should add 2 to the roadsize but that messes up the total count
 
     type = t; 
     //roadSize = size;
     int numSections = roadSize + 6;
     midLane = (numSections)/2;
-    cout <<"Road Size" << roadSize << "Middle" << midLane << endl;    
+    cout <<"Total number of sections is" << numSections << "Middle" << midLane << endl;    
 
     for(int i = 0; i < midLane; i++)
     {
