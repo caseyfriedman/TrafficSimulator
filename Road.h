@@ -29,7 +29,7 @@ class Road
 		void addVehicle(VehicleBase* vehicle, Direction type);
 		Road();
 		Road(Parameters params);
-		vector<Section*> setIntersections();
+		void setIntersections();
 		void moveTraffic(int currentTime);
 		int getVehicleCount(){return allcars.size();}
 		

@@ -14,7 +14,7 @@ ewLight(LightDirection::EW,params), northBound(params, Direction::north,
 	params, Direction::east, &ewLight), westBound(params, Direction::west,
 	&ewLight){
 
-	intersections = setIntersections();
+	setIntersections();
 
 	setLanes();
 
@@ -29,7 +29,7 @@ ewLight(LightDirection::EW,params), northBound(params, Direction::north,
 }
 
 
-vector<Section*> Road::setIntersections(){
+void Road::setIntersections(){
 		neIntersection.setIntersection();
 		nwIntersection.setIntersection();
 		seIntersection.setIntersection();
