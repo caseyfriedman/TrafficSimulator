@@ -175,11 +175,11 @@ std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << s
 
    Road testRoad(params); //can't do default constructor for road 
 
-testRoad.addVehicle(&v1, Direction::north);
-   testRoad.addVehicle(&v2, Direction::east);
+//testRoad.addVehicle(&v1, Direction::north);
+   testRoad.addVehicle(&v1, Direction::east);
 
  
-for (int i=0; i<7; i++)
+for (int i=0; i<10; i++)
    testRoad.advanceRoad();
 
  for (int i=0; i < testRoad.northBound.getLane().size();i++)
@@ -194,7 +194,30 @@ for (int i=0; i<7; i++)
    std::cout << "The value in section of E" << i << " is" << testRoad.eastBound.getLane()[i]->isOccupied() << std::endl;
 }
 
+ for (int i=0; i < testRoad.southBound.getLane().size();i++)
+{
 
+   std::cout << "The value in section of S" << i << " is" << testRoad.southBound.getLane()[i]->isOccupied() << std::endl;
+}
+
+for (int i=0; i < testRoad.westBound.getLane().size();i++)
+{
+
+   std::cout << "The value in section of W" << i << " is" << testRoad.westBound.getLane()[i]->isOccupied() << std::endl;
+}
+
+ 
+
+   /*
+
+   for (int i=0; i<testRoad.northBound.getLane().size();i++){
+
+      if(testRoad.northBound.getLane()[i]->isIntersection()){
+         std::cout << "Intersection is " << testRoad.northBound.getLane()[i] << std::endl;
+      }
+
+   }
+*/
 
 
 
