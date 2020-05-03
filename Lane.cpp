@@ -106,6 +106,9 @@ void Lane::advanceLane()
         setTurningVehicle(nullptr);
         
         if(lane[i]->isOccupied())
+
+
+
         {
             if(lane[i]->getVehicle().getVehicleID() != currVehicle)
             {
@@ -114,19 +117,24 @@ void Lane::advanceLane()
 
                 cout << "assigning vehicle head, this should be done at the start: curVehicle = " << currVehicle << ", newVehicle =" << lane[i]->getVehicle().getVehicleID() << endl;
             }
+
+
             if(i == lane.size() - 1)
             {
                 cout <<"part of vehicle at end" << endl;
                 lane[i]->setVehicle(nullptr);
+                continue;
             }
             else if(i > midLane + 1)
             {
                 cout <<"part of vehicle past intersection, i = " << i << "  midlane = "<< midLane << endl;
                 moveForward(i);
+                continue;
             }
-            else if ((i == midLane + 1) && !light->getIsRed())
+            else if ((i == midLane + 1) && !light->getIsRed()) //what if it's turning
             {
                 moveForward(i);
+                continue;
             }
             else if(i == midLane && !light->getIsRed()) //if we're in the intersection
             {
@@ -145,6 +153,7 @@ void Lane::advanceLane()
                 {
                     
                     moveForward(i);
+                    continue;
                 }
                 continue;
             }
@@ -158,6 +167,7 @@ void Lane::advanceLane()
                     
                         moveForward(i);
                         cout << "we movin it" << endl;
+                        continue;
                     }
                     else
                     {
@@ -171,12 +181,12 @@ void Lane::advanceLane()
                     moveForward(i);
                     
                     cout << "we movin it" << endl;
-                    //continue; // the light is red and we don't 
+                    continue; 
                 }
             }
             else
             {
-                if(!lane[i+1]->isOccupied())
+                if(i < midLane && !lane[i+1]->isOccupied()) // and the light isn't red
                 {
                     moveForward(i);
                 }
@@ -307,6 +317,9 @@ intersection[3] = SW
         lane[midLane + 1] = intersections[1]; //NW
     }
 
+}
+
+
 void Lane::moveForward(int i){
 
      lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
@@ -314,7 +327,8 @@ void Lane::moveForward(int i){
 } 
     
 
-}
+
+
 
 
 
