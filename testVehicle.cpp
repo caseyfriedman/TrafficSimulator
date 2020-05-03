@@ -12,6 +12,7 @@
 #include "Lane.h"
 #include <string>
 #include "Road.h"
+#include "Random.h"
 
 int main ()
 {
