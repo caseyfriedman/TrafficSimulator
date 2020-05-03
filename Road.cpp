@@ -11,7 +11,7 @@ Road::Road(){
 Road::Road(Parameters params) : nsLight(LightDirection::NS, params),
 ewLight(LightDirection::EW,params), northBound(params, Direction::north, 
 	&nsLight), southBound(params, Direction::south, &nsLight), eastBound(
-	params, Direction::east, &ewLight), westBound(params, Direction::east,
+	params, Direction::east, &ewLight), westBound(params, Direction::west,
 	&ewLight){
 
 	intersections = setIntersections();
@@ -46,6 +46,7 @@ vector<Section*> Road::setIntersections(){
 void Road::setLanes(){
 
 
+		cout << "Set lanes is called" << endl;
 		northBound.addIntersections(intersections);
 		southBound.addIntersections(intersections);
 		eastBound.addIntersections(intersections);
