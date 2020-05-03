@@ -33,11 +33,12 @@ intersection[2] = SE
 intersection[3] = SW
 */
 
-Lane::Lane(Parameters params, Direction type, TrafficLight* light) : light(light)
+Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
 {
 
     roadSize = (params.get_number_of_sections_before_intersection() * 2) + 2;  //*2 because there are 2 sides, +2 because of the intersection
 
+    type = t; 
     //roadSize = size;
     int numSections = roadSize + 6;
     midLane = (numSections)/2;
@@ -264,25 +265,31 @@ void Lane::addIntersections(vector<Section*> intersections){
 
     if(type == Direction::north)
     {
-        lane[midLane] = intersections[0]; //NE
-        lane[midLane + 1] = intersections[1]; //NW
+        cout << "NorthBoundLane created" << endl;
+        lane[midLane] = intersections[2]; //SE
+        lane[midLane + 1] = intersections[1]; //NE
     }
     else if(type == Direction::east)
     {
-        lane[midLane] = intersections[2]; //SE
-        lane[midLane + 1] = intersections[0]; //NE
-    }
-    else if(type == Direction::south)
-    {
+         cout << "EastBoundLane created" << endl;
         lane[midLane] = intersections[3]; //SW
         lane[midLane + 1] = intersections[2]; //SE
     }
+    else if(type == Direction::south)
+    {
+         cout << "SouthBoundLane created" << endl;
+        lane[midLane] = intersections[1]; //NW
+        lane[midLane + 1] = intersections[3]; //SW
+    }
     else if(type == Direction::west)
     {
-        lane[midLane] = intersections[1]; //NW
-        lane[midLane] = intersections[3]; //SW
+         cout << "WestBoundLane created" << endl;
+        lane[midLane] = intersections[0]; //NE
+        lane[midLane + 1] = intersections[1]; //NW
     }
 
+    else
+        cout << "made to end of else" << endl;
     
 
 
