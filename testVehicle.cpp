@@ -179,13 +179,24 @@ testRoad.addVehicle(&v1, Direction::north);
    testRoad.addVehicle(&v2, Direction::east);
 
  
+for (int i=0; i<7; i++)
+   testRoad.advanceRoad();
 
  for (int i=0; i < testRoad.northBound.getLane().size();i++)
 {
-   std::cout << "The value in section " << i << " is" << testRoad.northBound.getLane()[i]->isOccupied() << std::endl;
+
+   std::cout << "The value in section of N " << i << " is" << testRoad.northBound.getLane()[i]->isOccupied() << std::endl;
 }
       
-   //problem is when we get to the middle
+  for (int i=0; i < testRoad.eastBound.getLane().size();i++)
+{
+
+   std::cout << "The value in section of E" << i << " is" << testRoad.eastBound.getLane()[i]->isOccupied() << std::endl;
+}
+
+
+
+
 
    return 0;
 }
