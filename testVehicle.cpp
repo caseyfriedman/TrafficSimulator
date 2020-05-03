@@ -21,6 +21,9 @@ int main ()
    std::cout << "Prop. of turn SUVs:" << params.get_proportion_right_turn_SUVs() << std::endl;
    std::cout << "Prop. of turn truckss:" << params.get_proportion_right_turn_trucks() << std::endl;
 
+   //set initial seed for RNG
+   Random::setSeed(1);
+
    std::cout << "Testing VehicleBase" << std::endl;
    std::cout << "Creating objects...   " << std::endl;
    VehicleBase v1(VehicleType::car, Direction::east, params);
