@@ -16,6 +16,7 @@ class Lane
         int roadSize;
         int midLane;
         bool makingRight;
+        double probOfNewVehicle;
         VehicleBase* vehicleTurningRight;
         vector<Section*> lane;
         TrafficLight* light;
@@ -35,6 +36,7 @@ class Lane
         bool canMakeLight(VehicleBase vehicle);
         int timeToCross(VehicleBase vehicle);
         bool canNewCarCome();
+        bool shouldNewCarCome();
 
         void addIntersections(vector<Section*> intersections);
 

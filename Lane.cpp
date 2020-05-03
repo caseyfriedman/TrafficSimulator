@@ -2,6 +2,7 @@
 #define __LANE_CPP__
 
 #include "Lane.h"
+#include "Random.h"
 
 Lane::Lane()
 {
@@ -35,7 +36,6 @@ intersection[3] = SW
 
 Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
 {
-
     roadSize = (params.get_number_of_sections_before_intersection() * 2) + 2;  //*2 because there are 2 sides, +2 because of the intersection
 
     type = t; 
@@ -84,6 +84,15 @@ Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
     {
         Section* sec = new Section();
         lane.push_back(sec);
+    }
+
+    //read and store the probabilties for new vehicles for each lane
+    switch(this->type)
+    {
+       case Direction::north: probOfNewVehicle = params.get_prob_new_vehicle_northbound(); break;
+       case Direction::south: probOfNewVehicle = params.get_prob_new_vehicle_southbound(); break;
+       case Direction::east: probOfNewVehicle = params.get_prob_new_vehicle_eastbound(); break;
+       case Direction::west: probOfNewVehicle = params.get_prob_new_vehicle_westbound(); break;
     }
 }
 
@@ -259,6 +268,17 @@ bool Lane::canNewCarCome()
     return !lane[4]->isOccupied();
 }
 
+bool Lane::shouldNewCarCome()
+{
+    //generate random number
+    double randNum = Random::generateNum();
+
+    if (randNum <= probOfNewVehicle)
+    {
+       return true;
+    }
+    return false; 
+}
 
 void Lane::addIntersections(vector<Section*> intersections){
 
