@@ -175,8 +175,13 @@ testRoad.addVehicle(&v1, Direction::north);
    testRoad.addVehicle(&v2, Direction::east);
 
  
-      testRoad.advanceLanes();
-   
+
+ for (int i=0; i < testRoad.northBound.getLane().size();i++)
+{
+   std::cout << "The value in section " << i << " is" << testRoad.northBound.getLane()[i]->isOccupied() << std::endl;
+}
+      
+   //problem is when we get to the middle
 
    return 0;
 }
