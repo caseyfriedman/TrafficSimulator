@@ -263,6 +263,8 @@ bool Lane::canNewCarCome()
 void Lane::addIntersections(vector<Section*> intersections){
 
 
+    cout << lane[midLane] << endl;
+
     if(type == Direction::north)
     {
         cout << "NorthBoundLane created" << endl;
@@ -288,11 +290,13 @@ void Lane::addIntersections(vector<Section*> intersections){
         lane[midLane + 1] = intersections[1]; //NW
     }
 
-    else
-        cout << "made to end of else" << endl;
     
+        //cout << lane[midLane] << endl;
 
-
+        cout << intersections[0] << endl;
+        cout << intersections[1] << endl;
+        cout << intersections[2] << endl;
+        cout << intersections[3] << endl;
 }
 
 #endif
