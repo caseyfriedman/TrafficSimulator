@@ -76,18 +76,33 @@ void Road::advanceRoad(){
       }
       if (westBound.getTurningVehicle() != nullptr)
       {
+         cout <<"turning west vehicles" << endl;
+         cout <<"turning vehicle: " << westBound.getTurningVehicle()->getVehicleID() << endl;
          northBound.addAtTurnIndex(westBound.getTurningVehicle()); 
+
+         westBound.setTurningVehicle(nullptr); //reset turning vehicle pointer
+         westBound.setMakingRight(false);
       }
    }
    else //north south cars may be turning
    {
       if (northBound.getTurningVehicle() != nullptr)
       {
+         cout <<"turning east vehicles" << endl;
+         cout <<"turning vehicle: " << northBound.getTurningVehicle()->getVehicleID() << endl;
          eastBound.addAtTurnIndex(northBound.getTurningVehicle());
+     
+         northBound.setTurningVehicle(nullptr); //reset turning vehicle pointer
+         northBound.setMakingRight(false);
       }
       if (southBound.getTurningVehicle() != nullptr)
       {
+         cout <<"turning east vehicles" << endl;
+         cout <<"turning vehicle: " << southBound.getTurningVehicle()->getVehicleID() << endl;
          westBound.addAtTurnIndex(southBound.getTurningVehicle());
+      
+         southBound.setTurningVehicle(nullptr); //reset turning vehicle pointer
+         southBound.setMakingRight(false);
       }
    }
 

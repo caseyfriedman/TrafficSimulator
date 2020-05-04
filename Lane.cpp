@@ -77,8 +77,6 @@ void Lane::advanceLane() //return a vehicle id?
     
     for(int i = lane.size() - 1; i >= 0; i--)
     {
-        //setMakingRight(false);
-        
         if(lane[i]->isOccupied())
         {
             if(lane[i]->getVehicle().getVehicleID() != currVehicle)
@@ -88,7 +86,6 @@ void Lane::advanceLane() //return a vehicle id?
 
                 cout << "assigning vehicle head, this should be done at the start: curVehicle = " << currVehicle << ", newVehicle =" << lane[i]->getVehicle().getVehicleID() << endl;
             }
-
 
             if(i == lane.size() - 1)
             {
@@ -133,8 +130,10 @@ void Lane::advanceLane() //return a vehicle id?
             else if(i == midLane - 1)
             {
                 cout <<"part of vehicle at intersection" << endl;
-                if(vehicleHead) //vehicle heads should check if they can go
+                //cout << "determineHead = "<< determineHead(i) << endl;
+                if(vehicleHead && determineHead(i)) //vehicle heads should check if they can go
                 {
+                    //cout << "determineHead = "<< determineHead(i) << endl;
                     if(canMakeLight(lane[i]->getVehicle())) //move if can make it
                     {
                     
@@ -305,6 +304,23 @@ void Lane::addAtTurnIndex(VehicleBase* vehicle)
 }
 
 
-void Lane::
+bool Lane::determineHead(int vehicleIndex)
+{
+    int vehicleID = lane[vehicleIndex]->vehiclePtr->getVehicleID();
+    int count = lane[vehicleIndex]->vehiclePtr->getVehicleSize();
+    //int i = vehicleIndex;
+    //if (lane[i--]->getVehicle()){cout<< "determiningHead" << endl;}
+    // lane[i]->getVehicle().getVehicleID()
+    /*
+    for (int i=count-1; i>0; i--){
+    if (lane[vehicleIndex-i]->getVehicle() == nullptr){return false;}
+    if (vehicleID == lane[vehicleIndex-i]->getVehicle().getVehicleID())
+    {
+       cout<< count-- << endl;
+    }}
+    */   
+    if (count != 0) {return false;} //if there were exactly size-1 identical IDs behind, it is head
+    else {return true;}  //else it is not true head
+}
 
 #endif

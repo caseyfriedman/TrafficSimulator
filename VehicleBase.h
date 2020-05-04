@@ -18,7 +18,8 @@ class VehicleBase
       VehicleType vehicleType;
       Direction   vehicleDirection;
       int         vehicleSize;
-      bool        turnRight;   
+      bool        turnRight;
+      int         headSet;   
  
     public:
        VehicleBase(VehicleType type, Direction originalDirection);
