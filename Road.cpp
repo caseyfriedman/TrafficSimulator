@@ -66,6 +66,31 @@ void Road::advanceRoad(){
 
    //call the appropriate methods for right turns to occur for all lanes- only lanes with green light should be 
    //able to turn? (are we allowing right on red?)
+   if(!ewLight.getIsRed()) //if east west light is not red, these cars may be turning
+   {
+      cout <<"is stored vehicle null: " << (eastBound.getTurningVehicle() == nullptr) << endl;
+      if (eastBound.getTurningVehicle() != nullptr)
+      {
+         cout <<"turning east vehicles" << endl;
+         cout <<"turning vehicle: " << eastBound.getTurningVehicle()->getVehicleID() << endl;
+         southBound.addAtTurnIndex(eastBound.getTurningVehicle());
+      }
+      if (westBound.getTurningVehicle() != nullptr)
+      {
+         northBound.addAtTurnIndex(westBound.getTurningVehicle()); 
+      }
+   }
+   else //north south cars may be turning
+   {
+      if (northBound.getTurningVehicle() != nullptr)
+      {
+         eastBound.addAtTurnIndex(northBound.getTurningVehicle());
+      }
+      if (southBound.getTurningVehicle() != nullptr)
+      {
+         westBound.addAtTurnIndex(southBound.getTurningVehicle());
+      }
+   }
 
    //determine if new cars will be added- calls Lane.canAddCar() method for all lanes
    if (northBound.canNewCarCome())
@@ -79,6 +104,9 @@ void Road::advanceRoad(){
          //northBound.addVehicle(VehicleBase (VehicleType::car, Direction::north, params)); //adds newly generated vehicle to lane and vector of vehicles and increments vehicle count   
       }  
    } //else does not add car
+
+   ewLight.update();
+   nsLight.update();
 }
 
 void Road::addVehicle(VehicleBase* vehicle, Direction type){

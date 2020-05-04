@@ -106,9 +106,6 @@ void Lane::advanceLane()
         setTurningVehicle(nullptr);
         
         if(lane[i]->isOccupied())
-
-
-
         {
             if(lane[i]->getVehicle().getVehicleID() != currVehicle)
             {
@@ -146,12 +143,13 @@ void Lane::advanceLane()
                     //I changed it to be vehiclePtr because that's what the other methods seemed to do
                     setTurningVehicle(lane[i]->vehiclePtr); //store vehicle that is making a right
                     //ERROR
-                    
+                   
+                    cout <<"part of vehicle stored for turn: "<< this->getTurningVehicle()->getVehicleID() << endl;  
+  
                     lane[i]->setVehicle(nullptr); //Remove vehicle and Road will add it to the appropriate lane
                 }
                 else
                 {
-                    
                     moveForwardTo(i);
                     continue;
                 }
@@ -325,11 +323,10 @@ void Lane::moveForwardTo(int i){
      lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
      lane[i]->setVehicle(nullptr);
 } 
-    
 
-
-
-
-
+void Lane::addAtTurnIndex(VehicleBase* vehicle)    
+{
+    lane[midLane + 2]->setVehicle(vehicle);
+}
 
 #endif
