@@ -37,7 +37,7 @@ Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
 
     int numSections = params.compute_total_size();
     midLane = (numSections)/2;
-    cout <<"Total number of sections is" << numSections << "Middle" << midLane << endl;    
+    cout <<"Total number of sections is " << numSections << "Middle" << midLane << endl;    
 
     for(int i = 0; i < midLane; i++)
     {
@@ -303,5 +303,8 @@ void Lane::addAtTurnIndex(VehicleBase* vehicle)
 {
     lane[midLane + 2]->setVehicle(vehicle);
 }
+
+
+void Lane::
 
 #endif

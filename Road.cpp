@@ -25,7 +25,6 @@ ewLight(LightDirection::EW,params), northBound(params, Direction::north,
 
 
 
-
 }
 
 
@@ -43,17 +42,14 @@ void Road::setIntersections(){
 }
 
 
+
+
 void Road::setLanes(){
 
-
-		cout << "Set lanes is called" << endl;
 		northBound.addIntersections(intersections);
 		southBound.addIntersections(intersections);
 		eastBound.addIntersections(intersections);
 		westBound.addIntersections(intersections);
-
-
-	
 
 }
 
@@ -104,8 +100,9 @@ void Road::advanceRoad(){
       { 
          //somewhere need to use RNG to determine whether new vehicle will be car, SUV or truck 
          //We need to give the car params but this doesn't currently have access- we should think about how we are using params
-         //northBound.addVehicle(VehicleBase (VehicleType::car, Direction::north, params)); //adds newly generated vehicle to lane and vector of vehicles and increments vehicle count   
-      }  
+         //northBound.addVehicle(VehicleBase (VehicleType::car, Direction::north, params)); //adds newly generated vehicle to lane and vector of vehicles and increments vehicle count
+      	//                       ^^^^^^^^^^^^^^^^^^^^^^^ needs to be a pointer		
+      }   
    } //else does not add car
 
    ewLight.update();
@@ -128,5 +125,7 @@ void Road::addVehicle(VehicleBase* vehicle, Direction type){
         
         vehicleCount++;
 }
+
+
 
 //maybe clock tick will occur in driver 
