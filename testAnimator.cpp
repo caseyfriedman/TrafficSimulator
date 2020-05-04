@@ -20,11 +20,32 @@ int main()
     //Create instance of Road, which will create the Sections and Lanes
     Road road(params);
 
+
+   
+
     //construct vectors of VehicleBase* of appropriate size, init to nullptr
     std::vector<VehicleBase*> westbound(halfSize * 2 + 2, nullptr);
     std::vector<VehicleBase*> eastbound(halfSize * 2 + 2, nullptr);
     std::vector<VehicleBase*> southbound(halfSize * 2 + 2, nullptr);
     std::vector<VehicleBase*> northbound(halfSize * 2 + 2, nullptr);
+
+/*
+
+syncs the lanes with the VehicleBase vectors
+
+*/
+
+ for(int i=3; i < road.eastBound.getLane().size() - 3; i++){
+
+       eastbound[i-3] = road.eastBound.getLane()[i]->getVehicle();
+       westbound[i-3] = road.westBound.getLane()[i]->getVehicle();
+       northbound[i-3] = road.northBound.getLane()[i]->getVehicle();
+       southbound[i-3] = road.southBound.getLane()[i]->getVehicle();
+  
+
+    } 
+
+
 
     char dummy;
 
