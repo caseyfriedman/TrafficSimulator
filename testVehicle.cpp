@@ -20,7 +20,7 @@ int main ()
    Parameters params("inputFile.txt");
    std::cout << "Prop. of turn cars:" << params.get_proportion_right_turn_cars() << std::endl;
    std::cout << "Prop. of turn SUVs:" << params.get_proportion_right_turn_SUVs() << std::endl;
-   std::cout << "Prop. of turn truckss:" << params.get_proportion_right_turn_trucks() << std::endl;
+   std::cout << "Prop. of turn trucks:" << params.get_proportion_right_turn_trucks() << std::endl;
 
    //set initial seed for RNG
    Random::setSeed(1);
@@ -184,12 +184,11 @@ std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << s
 
   // std::cout << "ew light " << testRoad.ewLight.getIsRed() << std::endl;
   // std::cout << "ns light " << testRoad.nsLight.getIsRed() << std::endl;
-//testRoad.addVehicle(&v1, Direction::north);
+  // testRoad.addVehicle(&v1, Direction::north);
    testRoad.addVehicle(&v3, Direction::east);
+   //testRoad.addVehicle(&v1, Direction::east);
 
-
- 
-for (int i=0; i<11; i++){
+for (int i=0; i<7; i++){
    testRoad.advanceRoad();
 } 
 for (int i=0; i < testRoad.northBound.getLane().size();i++)
@@ -216,6 +215,34 @@ for (int i=0; i < testRoad.westBound.getLane().size();i++)
    std::cout << "The value in section of W" << i << " is" << testRoad.westBound.getLane()[i]->isOccupied() << std::endl;
 }
 
+testRoad.addVehicle(&v1, Direction::east);
+
+for (int i=0; i<7; i++){
+   testRoad.advanceRoad();
+}
+for (int i=0; i < testRoad.northBound.getLane().size();i++)
+{
+
+   std::cout << "The value in section of N " << i << " is" << testRoad.northBound.getLane()[i]->isOccupied() << std::endl;
+}
+
+  for (int i=0; i < testRoad.eastBound.getLane().size();i++)
+{
+
+   std::cout << "The value in section of E" << i << " is" << testRoad.eastBound.getLane()[i]->isOccupied() << std::endl;
+}
+
+ for (int i=0; i < testRoad.southBound.getLane().size();i++)
+{
+
+   std::cout << "The value in section of S" << i << " is" << testRoad.southBound.getLane()[i]->isOccupied() << std::endl;
+}
+
+for (int i=0; i < testRoad.westBound.getLane().size();i++)
+{
+
+   std::cout << "The value in section of W" << i << " is" << testRoad.westBound.getLane()[i]->isOccupied() << std::endl;
+}
  
 
 
