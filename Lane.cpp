@@ -31,13 +31,11 @@ Lane::Lane()
 
 Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
 {
-    roadSize = (params.get_number_of_sections_before_intersection() * 2);  //*2 because there are 2 sides, +2 because of the intersection
-
-    //I thought we should add 2 to the roadsize but that messes up the total count
+   
 
     type = t; 
-    //roadSize = size;
-    int numSections = roadSize + 6;
+
+    int numSections = params.compute_total_size();
     midLane = (numSections)/2;
     cout <<"Total number of sections is" << numSections << "Middle" << midLane << endl;    
 
@@ -47,31 +45,6 @@ Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
         lane.push_back(sec);
     }
     
-
-    /*
-    if(type == Direction::north)
-    {
-        lane.push_back(intersections[0]); //NE
-        lane.push_back(intersections[1]); //NW
-    }
-    else if(type == Direction::east)
-    {
-        lane.push_back(intersections[2]); //SE
-        lane.push_back(intersections[0]); //NE
-    }
-    else if(type == Direction::south)
-    {
-        lane.push_back(intersections[3]); //SW
-        lane.push_back(intersections[2]); //SE
-    }
-    else if(type == Direction::west)
-    {
-        lane.push_back(intersections[1]); //NW
-        lane.push_back(intersections[3]); //SW
-    }
-
-*/
-
 
     lane.push_back(nullptr); //the intersections are created by Road but aren't available at initialization
     lane.push_back(nullptr);
@@ -95,7 +68,7 @@ Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
 
 Lane::~Lane() {}
 
-void Lane::advanceLane()
+void Lane::advanceLane() //return a vehicle id?
 {
     int currVehicle = -1;
     bool vehicleHead = false;
@@ -120,6 +93,7 @@ void Lane::advanceLane()
             if(i == lane.size() - 1)
             {
                 cout <<"part of vehicle at end" << endl;
+
                 lane[i]->setVehicle(nullptr);
                 continue;
             }
