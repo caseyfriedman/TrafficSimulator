@@ -175,6 +175,7 @@ std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << s
 
    Road testRoad(params); //can't do default constructor for road 
 
+
 //testRoad.addVehicle(&v3, Direction::north);
   testRoad.addVehicle(&v3, Direction::east);
   // testRoad.addVehicle(&v, Direction::west);
@@ -183,6 +184,9 @@ std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << s
 
   // std::cout << "ew light " << testRoad.ewLight.getIsRed() << std::endl;
   // std::cout << "ns light " << testRoad.nsLight.getIsRed() << std::endl;
+//testRoad.addVehicle(&v1, Direction::north);
+   testRoad.addVehicle(&v3, Direction::east);
+
 
  
 for (int i=0; i<20; i++)
@@ -190,7 +194,8 @@ for (int i=0; i<20; i++)
 
 
 
- 
+
+
  for (int i=0; i < testRoad.northBound.getLane().size();i++)
 {
 

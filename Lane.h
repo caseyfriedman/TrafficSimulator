@@ -32,7 +32,8 @@ class Lane
         inline VehicleBase* getTurningVehicle() {return this->vehicleTurningRight;}
         inline void setTurningVehicle(VehicleBase* v) {this->vehicleTurningRight = v;}
         void addVehicle(VehicleBase* vehicle); //maybe should be boolean and return false if there's a vehicle there?
-      
+        void addAtTurnIndex(VehicleBase* vehicle);     
+ 
         bool canMakeLight(VehicleBase vehicle);
         int timeToCross(VehicleBase vehicle);
         bool canNewCarCome();

@@ -23,11 +23,12 @@ class Road
 
 	public:
 		int roadSize;
-		void setLanes();
+		
+                Road();
+                Road(Parameters params);
+                void setLanes();
 		void advanceRoad();
 		void addVehicle(VehicleBase* vehicle, Direction type);
-		Road();
-		Road(Parameters params);
 		void setIntersections();
 		void moveTraffic(int currentTime);
 		int getVehicleCount(){return allcars.size();}
