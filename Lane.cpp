@@ -128,12 +128,12 @@ void Lane::advanceLane()
             else if(i > midLane + 1)
             {
                 cout <<"part of vehicle past intersection, i = " << i << "  midlane = "<< midLane << endl;
-                moveForward(i);
+                moveForwardTo(i);
                 continue;
             }
             else if ((i == midLane + 1) && !light->getIsRed()) //what if it's turning
             {
-                moveForward(i);
+                moveForwardTo(i);
                 continue;
             }
             else if(i == midLane && !light->getIsRed()) //if we're in the intersection
@@ -152,7 +152,7 @@ void Lane::advanceLane()
                 else
                 {
                     
-                    moveForward(i);
+                    moveForwardTo(i);
                     continue;
                 }
                 continue;
@@ -165,7 +165,7 @@ void Lane::advanceLane()
                     if(canMakeLight(lane[i]->getVehicle())) //move if can make it
                     {
                     
-                        moveForward(i);
+                        moveForwardTo(i);
                         cout << "we movin it" << endl;
                         continue;
                     }
@@ -178,7 +178,7 @@ void Lane::advanceLane()
                 else //is a body of car, no decisions to be made (can assume its safe to move) 
                 {
                     
-                    moveForward(i);
+                    moveForwardTo(i);
                     
                     cout << "we movin it" << endl;
                     continue; 
@@ -188,7 +188,7 @@ void Lane::advanceLane()
             {
                 if(i < midLane && !lane[i+1]->isOccupied()) // and the light isn't red
                 {
-                    moveForward(i);
+                    moveForwardTo(i);
                 }
             }
         }
@@ -320,7 +320,7 @@ intersection[3] = SW
 }
 
 
-void Lane::moveForward(int i){
+void Lane::moveForwardTo(int i){
 
      lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
      lane[i]->setVehicle(nullptr);
