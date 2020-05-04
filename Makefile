@@ -1,5 +1,6 @@
 EXECS = testVehicle
 OBJS = testVehicle.o VehicleBase.o Random.o Parameters.o Section.o TrafficLight.o Road.o Lane.o
+OBJS2 = VehicleBase.o Random.o Parameters.o Section.o TrafficLight.o Road.o Lane.o
 
 #### use next two lines for Mac
 #CC = clang++
@@ -22,3 +23,7 @@ testVehicle: $(OBJS)
 
 clean:
 	/bin/rm -f a.out $(OBJS) $(EXECS)
+
+driver: $(OBJS2) Driver.o
+	$(CC) $(CCFLAGS) $^ -o $@
+
