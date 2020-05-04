@@ -139,6 +139,19 @@ double Parameters::get_proportion_left_turn_trucks(){
 }
 
 
+int Parameters::compute_total_size(){
+
+
+	int sections_before_intersection = stoi(params[1]);
+
+	int total_sections = (sections_before_intersection * 2) + 6;
+
+	return total_sections;
+
+
+}
+
+
 
 void Parameters::error(std::string msg, string filename)
 {

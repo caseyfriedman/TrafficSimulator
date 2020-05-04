@@ -67,6 +67,8 @@ double get_proportion_right_turn_trucks();
 
 double get_proportion_left_turn_trucks();
 
+int compute_total_size();
+
 void error(std::string msg, string filename);
 
 
