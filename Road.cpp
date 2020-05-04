@@ -69,11 +69,14 @@ void Road::advanceRoad(){
    if(!ewLight.getIsRed()) //if east west light is not red, these cars may be turning
    {
       cout <<"is stored vehicle null: " << (eastBound.getTurningVehicle() == nullptr) << endl;
-      if (eastBound.getTurningVehicle() != nullptr)
+      if (eastBound.isMakingRight())
       {
          cout <<"turning east vehicles" << endl;
          cout <<"turning vehicle: " << eastBound.getTurningVehicle()->getVehicleID() << endl;
          southBound.addAtTurnIndex(eastBound.getTurningVehicle());
+
+         eastBound.setTurningVehicle(nullptr); //reset turning vehicle pointer
+         eastBound.setMakingRight(false);
       }
       if (westBound.getTurningVehicle() != nullptr)
       {

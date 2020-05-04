@@ -179,7 +179,7 @@ std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << s
    testRoad.addVehicle(&v3, Direction::east);
 
  
-for (int i=0; i<10; i++)
+for (int i=0; i<11; i++)
    testRoad.advanceRoad();
    
  for (int i=0; i < testRoad.northBound.getLane().size();i++)

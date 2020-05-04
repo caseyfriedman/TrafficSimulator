@@ -99,11 +99,12 @@ void Lane::advanceLane()
 {
     int currVehicle = -1;
     bool vehicleHead = false;
+    setTurningVehicle(nullptr);
+    setMakingRight(false);
     
     for(int i = lane.size() - 1; i >= 0; i--)
     {
-        setMakingRight(false);
-        setTurningVehicle(nullptr);
+        //setMakingRight(false);
         
         if(lane[i]->isOccupied())
         {
