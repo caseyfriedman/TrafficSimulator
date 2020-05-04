@@ -29,7 +29,7 @@ int main ()
    std::cout << "Creating objects...   " << std::endl;
    VehicleBase v1(VehicleType::car, Direction::east, params);
    VehicleBase v2(VehicleType::suv, Direction::west, params);
-   VehicleBase v3(VehicleType::truck, Direction::north, params);
+   VehicleBase v3(VehicleType::truck, Direction::east, params);
 
    v1.getVehicleType();
    v2.getVehicleOriginalDirection();
@@ -175,19 +175,29 @@ std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << s
 
    Road testRoad(params); //can't do default constructor for road 
 
+
+//testRoad.addVehicle(&v3, Direction::north);
+  testRoad.addVehicle(&v3, Direction::east);
+  // testRoad.addVehicle(&v, Direction::west);
+   //testRoad.addVehicle(&v2, Direction::south);
+
+
+  // std::cout << "ew light " << testRoad.ewLight.getIsRed() << std::endl;
+  // std::cout << "ns light " << testRoad.nsLight.getIsRed() << std::endl;
 //testRoad.addVehicle(&v1, Direction::north);
    testRoad.addVehicle(&v3, Direction::east);
 
+
  
-for (int i=0; i<11; i++)
+for (int i=0; i<11; i++){
    testRoad.advanceRoad();
-   
- for (int i=0; i < testRoad.northBound.getLane().size();i++)
+} 
+for (int i=0; i < testRoad.northBound.getLane().size();i++)
 {
 
    std::cout << "The value in section of N " << i << " is" << testRoad.northBound.getLane()[i]->isOccupied() << std::endl;
 }
-      
+     
   for (int i=0; i < testRoad.eastBound.getLane().size();i++)
 {
 
@@ -207,6 +217,7 @@ for (int i=0; i < testRoad.westBound.getLane().size();i++)
 }
 
  
+
 
    /*
 

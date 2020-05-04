@@ -16,8 +16,7 @@ class Road
 		Section seIntersection;
 		Section swIntersection;
 		//
-		TrafficLight nsLight;
-		TrafficLight ewLight;
+
 		vector<VehicleBase> allcars;	//might be handled by driver so could be deleted???
 		int vehicleCount;
 		vector<Section*> intersections;
@@ -33,7 +32,8 @@ class Road
 		void setIntersections();
 		void moveTraffic(int currentTime);
 		int getVehicleCount(){return allcars.size();}
-		
+		TrafficLight nsLight;
+		TrafficLight ewLight;
 		Lane northBound;
 		Lane southBound;
 		Lane eastBound;
