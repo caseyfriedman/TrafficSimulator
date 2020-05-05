@@ -15,6 +15,8 @@ ewLight(LightDirection::EW,params), northBound(params, Direction::north,
 	params, Direction::east, &ewLight), westBound(params, Direction::west,
 	&ewLight){
 
+	param = params; //Needed for Line 176 to compile
+
 	setIntersections();
 
 	setLanes();
@@ -173,8 +175,9 @@ VehicleBase* Road::genNewVehicle(Direction dir)
         t = VehicleType::truck;
     }
     
-    VehicleBase* v = new VehicleBase(t,dir,params); //needs to be dynamically allocated
-    
+    VehicleBase* v = new VehicleBase(t,dir,param); //needs to be dynamically allocated
+    //                                     ^^^^^^^ params is not in scope
+
     return v;
 }
 

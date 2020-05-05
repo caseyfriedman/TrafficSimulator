@@ -15,7 +15,7 @@ class Road
 		Section nwIntersection;
 		Section seIntersection;
 		Section swIntersection;
-		//
+		Parameters param;
 
 		vector<VehicleBase> allcars;	//might be handled by driver so could be deleted???
 		int vehicleCount;
