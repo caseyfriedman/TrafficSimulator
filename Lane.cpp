@@ -130,7 +130,7 @@ void Lane::advanceLane() //return a vehicle id?
             else if(i == midLane - 1)
             {
                 cout <<"part of vehicle at intersection" << endl;
-                //cout << "determineHead = "<< determineHead(i) << endl;
+                cout << "determineHead = "<< determineHead(i) << endl;
                 if(vehicleHead && determineHead(i)) //vehicle heads should check if they can go
                 {
                     //cout << "determineHead = "<< determineHead(i) << endl;
@@ -138,7 +138,7 @@ void Lane::advanceLane() //return a vehicle id?
                     {
                     
                         moveForwardTo(i);
-                        cout << "we movin it" << endl;
+                        cout << "head said we movin it" << endl;
                         continue;
                     }
                     else
@@ -311,16 +311,36 @@ bool Lane::determineHead(int vehicleIndex)
     //int i = vehicleIndex;
     //if (lane[i--]->getVehicle()){cout<< "determiningHead" << endl;}
     // lane[i]->getVehicle().getVehicleID()
+    
     /*
     for (int i=count-1; i>0; i--){
-    if (lane[vehicleIndex-i]->getVehicle() == nullptr){return false;}
+    if (lane[vehicleIndex-i] == nullptr){return false;}
     if (vehicleID == lane[vehicleIndex-i]->getVehicle().getVehicleID())
     {
        cout<< count-- << endl;
     }}
-    */   
-    if (count != 0) {return false;} //if there were exactly size-1 identical IDs behind, it is head
-    else {return true;}  //else it is not true head
+    */
+    int i = 1;
+    cout << "is pointer null" << lane[vehicleIndex]->vehiclePtr << endl;
+    cout << "is pointer null" << lane[vehicleIndex-1]->vehiclePtr << endl;    
+    cout << "is pointer null" << lane[vehicleIndex-2]->vehiclePtr << endl;
+    cout << "is pointer null" << lane[vehicleIndex-3]->vehiclePtr << endl;
+    
+    if (!lane[vehicleIndex-i]->vehiclePtr) {return false;} //if null pointer directly behind, it is not a head
+    while (lane[vehicleIndex-i]->vehiclePtr && i < count)  //while null pointers are not found and we have not iterated for size of vehicle
+    {
+       cout << "determine head" << endl;
+       if (vehicleID != lane[vehicleIndex-i]->getVehicle().getVehicleID())
+       {
+           return false;
+           // cout<< "number of matches: " << i-- << endl;
+           //count--;
+       }
+       i++;
+    }
+    cout << "am i doing anything" << endl; 
+    return true;  //else it is not true head
+    //else {return lane[vehicleIndex] == nullptr;}
 }
 
 #endif
