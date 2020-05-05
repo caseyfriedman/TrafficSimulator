@@ -149,11 +149,6 @@ for (int i=0; i < laneE.size();i++)
 {
    std::cout << "The value in section " << i << " is" << laneE[i]->isOccupied() << std::endl;
 }
-//check they all share the ID correctly
-std::cout << "The ID in section " << 0 << " is" << laneE[0]->getVehicle()->getVehicleID() << std::endl;
-std::cout << "The ID in section " << 1 << " is" << laneE[1]->getVehicle()->getVehicleID() << std::endl;
-std::cout << "The ID in section " << 2 << " is" << laneE[2]->getVehicle()->getVehicleID() << std::endl;
-std::cout << "The ID in section " << 3 << " is" << laneE[3]->getVehicle()->getVehicleID() << std::endl;
 
 //lightEW.setTimeUntilRed(3);
 //move 2 vehicles

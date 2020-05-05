@@ -22,14 +22,15 @@ class VehicleBase
       int         headSet;   
  
     public:
-       VehicleBase(VehicleType type, Direction originalDirection);
+       VehicleBase(VehicleType type, Direction dir);
        VehicleBase(VehicleType type, Direction originalDirection, Parameters param);
        VehicleBase(const VehicleBase& other);
        ~VehicleBase();
 
        inline int getVehicleID() const { return this->vehicleID; }
 
-       void setVehicleID(int num) {vehicleID=num;}
+       inline void setVehicleID(int num) {vehicleID=num;}
+       inline void setRightTurn() {turnRight=true;}
 
        inline VehicleType getVehicleType() const { return this->vehicleType; }
        inline Direction   getVehicleOriginalDirection() const { return this->vehicleDirection; }

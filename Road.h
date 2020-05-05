@@ -5,6 +5,7 @@
 #include "Lane.h"
 #include "Parameters.h"
 #include "TrafficLight.h"
+#include "Random.h"
 #include <vector>
 using namespace std;
 
@@ -31,8 +32,6 @@ class Road
 		void addVehicle(VehicleBase* vehicle, Direction type);
 		void setIntersections();
 		void moveTraffic(int currentTime);
-        void addNewVehicles();
-        VehicleBase* genNewVehicle(Direction dir);
 		int getVehicleCount(){return allcars.size();}
 		TrafficLight nsLight;
 		TrafficLight ewLight;
@@ -40,9 +39,13 @@ class Road
 		Lane southBound;
 		Lane eastBound;
 		Lane westBound;
-        vector<Lane> laneVec;
-        vector<double> probNewVehicle;
-        vector<double> probVehicleType;
+                vector<Lane*> laneVec;
+                vector<double> probNewVehicle;
+                vector<double> probVehicleType;
+                vector<double> probRightTurn;
+                VehicleBase* genNewVehicle(Direction dir);
+                       void addNewVehicles();
+
 
 };
 #endif

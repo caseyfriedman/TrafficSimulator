@@ -40,11 +40,9 @@ class Lane
         bool canNewCarCome();
         bool shouldNewCarCome();
         void moveForwardTo(int i);
-        bool determineHead(int vehicleIndex);
-
-        void addIntersections(vector<Section*> intersections);
-
+        bool determineHead(int vehicleIndex);        
         void removeVehicle(int i);
+        void addIntersections(vector<Section*> intersections);
 
         //TESTING
 
