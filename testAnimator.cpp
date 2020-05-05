@@ -33,13 +33,6 @@ syncs the lanes with the VehicleBase vectors
 
 */
 
- for(int i=3; i < road.eastBound.getLane().size() - 3; i++){
-
-       eastbound[i-3] = road.eastBound.getLane()[i]->getVehicle();
-       westbound[i-3] = road.westBound.getLane()[i]->getVehicle();
-       northbound[i-3] = road.northBound.getLane()[i]->getVehicle();
-       southbound[i-3] = road.southBound.getLane()[i]->getVehicle();
-    } 
 
     char dummy;
 
@@ -52,16 +45,19 @@ syncs the lanes with the VehicleBase vectors
     while (i <= params.get_max_simulated_time())
     {
        road.advanceRoad();
-       for(int i=3; i < road.eastBound.getLane().size() - 3; i++){
-       eastbound[i-3] = road.eastBound.getLane()[i]->getVehicle();
-       westbound[i-3] = road.westBound.getLane()[i]->getVehicle();
-       northbound[i-3] = road.northBound.getLane()[i]->getVehicle();
-       southbound[i-3] = road.southBound.getLane()[i]->getVehicle();
+       cout << "The size of this road is " << road.getRoadsize() << endl;
+       for(int i=3; i < road.getRoadsize() - 3; i++){
+        northbound[i-3] = road.getNB().getLane()[i]->getVehicle();
+        southbound[i-3] = road.getSB().getLane()[i]->getVehicle(); //I don't think it has to be a pointer
+        eastbound[i-3] = road.getEB().getLane()[i]->getVehicle();
+        westbound[i-3] = road.getWB().getLane()[i]->getVehicle();
+       
+       
        }
-       anim.setVehiclesNorthbound(northbound);
+        anim.setVehiclesNorthbound(northbound);
         anim.setVehiclesSouthbound(southbound);
-         anim.setVehiclesEastbound(eastbound);
-          anim.setVehiclesWestbound(westbound);
+        anim.setVehiclesEastbound(eastbound);
+        anim.setVehiclesWestbound(westbound);
 
 
 
