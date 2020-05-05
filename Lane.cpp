@@ -109,8 +109,8 @@ void Lane::advanceLane() //return a vehicle id?
 
                 if(lane[i]->getVehicle()->getTurn())
                 {
-                    cout << "The Vehicle ID that is turning right is " << lane[i]->getVehicle()->getVehicleID() << endl;
-                    cout << "And the vehicle is in " << lane[i]->getVehicle()->getVehicleOriginalDirection() << endl;
+                    //cout << "The Vehicle ID that is turning right is " << lane[i]->getVehicle()->getVehicleID() << endl;
+                    //cout << "And the vehicle is in " << lane[i]->getVehicle()->getVehicleOriginalDirection() << endl;
                     setMakingRight(true); //indicate a vehicle is making a right
                     
                     //I changed it to be vehiclePtr because that's what the other methods seemed to do
@@ -309,13 +309,14 @@ bool Lane::determineHead(int vehicleIndex)
 }
 
 void Lane::removeVehicle(int i){
-    //cout << "deleting at index: " << i << endl;
+    cout << "Deleting car " << lane[i]->getVehicle()->getVehicleID() << endl;
+    cout << "deleting at index: " << i << endl;
     //cout << "vehicle with size: " << lane[i]->getVehicle()->getVehicleSize() <<endl; 
     VehicleBase* vehicle = lane[i]->getVehicle();
             for(int x = i;x>(roadSize - (vehicle->getVehicleSize() - 1)); x--){
                 lane[x]->setVehicle(nullptr);
             }
 
-            //delete vehicle;
+            delete vehicle;
 }
 #endif
