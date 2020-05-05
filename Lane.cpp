@@ -92,9 +92,9 @@ void Lane::advanceLane() //return a vehicle id?
             {
                 
                 cout <<"part of vehicle at end" << endl;
-               // removeVehicle(i);
-               
-                continue; //do we want it to continue
+                //lane[i]->setVehicle(nullptr);
+                removeVehicle(i);
+                continue;
             }
             else if(i > midLane + 1)
             {
@@ -109,7 +109,7 @@ void Lane::advanceLane() //return a vehicle id?
             }
             else if(i == midLane && !light->getIsRed()) //if we're in the intersection
             {
-                cout <<"part of vehicle in intersection"<< endl;
+                cout <<"part of vehicle in intersection" << endl;
                 if(lane[i]->getVehicle()->getTurn())
                 {
 
@@ -170,7 +170,6 @@ void Lane::advanceLane() //return a vehicle id?
         vehicleHead = false;
     }
 }
-
 
 void Lane::addVehicle(VehicleBase* vehiclePtr)
 { //might want it not to be a pointer, will wait and see
@@ -327,17 +326,13 @@ bool Lane::determineHead(int vehicleIndex)
 }
 
 void Lane::removeVehicle(int i){
-
-
+    //cout << "deleting at index: " << i << endl;
+    //cout << "vehicle with size: " << lane[i]->getVehicle()->getVehicleSize() <<endl; 
     VehicleBase* vehicle = lane[i]->getVehicle();
-
-
-            for(;i>roadSize - (vehicle->getVehicleSize() - 1); i--){
-                lane[i]->setVehicle(nullptr);
+            for(int x = i;x>(roadSize - (vehicle->getVehicleSize() - 1)); x--){
+                lane[x]->setVehicle(nullptr);
             }
-     
-            delete vehicle;
-            
-}
 
+            //delete vehicle;
+}
 #endif

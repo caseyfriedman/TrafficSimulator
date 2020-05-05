@@ -20,9 +20,6 @@ int main()
     //Create instance of Road, which will create the Sections and Lanes
     Road road(params);
 
-
-   
-
     //construct vectors of VehicleBase* of appropriate size, init to nullptr
     std::vector<VehicleBase*> westbound(halfSize * 2 + 2, nullptr);
     std::vector<VehicleBase*> eastbound(halfSize * 2 + 2, nullptr);
@@ -41,46 +38,30 @@ syncs the lanes with the VehicleBase vectors
        westbound[i-3] = road.westBound.getLane()[i]->getVehicle();
        northbound[i-3] = road.northBound.getLane()[i]->getVehicle();
        southbound[i-3] = road.southBound.getLane()[i]->getVehicle();
-  
-
     } 
 
-
-
     char dummy;
-
-    // test drawing vehicles moving eastbound and westbound
-    VehicleBase vb1(VehicleType::car, Direction::east);
-    VehicleBase vb2(VehicleType::suv, Direction::east);
-    VehicleBase vb3(VehicleType::truck, Direction::east);
-    VehicleBase vb4(VehicleType::car, Direction::west);
-    VehicleBase vb5(VehicleType::suv, Direction::west);
-    VehicleBase vb6(VehicleType::truck, Direction::west);
-
-    VehicleBase vb7(VehicleType::car, Direction::south);
-    VehicleBase vb8(VehicleType::suv, Direction::south);
-    VehicleBase vb9(VehicleType::truck, Direction::south);
-    VehicleBase vb10(VehicleType::car, Direction::north);
-    VehicleBase vb11(VehicleType::suv, Direction::north);
-    VehicleBase vb12(VehicleType::truck, Direction::north);
-    VehicleBase vb13(vb12);  // just test the copy constructor -- should be #011
-
-    int i = 0;
-    int j = 0;
 
     //set initial colors for animated traffic light
     anim.setLightNorthSouth(LightColor::red);
     anim.setLightEastWest(LightColor::green);
 
-/*
+    int i = 0;
     //while max simulation time is not met
     while (i <= params.get_maximum_simulation_time())
     {
+       road.advanceRoad();
+       for(int i=3; i < road.eastBound.getLane().size() - 3; i++){
+       eastbound[i-3] = road.eastBound.getLane()[i]->getVehicle();
+       westbound[i-3] = road.westBound.getLane()[i]->getVehicle();
+       northbound[i-3] = road.northBound.getLane()[i]->getVehicle();
+       southbound[i-3] = road.southBound.getLane()[i]->getVehicle();
+       }
        //ask road to generate cars
        //ask road to move each lane
        //increment light and increment simulation time (i)
     }
-*/
+
     for (; i < 4; i++)
     {
         eastbound[10+i] = eastbound[11+i] = &vb1;

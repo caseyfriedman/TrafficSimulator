@@ -6,10 +6,10 @@
 
 int VehicleBase::vehicleCount = 0;
 
-VehicleBase::VehicleBase(VehicleType type, Direction direction)
+VehicleBase::VehicleBase(VehicleType type, Direction dir)
     : vehicleID(VehicleBase::vehicleCount++),
       vehicleType(type),
-      vehicleDirection(direction)
+      vehicleDirection(dir)
 {
    //set vehicle size based on vehicle type
    switch(vehicleType)
@@ -17,19 +17,6 @@ VehicleBase::VehicleBase(VehicleType type, Direction direction)
       case VehicleType::car: vehicleSize = 2; break;
       case VehicleType::suv: vehicleSize = 3; break;
       case VehicleType::truck: vehicleSize = 4; break;
-   }
-   
-   //call random number generator
-   double randNum = Random::generateNum();
-
-   //determine whether vehicle will turn
-   if (randNum < 0.4)
-   {
-      turnRight = true;
-   }
-   else
-   {
-      turnRight = false;
    }
 }
 
