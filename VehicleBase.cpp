@@ -1,8 +1,6 @@
-#ifndef __VEHICLE_BASE_CPP__
-#define __VEHICLE_BASE_CPP__
 
 #include "VehicleBase.h"
-#include "Random.h"
+
 
 int VehicleBase::vehicleCount = 0;
 
@@ -86,4 +84,4 @@ VehicleBase::VehicleBase(const VehicleBase& other)
 
 VehicleBase::~VehicleBase() {}
 
-#endif
+

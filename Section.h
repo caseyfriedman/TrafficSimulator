@@ -2,16 +2,14 @@
 #define __SECTION_H__
 
 #include "VehicleBase.h"
-
+#include <iostream>
 class Section
 {
-   public:
-      VehicleBase* vehiclePtr;
-
+  
    private:
       bool         intersection;
       static int   numOfSecs;
-
+      VehicleBase* vehiclePtr;
    public:
       Section();
       Section(VehicleBase* vehicle);

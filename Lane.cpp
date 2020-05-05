@@ -1,8 +1,6 @@
-#ifndef __LANE_CPP__
-#define __LANE_CPP__
 
 #include "Lane.h"
-#include "Random.h"
+
 
 Lane::Lane()
 {
@@ -313,4 +311,4 @@ void Lane::removeVehicle(int i){
 
             delete vehicle;
 }
-#endif
+

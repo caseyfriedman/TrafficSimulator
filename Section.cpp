@@ -1,9 +1,6 @@
-#ifndef __SECTION_CPP__
-#define __SECTION_CPP__
 
 #include "Section.h"
-#include "VehicleBase.h"
-#include <iostream>
+
 
 int Section::numOfSecs = 0;
 
@@ -23,4 +20,4 @@ Section::Section()
 
 Section::~Section() {}
 
-#endif
+

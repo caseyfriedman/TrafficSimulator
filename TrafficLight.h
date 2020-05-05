@@ -3,6 +3,7 @@
 
 #include "Parameters.h"
 #include "Animator.h"
+#include <iostream>
 
 enum class LightDirection   {EW, NS};
 

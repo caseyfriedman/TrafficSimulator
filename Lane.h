@@ -6,6 +6,7 @@
 #include "Section.h"
 #include "TrafficLight.h"
 #include "Parameters.h"
+#include "Random.h"
 
 using namespace std;
 

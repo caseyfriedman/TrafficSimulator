@@ -1,9 +1,7 @@
-#ifndef __TRAFFIC_LIGHT_CPP__
-#define __TRAFFIC_LIGHT_CPP__
 
-#include <iostream>
+
 #include "TrafficLight.h"
-#include "Parameters.h"
+
 
 TrafficLight::TrafficLight(LightDirection lightDir, Parameters params)
 {
@@ -93,4 +91,4 @@ LightColor TrafficLight::getColor(){
         return LightColor::green;
 }
 
-#endif
+
