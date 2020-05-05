@@ -18,13 +18,13 @@ ewLight(LightDirection::EW,params), northBound(params, Direction::north,
 	param = params; //Needed for Line 176 to compile
 
 	setIntersections();
-
-	setLanes();
-
-    laneVec.push_back(northBound);
+	laneVec.push_back(northBound);
     laneVec.push_back(southBound);
     laneVec.push_back(eastBound);
     laneVec.push_back(westBound);
+    
+	setLanes();
+
     
     probNewVehicle.push_back(params.get_prob_new_vehicle_northbound());
     probNewVehicle.push_back(params.get_prob_new_vehicle_southbound());
