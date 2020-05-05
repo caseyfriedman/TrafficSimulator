@@ -2,6 +2,7 @@
 #define __TRAFFIC_LIGHT_H__
 
 #include "Parameters.h"
+#include "Animator.h"
 
 enum class LightDirection   {EW, NS};
 
@@ -22,6 +23,7 @@ class TrafficLight
       void setValues(LightDirection lightDir, Parameters params); //this might be unnecessary and can probably be deleted 
       inline int timeUntilRed() {return this->counter;}
       bool getIsRed() {return this->isRed;}
+      LightColor getColor();
 
       void setTimeUntilRed(int time) {counter = time;}
 

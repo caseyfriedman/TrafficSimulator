@@ -35,6 +35,8 @@ class Road
 		int getVehicleCount(){return allcars.size();}
 		TrafficLight nsLight;
 		TrafficLight ewLight;
+		TrafficLight getNsLight(){return nsLight;}
+		TrafficLight getEwLight(){return ewLight;}
 		Lane northBound;
 		Lane southBound;
 		Lane eastBound;

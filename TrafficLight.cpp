@@ -81,4 +81,16 @@ void TrafficLight::update()
    }
 }
 
+LightColor TrafficLight::getColor(){
+
+      if(counter > 0 && counter <= timeYellow){
+        return LightColor::yellow;
+      } else if (getIsRed()) {
+        return LightColor::red;
+}
+
+
+        return LightColor::green;
+}
+
 #endif

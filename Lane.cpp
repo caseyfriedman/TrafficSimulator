@@ -38,7 +38,6 @@ Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
 
     roadSize = params.compute_total_size();
     midLane = (roadSize)/2;
-    cout <<"Total number of sections is " << roadSize << "Middle" << midLane << endl;    
 
     for(int i = 0; i < midLane; i++)
     {
@@ -85,20 +84,18 @@ void Lane::advanceLane() //return a vehicle id?
                 currVehicle = lane[i]->getVehicle()->getVehicleID();
                 vehicleHead = true;
 
-                cout << "assigning vehicle head, this should be done at the start: curVehicle = " << currVehicle << ", newVehicle =" << lane[i]->getVehicle()->getVehicleID() << endl;
             }
 
             if(i == lane.size() - 1) // vehicle is at the end
             {
                 
-                cout <<"part of vehicle at end" << endl;
+                 
                 //lane[i]->setVehicle(nullptr);
                 removeVehicle(i);
                 continue;
             }
             else if(i > midLane + 1)
             {
-                cout <<"part of vehicle past intersection, i = " << i << "  midlane = "<< midLane << endl;
                 moveForwardTo(i);
                 continue;
             }
@@ -109,17 +106,17 @@ void Lane::advanceLane() //return a vehicle id?
             }
             else if(i == midLane && !light->getIsRed()) //if we're in the intersection
             {
-                cout <<"part of vehicle in intersection" << endl;
+
                 if(lane[i]->getVehicle()->getTurn())
                 {
-
+                    cout << "The Vehicle ID that is turning right is " << lane[i]->getVehicle()->getVehicleID() << endl;
+                    cout << "And the vehicle is in " << lane[i]->getVehicle()->getVehicleOriginalDirection() << endl;
                     setMakingRight(true); //indicate a vehicle is making a right
                     
                     //I changed it to be vehiclePtr because that's what the other methods seemed to do
                     setTurningVehicle(lane[i]->vehiclePtr); //store vehicle that is making a right
                     //ERROR
                    
-                    cout <<"part of vehicle stored for turn: "<< this->getTurningVehicle()->getVehicleID() << endl;  
   
                     lane[i]->setVehicle(nullptr); //Remove vehicle and Road will add it to the appropriate lane
                 }
@@ -132,8 +129,6 @@ void Lane::advanceLane() //return a vehicle id?
             }
             else if(i == midLane - 1)
             {
-                cout <<"part of vehicle at intersection" << endl;
-                cout << "determineHead = "<< determineHead(i) << endl;
                 if(vehicleHead && determineHead(i)) //vehicle heads should check if they can go
                 {
                     //cout << "determineHead = "<< determineHead(i) << endl;
@@ -141,12 +136,10 @@ void Lane::advanceLane() //return a vehicle id?
                     {
                     
                         moveForwardTo(i);
-                        cout << "head said we movin it" << endl;
                         continue;
                     }
                     else
                     {
-                        cout << "we cannot make light" << endl;
                         continue; //cannot make light, no move 
                     }
                 }
@@ -155,7 +148,6 @@ void Lane::advanceLane() //return a vehicle id?
                     
                     moveForwardTo(i);
                     
-                    cout << "we movin it" << endl;
                     continue; 
                 }
             }
@@ -186,12 +178,9 @@ bool Lane::canMakeLight(VehicleBase* vehicle)
 {
     if(light->getIsRed()) //every lane only needs 1 traffic light
     {
-        cout <<"light is red. do not enter intersection " << endl;
         return false;
     }
     
-    cout <<"light is red " << light->getIsRed() << endl;
-    cout <<"time left is " << light->timeUntilRed() << endl;
     return timeToCross(vehicle) <= light->timeUntilRed();
 }
 
@@ -235,8 +224,7 @@ intersection[2] = SE
 intersection[3] = SW
 */
 
-    cout << lane[midLane] << endl;
-
+    
     if(type == Direction::north)
     {
     
@@ -284,23 +272,18 @@ bool Lane::determineHead(int vehicleIndex)
     int count = lane[vehicleIndex]->vehiclePtr->getVehicleSize();
     
     //for testing purposes, allows us to know whether vehicle section at index is truly a head
-    cout << "is pointer null- index+1: " << lane[vehicleIndex+1]->vehiclePtr << endl;
-    cout << "is pointer null- index: " << lane[vehicleIndex]->vehiclePtr << endl;
-    cout << "is pointer null- index-1: " << lane[vehicleIndex-1]->vehiclePtr << endl;    
-    cout << "is pointer null- index-2: " << lane[vehicleIndex-2]->vehiclePtr << endl;
-    cout << "is pointer null- index-3: " << lane[vehicleIndex-3]->vehiclePtr << endl;
-   
+  
     //determine whether vehicle section at vehicleIndex is a head of vehicle 
     int i = 1;  //initialize i to 1 because we want to check index, 1 to (vehicle size-1) before it
     
     //if null pointer directly behind, it is not a head
     if (!lane[vehicleIndex-i]->vehiclePtr)
-    {   cout << "null pointer behind" << endl;
+    {  
         return false;
     }
     //if index ahead is not a nullptr and is the same vehicle, it is not a head
     if (lane[vehicleIndex+1]->vehiclePtr && vehicleID != lane[vehicleIndex+1]->getVehicle()->getVehicleID())
-    {      cout << "index ahead is same as mine" << endl;
+    {      
            return false;
     }
     //while null pointers are not found and we have not iterated for size of vehicle,
@@ -308,20 +291,20 @@ bool Lane::determineHead(int vehicleIndex)
     //then it is not head
     while (lane[vehicleIndex-i]->vehiclePtr && i < count)
     {
-       cout << "determine head" << endl;
+       
        if (vehicleID != lane[vehicleIndex-i]->getVehicle()->getVehicleID())
-       {   cout << "vehicle index-"<< i <<" is different" << endl;
+       {  
            return false;
        }
        i++;
     }
     //if exited loop early due to null ptr, it is not a head 
     if (i<count)
-    {      cout << "I am present in too few spots to be head" << endl;
+    {     
            return false;
     }
     //if all of the above conditions are not met, then it is head
-    cout << "something else.." << endl; 
+   
     return true;
 }
 
