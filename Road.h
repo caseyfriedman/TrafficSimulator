@@ -24,13 +24,15 @@ class Road
 	public:
 		int roadSize;
 		
-                Road();
-                Road(Parameters params);
-                void setLanes();
+        Road();
+        Road(Parameters params);
+        void setLanes();
 		void advanceRoad();
 		void addVehicle(VehicleBase* vehicle, Direction type);
 		void setIntersections();
 		void moveTraffic(int currentTime);
+        void addNewVehicles();
+        VehicleBase* genNewVehicle(Direction dir);
 		int getVehicleCount(){return allcars.size();}
 		TrafficLight nsLight;
 		TrafficLight ewLight;
@@ -38,6 +40,9 @@ class Road
 		Lane southBound;
 		Lane eastBound;
 		Lane westBound;
+        vector<Lane> laneVec;
+        vector<double> probNewVehicle;
+        vector<double> probVehicleType;
 
 };
 #endif

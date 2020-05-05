@@ -31,6 +31,7 @@ class Lane
         inline void setMakingRight(bool myBoolean) {this->makingRight = myBoolean;}
         inline VehicleBase* getTurningVehicle() {return this->vehicleTurningRight;}
         inline void setTurningVehicle(VehicleBase* v) {this->vehicleTurningRight = v;}
+        inline Direction getDirection(){return this->type;}
         void addVehicle(VehicleBase* vehicle); //maybe should be boolean and return false if there's a vehicle there?
         void addAtTurnIndex(VehicleBase* vehicle);     
  
@@ -39,7 +40,7 @@ class Lane
         bool canNewCarCome();
         bool shouldNewCarCome();
         void moveForwardTo(int i);
-        bool determineHead(int vehicleIndex);        
+        bool determineHead(int vehicleIndex);
 
         void addIntersections(vector<Section*> intersections);
 
