@@ -27,28 +27,28 @@ int main ()
 
    std::cout << "Testing VehicleBase" << std::endl;
    std::cout << "Creating objects...   " << std::endl;
-   VehicleBase v1(VehicleType::car, Direction::east, params);
-   VehicleBase v2(VehicleType::suv, Direction::west, params);
-   VehicleBase v3(VehicleType::truck, Direction::east, params);
+   VehicleBase* v1= new VehicleBase(VehicleType::car, Direction::east, params) ;
+   VehicleBase* v2 = new VehicleBase(VehicleType::suv, Direction::west, params);
+   VehicleBase* v3 = new VehicleBase(VehicleType::truck, Direction::east, params);
 
-   v1.getVehicleType();
-   v2.getVehicleOriginalDirection();
-   std::cout << "Vehicle count:" << v1.vehicleCount << std::endl;
+   v1->getVehicleType();
+   v2->getVehicleOriginalDirection();
+   std::cout << "Vehicle count:" << v1->vehicleCount << std::endl;
 
-   std::cout << "Vehicle size (car): " << v1.getVehicleSize() << std::endl;
-   std::cout << "Vehicle size (suv): " << v2.getVehicleSize() << std::endl;
-   std::cout << "Vehicle size (truck): " << v3.getVehicleSize() << std::endl;
+   std::cout << "Vehicle size (car): " << v1->getVehicleSize() << std::endl;
+   std::cout << "Vehicle size (suv): " << v2->getVehicleSize() << std::endl;
+   std::cout << "Vehicle size (truck): " << v3->getVehicleSize() << std::endl;
 
-   std::cout << "Vehicle turn (car): " << v1.getTurn() << std::endl;
-   std::cout << "Vehicle turn (suv): " << v2.getTurn() << std::endl;
-   std::cout << "Vehicle turn (truck): " << v3.getTurn() << std::endl;
+   std::cout << "Vehicle turn (car): " << v1->getTurn() << std::endl;
+   std::cout << "Vehicle turn (suv): " << v2->getTurn() << std::endl;
+   std::cout << "Vehicle turn (truck): " << v3->getTurn() << std::endl;
  
    std::cout << "Testing Section" << std::endl;  
 
 
-   Section sec1(&v1);
-   Section sec2(&v2);
-   Section sec3(&v3);
+   Section sec1(v1);
+   Section sec2(v2);
+   Section sec3(v3);
 
 
    std::cout << "Section count:" << sec1.getNumOfSecs() << std::endl;
@@ -97,15 +97,15 @@ intersection[3] = SW
 Lane testLaneEast(params, Direction::north,&lightEW);
 testLaneEast.addIntersections(intersections);
 
-v1.setVehicleID(420);
-std::cout << v1.getVehicleID() << std::endl;
+v1->setVehicleID(420);
+std::cout << v1->getVehicleID() << std::endl;
 
 Lane testLaneNorth(params, Direction::north, &lightNS);
 testLaneNorth.addIntersections(intersections);
 
 //add vehicles
-testLaneNorth.addVehicle(&v1);
-testLaneEast.addVehicle(&v2);
+testLaneNorth.addVehicle(v1);
+testLaneEast.addVehicle(v2);
 
 vector<Section*> laneE = testLaneEast.getLane();
 //vector<Section*> laneN = testLaneNorth.getLane();
@@ -142,7 +142,7 @@ for (int i=0; i < laneE.size();i++)
 //check if new vehicle is allowed, add it
    std::cout << "Can new car come: " << testLaneEast.canNewCarCome() << std::endl;
 
-   testLaneEast.addVehicle(&v3);
+   testLaneEast.addVehicle(v3);
 
 //new truck should be in first few spots
 for (int i=0; i < laneE.size();i++)
@@ -177,7 +177,7 @@ std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << s
 
 
 //testRoad.addVehicle(&v3, Direction::north);
-  testRoad.addVehicle(&v3, Direction::east);
+  testRoad.addVehicle(v3, Direction::east);
   // testRoad.addVehicle(&v, Direction::west);
    //testRoad.addVehicle(&v2, Direction::south);
 
@@ -185,10 +185,11 @@ std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << s
   // std::cout << "ew light " << testRoad.ewLight.getIsRed() << std::endl;
   // std::cout << "ns light " << testRoad.nsLight.getIsRed() << std::endl;
   // testRoad.addVehicle(&v1, Direction::north);
-   testRoad.addVehicle(&v3, Direction::east);
+   testRoad.addVehicle(v3, Direction::east);
    //testRoad.addVehicle(&v1, Direction::east);
 
 for (int i=0; i<7; i++){
+  
    testRoad.advanceRoad();
 } 
 for (int i=0; i < testRoad.northBound.getLane().size();i++)
@@ -215,7 +216,7 @@ for (int i=0; i < testRoad.westBound.getLane().size();i++)
    std::cout << "The value in section of W" << i << " is" << testRoad.westBound.getLane()[i]->isOccupied() << std::endl;
 }
 
-testRoad.addVehicle(&v1, Direction::east);
+testRoad.addVehicle(v1, Direction::east);
 
 for (int i=0; i<7; i++){
    testRoad.advanceRoad();
