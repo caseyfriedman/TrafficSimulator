@@ -64,9 +64,8 @@ syncs the lanes with the VehicleBase vectors
        anim.setLightNorthSouth(road.getNsLight().getColor());
        anim.setLightEastWest(road.getEwLight().getColor());
 
-
-
        anim.draw(i++);
+       std::cin.get(dummy);
     }
 
     
