@@ -173,7 +173,7 @@ VehicleBase* Road::genNewVehicle(Direction dir)
         t = VehicleType::truck;
     }
     
-    VehicleBase* v = VehicleBase(t,dir,params);
+    VehicleBase* v = new VehicleBase(t,dir,params); //needs to be dynamically allocated
     
     return v;
 }
