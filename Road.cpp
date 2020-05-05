@@ -83,7 +83,7 @@ void Road::advanceRoad(){
    if(!ewLight.getIsRed()) //if east west light is not red, these cars may be turning
    {
       cout <<"is stored vehicle null: " << (eastBound.getTurningVehicle() == nullptr) << endl;
-      if (eastBound.isMakingRight())
+      if (eastBound.getTurningVehicle())
       {
          cout <<"turning east vehicles" << endl;
          cout <<"turning vehicle: " << eastBound.getTurningVehicle()->getVehicleID() << endl;
@@ -92,7 +92,7 @@ void Road::advanceRoad(){
          eastBound.setTurningVehicle(nullptr); //reset turning vehicle pointer
          eastBound.setMakingRight(false);
       }
-      if (westBound.getTurningVehicle() != nullptr)
+      if (westBound.getTurningVehicle())
       {
          cout <<"turning west vehicles" << endl;
          cout <<"turning vehicle: " << westBound.getTurningVehicle()->getVehicleID() << endl;
@@ -104,7 +104,7 @@ void Road::advanceRoad(){
    }
    else //north south cars may be turning
    {
-      if (northBound.getTurningVehicle() != nullptr)
+      if (northBound.getTurningVehicle())
       {
          cout <<"turning east vehicles" << endl;
          cout <<"turning vehicle: " << northBound.getTurningVehicle()->getVehicleID() << endl;
@@ -113,7 +113,7 @@ void Road::advanceRoad(){
          northBound.setTurningVehicle(nullptr); //reset turning vehicle pointer
          northBound.setMakingRight(false);
       }
-      if (southBound.getTurningVehicle() != nullptr)
+      if (southBound.getTurningVehicle())
       {
          cout <<"turning east vehicles" << endl;
          cout <<"turning vehicle: " << southBound.getTurningVehicle()->getVehicleID() << endl;

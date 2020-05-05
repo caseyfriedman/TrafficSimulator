@@ -97,7 +97,7 @@ intersection[3] = SW
 Lane testLaneEast(params, Direction::north,&lightEW);
 testLaneEast.addIntersections(intersections);
 
-v1->setVehicleID(420);
+
 std::cout << v1->getVehicleID() << std::endl;
 
 Lane testLaneNorth(params, Direction::north, &lightNS);
@@ -150,10 +150,10 @@ for (int i=0; i < laneE.size();i++)
    std::cout << "The value in section " << i << " is" << laneE[i]->isOccupied() << std::endl;
 }
 //check they all share the ID correctly
-std::cout << "The ID in section " << 0 << " is" << laneE[0]->getVehicle().getVehicleID() << std::endl;
-std::cout << "The ID in section " << 1 << " is" << laneE[1]->getVehicle().getVehicleID() << std::endl;
-std::cout << "The ID in section " << 2 << " is" << laneE[2]->getVehicle().getVehicleID() << std::endl;
-std::cout << "The ID in section " << 3 << " is" << laneE[3]->getVehicle().getVehicleID() << std::endl;
+std::cout << "The ID in section " << 0 << " is" << laneE[0]->getVehicle()->getVehicleID() << std::endl;
+std::cout << "The ID in section " << 1 << " is" << laneE[1]->getVehicle()->getVehicleID() << std::endl;
+std::cout << "The ID in section " << 2 << " is" << laneE[2]->getVehicle()->getVehicleID() << std::endl;
+std::cout << "The ID in section " << 3 << " is" << laneE[3]->getVehicle()->getVehicleID() << std::endl;
 
 //lightEW.setTimeUntilRed(3);
 //move 2 vehicles
@@ -163,7 +163,6 @@ for (int i=0; i<10; i++)
    lightEW.update();
    //lightNS.update();
 }
-
 for (int i=0; i < laneE.size();i++)
 {
    std::cout << "The value in section " << i << " is" << laneE[i]->isOccupied() << std::endl;
@@ -175,6 +174,7 @@ std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << s
 
    Road testRoad(params); //can't do default constructor for road 
 
+std::cout << "YOU GOT HERE" << std::endl;
 
 //testRoad.addVehicle(&v3, Direction::north);
   testRoad.addVehicle(v3, Direction::east);
@@ -182,10 +182,14 @@ std::cout << "************* VISIUAL BREAKUP AFTER LANE TESTS *************" << s
    //testRoad.addVehicle(&v2, Direction::south);
 
 
+v1->setVehicleID(420);
+v3 -> setVehicleID(29);
   // std::cout << "ew light " << testRoad.ewLight.getIsRed() << std::endl;
   // std::cout << "ns light " << testRoad.nsLight.getIsRed() << std::endl;
   // testRoad.addVehicle(&v1, Direction::north);
-   testRoad.addVehicle(v3, Direction::east);
+   testRoad.addVehicle(v1, Direction::east);
+
+
    //testRoad.addVehicle(&v1, Direction::east);
 
 for (int i=0; i<7; i++){

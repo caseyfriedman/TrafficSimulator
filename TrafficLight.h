@@ -19,7 +19,7 @@ class TrafficLight
       TrafficLight();
       ~TrafficLight();
       void update();
-      void setValues(LightDirection lightDir, Parameters params);
+      void setValues(LightDirection lightDir, Parameters params); //this might be unnecessary and can probably be deleted 
       inline int timeUntilRed() {return this->counter;}
       bool getIsRed() {return this->isRed;}
 

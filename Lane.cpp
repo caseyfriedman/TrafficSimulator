@@ -32,6 +32,7 @@ Lane::Lane()
 Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
 {
    
+  //  vehicleTurningRight = nullptr;   
 
     type = t; 
 
@@ -79,19 +80,19 @@ void Lane::advanceLane() //return a vehicle id?
     {
         if(lane[i]->isOccupied())
         {
-            if(lane[i]->getVehicle().getVehicleID() != currVehicle)
+            if(lane[i]->getVehicle()->getVehicleID() != currVehicle)
             {
-                currVehicle = lane[i]->getVehicle().getVehicleID();
+                currVehicle = lane[i]->getVehicle()->getVehicleID();
                 vehicleHead = true;
 
-                cout << "assigning vehicle head, this should be done at the start: curVehicle = " << currVehicle << ", newVehicle =" << lane[i]->getVehicle().getVehicleID() << endl;
+                cout << "assigning vehicle head, this should be done at the start: curVehicle = " << currVehicle << ", newVehicle =" << lane[i]->getVehicle()->getVehicleID() << endl;
             }
 
-            if(i == lane.size() - 1)
+            if(i == lane.size() - 1) // vehicle is at the end
             {
                 
                 cout <<"part of vehicle at end" << endl;
-                removeVehicle(i);
+               // removeVehicle(i);
                
                 continue; //do we want it to continue
             }
@@ -108,9 +109,10 @@ void Lane::advanceLane() //return a vehicle id?
             }
             else if(i == midLane && !light->getIsRed()) //if we're in the intersection
             {
-                cout <<"part of vehicle in intersection" << endl;
-                if(lane[i]->getVehicle().getTurn())
+                cout <<"part of vehicle in intersection"<< endl;
+                if(lane[i]->getVehicle()->getTurn())
                 {
+
                     setMakingRight(true); //indicate a vehicle is making a right
                     
                     //I changed it to be vehiclePtr because that's what the other methods seemed to do
@@ -169,35 +171,6 @@ void Lane::advanceLane() //return a vehicle id?
     }
 }
 
-/*
-void Lane::makeRight()
-{
-    if(type == Direction::north)
-    {
-        //right turn onto east
-        //eastBound.lane[midLane + 2].setVehicle(lane[midLane]->getVehicle()); //individual lanes don't have acccess to other lanes
-        lane[midLane]->setVehicle(nullptr);
-    }
-    else if(type == Direction::east)
-    {
-        //right turn onto south
-        //southBound.lane[midLane + 2]->setVehicle(lane[midLane]->getVehicle());
-        lane[midLane]->setVehicle(nullptr);
-    }
-    else if(type == Direction::south)
-    {
-        //right turn onto west
-        //westBound.lane[midLane + 2].setVehicle(lane[midLane]->getVehicle());
-        lane[midLane]->setVehicle(nullptr);
-    }
-    else if(type == Direction::west)
-    {
-        //right turn onto north
-        ///northBound.lane[midLane + 2]->setVehicle(lane[midLane]->getVehicle());
-        lane[midLane]->setVehicle(nullptr);
-    }
-}
-*/
 
 void Lane::addVehicle(VehicleBase* vehiclePtr)
 { //might want it not to be a pointer, will wait and see
@@ -210,7 +183,7 @@ void Lane::addVehicle(VehicleBase* vehiclePtr)
     }
 }
 
-bool Lane::canMakeLight(VehicleBase vehicle)
+bool Lane::canMakeLight(VehicleBase* vehicle)
 {
     if(light->getIsRed()) //every lane only needs 1 traffic light
     {
@@ -223,13 +196,13 @@ bool Lane::canMakeLight(VehicleBase vehicle)
     return timeToCross(vehicle) <= light->timeUntilRed();
 }
 
-int Lane::timeToCross(VehicleBase vehicle)   //should this be a pointer???
+int Lane::timeToCross(VehicleBase* vehicle)   //should this be a pointer???
 {
     int timeToCross = 2;
     
-    timeToCross += vehicle.getVehicleSize();
+    timeToCross += vehicle->getVehicleSize();
     
-    if(vehicle.getTurn())
+    if(vehicle->getTurn())
     {
         timeToCross -= 1;
     }
@@ -327,7 +300,7 @@ bool Lane::determineHead(int vehicleIndex)
         return false;
     }
     //if index ahead is not a nullptr and is the same vehicle, it is not a head
-    if (lane[vehicleIndex+1]->vehiclePtr && vehicleID != lane[vehicleIndex+1]->getVehicle().getVehicleID())
+    if (lane[vehicleIndex+1]->vehiclePtr && vehicleID != lane[vehicleIndex+1]->getVehicle()->getVehicleID())
     {      cout << "index ahead is same as mine" << endl;
            return false;
     }
@@ -337,7 +310,7 @@ bool Lane::determineHead(int vehicleIndex)
     while (lane[vehicleIndex-i]->vehiclePtr && i < count)
     {
        cout << "determine head" << endl;
-       if (vehicleID != lane[vehicleIndex-i]->getVehicle().getVehicleID())
+       if (vehicleID != lane[vehicleIndex-i]->getVehicle()->getVehicleID())
        {   cout << "vehicle index-"<< i <<" is different" << endl;
            return false;
        }

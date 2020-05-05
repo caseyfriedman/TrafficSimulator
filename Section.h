@@ -24,7 +24,7 @@ class Section
       inline bool isOccupied() {return (vehiclePtr != nullptr);}
       inline bool isIntersection() {return this->intersection;}
 
-      inline VehicleBase getVehicle() {return *vehiclePtr;}
+      inline VehicleBase* getVehicle() {return vehiclePtr;} //come back to this 
 
       inline int getNumOfSecs() {return numOfSecs;}
 };
