@@ -306,41 +306,50 @@ void Lane::addAtTurnIndex(VehicleBase* vehicle)
 
 bool Lane::determineHead(int vehicleIndex)
 {
+    //compute vehicleID and size of vehicle to save on calculations
     int vehicleID = lane[vehicleIndex]->vehiclePtr->getVehicleID();
     int count = lane[vehicleIndex]->vehiclePtr->getVehicleSize();
-    //int i = vehicleIndex;
-    //if (lane[i--]->getVehicle()){cout<< "determiningHead" << endl;}
-    // lane[i]->getVehicle().getVehicleID()
     
-    /*
-    for (int i=count-1; i>0; i--){
-    if (lane[vehicleIndex-i] == nullptr){return false;}
-    if (vehicleID == lane[vehicleIndex-i]->getVehicle().getVehicleID())
-    {
-       cout<< count-- << endl;
-    }}
-    */
-    int i = 1;
-    cout << "is pointer null" << lane[vehicleIndex]->vehiclePtr << endl;
-    cout << "is pointer null" << lane[vehicleIndex-1]->vehiclePtr << endl;    
-    cout << "is pointer null" << lane[vehicleIndex-2]->vehiclePtr << endl;
-    cout << "is pointer null" << lane[vehicleIndex-3]->vehiclePtr << endl;
+    //for testing purposes, allows us to know whether vehicle section at index is truly a head
+    cout << "is pointer null- index+1: " << lane[vehicleIndex+1]->vehiclePtr << endl;
+    cout << "is pointer null- index: " << lane[vehicleIndex]->vehiclePtr << endl;
+    cout << "is pointer null- index-1: " << lane[vehicleIndex-1]->vehiclePtr << endl;    
+    cout << "is pointer null- index-2: " << lane[vehicleIndex-2]->vehiclePtr << endl;
+    cout << "is pointer null- index-3: " << lane[vehicleIndex-3]->vehiclePtr << endl;
+   
+    //determine whether vehicle section at vehicleIndex is a head of vehicle 
+    int i = 1;  //initialize i to 1 because we want to check index, 1 to (vehicle size-1) before it
     
-    if (!lane[vehicleIndex-i]->vehiclePtr) {return false;} //if null pointer directly behind, it is not a head
-    while (lane[vehicleIndex-i]->vehiclePtr && i < count)  //while null pointers are not found and we have not iterated for size of vehicle
+    //if null pointer directly behind, it is not a head
+    if (!lane[vehicleIndex-i]->vehiclePtr)
+    {   cout << "null pointer behind" << endl;
+        return false;
+    }
+    //if index ahead is not a nullptr and is the same vehicle, it is not a head
+    if (lane[vehicleIndex+1]->vehiclePtr && vehicleID != lane[vehicleIndex+1]->getVehicle().getVehicleID())
+    {      cout << "index ahead is same as mine" << endl;
+           return false;
+    }
+    //while null pointers are not found and we have not iterated for size of vehicle,
+    //if any index 1 before to (vehicle size-1) before vehicleIndex is not same vehicle
+    //then it is not head
+    while (lane[vehicleIndex-i]->vehiclePtr && i < count)
     {
        cout << "determine head" << endl;
        if (vehicleID != lane[vehicleIndex-i]->getVehicle().getVehicleID())
-       {
+       {   cout << "vehicle index-"<< i <<" is different" << endl;
            return false;
-           // cout<< "number of matches: " << i-- << endl;
-           //count--;
        }
        i++;
     }
-    cout << "am i doing anything" << endl; 
-    return true;  //else it is not true head
-    //else {return lane[vehicleIndex] == nullptr;}
+    //if exited loop early due to null ptr, it is not a head 
+    if (i<count)
+    {      cout << "I am present in too few spots to be head" << endl;
+           return false;
+    }
+    //if all of the above conditions are not met, then it is head
+    cout << "something else.." << endl; 
+    return true;
 }
 
 #endif
