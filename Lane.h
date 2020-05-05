@@ -44,6 +44,8 @@ class Lane
 
         void addIntersections(vector<Section*> intersections);
 
+        void removeVehicle(int i);
+
         //TESTING
 
         vector<Section*> getLane() {return lane;}

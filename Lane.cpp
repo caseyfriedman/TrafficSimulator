@@ -35,9 +35,9 @@ Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
 
     type = t; 
 
-    int numSections = params.compute_total_size();
-    midLane = (numSections)/2;
-    cout <<"Total number of sections is " << numSections << "Middle" << midLane << endl;    
+    roadSize = params.compute_total_size();
+    midLane = (roadSize)/2;
+    cout <<"Total number of sections is " << roadSize << "Middle" << midLane << endl;    
 
     for(int i = 0; i < midLane; i++)
     {
@@ -89,10 +89,11 @@ void Lane::advanceLane() //return a vehicle id?
 
             if(i == lane.size() - 1)
             {
+                
                 cout <<"part of vehicle at end" << endl;
-
-                lane[i]->setVehicle(nullptr);
-                continue;
+                removeVehicle(i);
+               
+                continue; //do we want it to continue
             }
             else if(i > midLane + 1)
             {
@@ -350,6 +351,20 @@ bool Lane::determineHead(int vehicleIndex)
     //if all of the above conditions are not met, then it is head
     cout << "something else.." << endl; 
     return true;
+}
+
+void Lane::removeVehicle(int i){
+
+
+    VehicleBase* vehicle = lane[i]->getVehicle();
+
+
+            for(;i>roadSize - (vehicle->getVehicleSize() - 1); i--){
+                lane[i]->setVehicle(nullptr);
+            }
+     
+            delete vehicle;
+            
 }
 
 #endif
