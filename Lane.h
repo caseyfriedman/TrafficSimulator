@@ -20,10 +20,15 @@ class Lane
         VehicleBase* vehicleTurningRight;
         vector<Section*> lane;
         TrafficLight* light;
-    
+        void removeVehicle(int i);
+        void moveForwardTo(int i);
+        bool canMakeLight(VehicleBase* vehicle);
+        int timeToCross(VehicleBase* vehicle);
+        bool determineHead(int vehicleIndex);    
+        bool shouldNewCarCome(); // I THINK THIS CAN BE DELETED
     public:
         Lane();
-        Lane(Parameters params, Direction type, TrafficLight* light); //road is gonna tell us how much time until red
+        Lane(Parameters params, Direction type, TrafficLight* light); 
         ~Lane();
  
         void advanceLane();
@@ -32,19 +37,12 @@ class Lane
         inline VehicleBase* getTurningVehicle() {return this->vehicleTurningRight;}
         inline void setTurningVehicle(VehicleBase* v) {this->vehicleTurningRight = v;}
         inline Direction getDirection(){return this->type;}
-        void addVehicle(VehicleBase* vehicle); //maybe should be boolean and return false if there's a vehicle there?
+        void addVehicle(VehicleBase* vehicle);
         void addAtTurnIndex(VehicleBase* vehicle);     
  
-        bool canMakeLight(VehicleBase* vehicle);
-        int timeToCross(VehicleBase* vehicle);
         bool canNewCarCome();
-        bool shouldNewCarCome();
-        void moveForwardTo(int i);
-        bool determineHead(int vehicleIndex);        
-        void removeVehicle(int i);
+        
         void addIntersections(vector<Section*> intersections);
-
-        //TESTING
 
         vector<Section*> getLane() {return lane;}
     

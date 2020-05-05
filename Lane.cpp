@@ -6,9 +6,9 @@
 
 Lane::Lane()
 {
-    //assume it is NB lane with roadSize 10
+
     roadSize = 10;
-    //int numSections = roadSize + 6;
+
     midLane = (roadSize+6)/2;
     
     for(int i = 0; i < midLane; i++)
@@ -47,7 +47,7 @@ Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
     
 
     lane.push_back(nullptr); //the intersections are created by Road but aren't available at initialization
-    lane.push_back(nullptr);
+    lane.push_back(nullptr); //so we need to add in placeholders
 
 
     for(int i = 0; i < midLane; i++)
@@ -68,7 +68,7 @@ Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
 
 Lane::~Lane() {}
 
-void Lane::advanceLane() //return a vehicle id?
+void Lane::advanceLane() 
 {
     int currVehicle = -1;
     bool vehicleHead = false;
@@ -88,9 +88,6 @@ void Lane::advanceLane() //return a vehicle id?
 
             if(i == lane.size() - 1) // vehicle is at the end
             {
-                
-                 
-                //lane[i]->setVehicle(nullptr);
                 removeVehicle(i);
                 continue;
             }
@@ -99,7 +96,7 @@ void Lane::advanceLane() //return a vehicle id?
                 moveForwardTo(i);
                 continue;
             }
-            else if ((i == midLane + 1) && !light->getIsRed()) //what if it's turning
+            else if ((i == midLane + 1) && !light->getIsRed()) 
             {
                 moveForwardTo(i);
                 continue;
@@ -109,13 +106,12 @@ void Lane::advanceLane() //return a vehicle id?
 
                 if(lane[i]->getVehicle()->getTurn())
                 {
-                    //cout << "The Vehicle ID that is turning right is " << lane[i]->getVehicle()->getVehicleID() << endl;
-                    //cout << "And the vehicle is in " << lane[i]->getVehicle()->getVehicleOriginalDirection() << endl;
+                    
                     setMakingRight(true); //indicate a vehicle is making a right
                     
-                    //I changed it to be vehiclePtr because that's what the other methods seemed to do
-                    setTurningVehicle(lane[i]->vehiclePtr); //store vehicle that is making a right
-                    //ERROR
+                    
+                    setTurningVehicle(lane[i]->getVehicle()); //store vehicle that is making a right
+                    
                    
   
                     lane[i]->setVehicle(nullptr); //Remove vehicle and Road will add it to the appropriate lane
@@ -131,7 +127,7 @@ void Lane::advanceLane() //return a vehicle id?
             {
                 if(vehicleHead && determineHead(i)) //vehicle heads should check if they can go
                 {
-                    //cout << "determineHead = "<< determineHead(i) << endl;
+                    
                     if(canMakeLight(lane[i]->getVehicle())) //move if can make it
                     {
                     
@@ -153,7 +149,7 @@ void Lane::advanceLane() //return a vehicle id?
             }
             else
             {
-                if(i < midLane && !lane[i+1]->isOccupied()) // and the light isn't red
+                if(i < midLane && !lane[i+1]->isOccupied()) 
                 {
                     moveForwardTo(i);
                 }
@@ -164,7 +160,7 @@ void Lane::advanceLane() //return a vehicle id?
 }
 
 void Lane::addVehicle(VehicleBase* vehiclePtr)
-{ //might want it not to be a pointer, will wait and see
+{ 
     for (int i = 3; i > 3-vehiclePtr->getVehicleSize(); i--) //vehicles always added at pos 3 (first visible pos in lane)
     //truck will fill pos 3-0
     //suv will fill pos 3-1
@@ -176,7 +172,7 @@ void Lane::addVehicle(VehicleBase* vehiclePtr)
 
 bool Lane::canMakeLight(VehicleBase* vehicle)
 {
-    if(light->getIsRed()) //every lane only needs 1 traffic light
+    if(light->getIsRed()) 
     {
         return false;
     }
@@ -184,7 +180,7 @@ bool Lane::canMakeLight(VehicleBase* vehicle)
     return timeToCross(vehicle) <= light->timeUntilRed();
 }
 
-int Lane::timeToCross(VehicleBase* vehicle)   //should this be a pointer???
+int Lane::timeToCross(VehicleBase* vehicle)   
 {
     int timeToCross = 2;
     
@@ -255,7 +251,7 @@ intersection[3] = SW
 
 void Lane::moveForwardTo(int i){
 
-     lane[i + 1]->setVehicle(lane[i]->vehiclePtr);
+     lane[i + 1]->setVehicle(lane[i]->getVehicle());
      lane[i]->setVehicle(nullptr);
 } 
 
@@ -268,8 +264,8 @@ void Lane::addAtTurnIndex(VehicleBase* vehicle)
 bool Lane::determineHead(int vehicleIndex)
 {
     //compute vehicleID and size of vehicle to save on calculations
-    int vehicleID = lane[vehicleIndex]->vehiclePtr->getVehicleID();
-    int count = lane[vehicleIndex]->vehiclePtr->getVehicleSize();
+    int vehicleID = lane[vehicleIndex]->getVehicle()->getVehicleID();
+    int count = lane[vehicleIndex]->getVehicle()->getVehicleSize();
     
     //for testing purposes, allows us to know whether vehicle section at index is truly a head
   
@@ -277,19 +273,19 @@ bool Lane::determineHead(int vehicleIndex)
     int i = 1;  //initialize i to 1 because we want to check index, 1 to (vehicle size-1) before it
     
     //if null pointer directly behind, it is not a head
-    if (!lane[vehicleIndex-i]->vehiclePtr)
+    if (!lane[vehicleIndex-i]->getVehicle())
     {  
         return false;
     }
     //if index ahead is not a nullptr and is the same vehicle, it is not a head
-    if (lane[vehicleIndex+1]->vehiclePtr && vehicleID != lane[vehicleIndex+1]->getVehicle()->getVehicleID())
+    if (lane[vehicleIndex+1]->getVehicle() && vehicleID != lane[vehicleIndex+1]->getVehicle()->getVehicleID())
     {      
            return false;
     }
     //while null pointers are not found and we have not iterated for size of vehicle,
     //if any index 1 before to (vehicle size-1) before vehicleIndex is not same vehicle
     //then it is not head
-    while (lane[vehicleIndex-i]->vehiclePtr && i < count)
+    while (lane[vehicleIndex-i]->getVehicle() && i < count)
     {
        
        if (vehicleID != lane[vehicleIndex-i]->getVehicle()->getVehicleID())
@@ -310,8 +306,6 @@ bool Lane::determineHead(int vehicleIndex)
 
 void Lane::removeVehicle(int i){
     cout << "Deleting car " << lane[i]->getVehicle()->getVehicleID() << endl;
-    cout << "deleting at index: " << i << endl;
-    //cout << "vehicle with size: " << lane[i]->getVehicle()->getVehicleSize() <<endl; 
     VehicleBase* vehicle = lane[i]->getVehicle();
             for(int x = i;x>(roadSize - (vehicle->getVehicleSize() - 1)); x--){
                 lane[x]->setVehicle(nullptr);
