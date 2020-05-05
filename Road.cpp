@@ -1,5 +1,4 @@
 #include "Road.h"
-#include "Random.h"
 #include <iostream>
 using namespace std;
 
@@ -15,26 +14,14 @@ ewLight(LightDirection::EW,params), northBound(params, Direction::north,
 	params, Direction::east, &ewLight), westBound(params, Direction::west,
 	&ewLight){
 
-        probNewVehicle.push_back(params.get_prob_new_vehicle_northbound());
-        probNewVehicle.push_back(params.get_prob_new_vehicle_southbound());
-        probNewVehicle.push_back(params.get_prob_new_vehicle_eastbound());
-        probNewVehicle.push_back(params.get_prob_new_vehicle_westbound());
 
-        probVehicleType.push_back(params.get_proportion_of_cars());
-        probVehicleType.push_back(params.get_proportion_of_SUVs());
+		roadSize = params.compute_total_size();
 
-        probRightTurn.push_back(params.get_proportion_right_turn_cars());
-        probRightTurn.push_back(params.get_proportion_right_turn_SUVs());
-        probRightTurn.push_back(params.get_proportion_right_turn_trucks());
-
+		createVectors(params);
+     
         setIntersections();
 
-        laneVec.push_back(&northBound);
-        laneVec.push_back(&southBound);
-        laneVec.push_back(&eastBound);
-        laneVec.push_back(&westBound);
-
-	setLanes();
+		setLanes();
 }
 
 void Road::setIntersections(){
@@ -197,4 +184,30 @@ VehicleBase* Road::genNewVehicle(Direction dir)
 }
 
 
-//maybe clock tick will occur in driver 
+void Road::createVectors(Parameters params){
+
+	 	probNewVehicle.push_back(params.get_prob_new_vehicle_northbound());
+        probNewVehicle.push_back(params.get_prob_new_vehicle_southbound());
+        probNewVehicle.push_back(params.get_prob_new_vehicle_eastbound());
+        probNewVehicle.push_back(params.get_prob_new_vehicle_westbound());
+
+
+        probVehicleType.push_back(params.get_proportion_of_cars());
+        probVehicleType.push_back(params.get_proportion_of_SUVs()); //where is truck
+
+
+
+        probRightTurn.push_back(params.get_proportion_right_turn_cars());
+        probRightTurn.push_back(params.get_proportion_right_turn_SUVs());
+        probRightTurn.push_back(params.get_proportion_right_turn_trucks());
+
+
+
+        laneVec.push_back(&northBound);
+        laneVec.push_back(&southBound);
+        laneVec.push_back(&eastBound);
+        laneVec.push_back(&westBound);
+
+}
+
+
