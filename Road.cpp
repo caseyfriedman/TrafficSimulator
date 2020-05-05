@@ -14,16 +14,26 @@ ewLight(LightDirection::EW,params), northBound(params, Direction::north,
 	params, Direction::east, &ewLight), westBound(params, Direction::west,
 	&ewLight){
 
-	setIntersections();
+        probNewVehicle.push_back(params.get_prob_new_vehicle_northbound());
+        probNewVehicle.push_back(params.get_prob_new_vehicle_southbound());
+        probNewVehicle.push_back(params.get_prob_new_vehicle_eastbound());
+        probNewVehicle.push_back(params.get_prob_new_vehicle_westbound());
+
+        probVehicleType.push_back(params.get_proportion_of_cars());
+        probVehicleType.push_back(params.get_proportion_of_SUVs());
+
+        probRightTurn.push_back(params.get_proportion_right_turn_cars());
+        probRightTurn.push_back(params.get_proportion_right_turn_SUVs());
+        probRightTurn.push_back(params.get_proportion_right_turn_trucks());
+
+        setIntersections();
+
+        laneVec.push_back(&northBound);
+        laneVec.push_back(&southBound);
+        laneVec.push_back(&eastBound);
+        laneVec.push_back(&westBound);
 
 	setLanes();
-
-
-
-
-
-
-
 
 }
 
@@ -107,18 +117,7 @@ void Road::advanceRoad(){
    }
 
    //determine if new cars will be added- calls Lane.canAddCar() method for all lanes
-   if (northBound.canNewCarCome())
-   {
-      //if true, calls another method in lane which will generate random number to determine whether that particular lane 
-      //(based on its param values) should add a vehicle at that clock tick
-      if (northBound.shouldNewCarCome())
-      { 
-         //somewhere need to use RNG to determine whether new vehicle will be car, SUV or truck 
-         //We need to give the car params but this doesn't currently have access- we should think about how we are using params
-         //northBound.addVehicle(VehicleBase (VehicleType::car, Direction::north, params)); //adds newly generated vehicle to lane and vector of vehicles and increments vehicle count
-      	//                       ^^^^^^^^^^^^^^^^^^^^^^^ needs to be a pointer		
-      }   
-   } //else does not add car
+   addNewVehicles();
 
    ewLight.update();
    nsLight.update();
@@ -141,6 +140,70 @@ void Road::addVehicle(VehicleBase* vehicle, Direction type){
         vehicleCount++;
 }
 
+void Road::addNewVehicles()
+{
+    double randNum;
+    for(int i = 0; i < 4; i ++)
+    {
+        randNum = Random::generateNum();
+        if(laneVec[i]->canNewCarCome() && (probNewVehicle[i] < randNum))
+        {
+            laneVec[i]->addVehicle(genNewVehicle(laneVec[i]->getDirection()));
+        }
+    }
+}
+
+VehicleBase* Road::genNewVehicle(Direction dir)
+{
+    double randNum = Random::generateNum();
+    VehicleType t;
+
+    if(probVehicleType[0] < randNum)
+    {
+        t = VehicleType::car;
+    }
+    else if ((probVehicleType[0] = probVehicleType[1]) < randNum)
+    {
+        t = VehicleType::suv;
+    }
+    else
+    {
+        t = VehicleType::truck;
+    }
+
+    VehicleBase* v = new VehicleBase(t, dir); //needs to be dynamically allocated
+    
+    randNum = Random::generateNum();
+    switch(t)
+    {
+       case VehicleType::car: 
+         {
+            if (probRightTurn[0] <= randNum)
+            {
+               v->setRightTurn();
+            }
+            break;
+         }
+       case VehicleType::suv: 
+         {
+            if (probRightTurn[1] <= randNum)
+            {
+               v->setRightTurn();
+            }
+            break;
+         }
+       case VehicleType::truck: 
+         {
+            if (probRightTurn[2] <= randNum)
+            {
+               v->setRightTurn();
+            }
+            break;
+         }
+    }    
+
+    return v;
+}
 
 
 //maybe clock tick will occur in driver 

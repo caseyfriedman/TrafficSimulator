@@ -5,6 +5,7 @@
 #include "Lane.h"
 #include "Parameters.h"
 #include "TrafficLight.h"
+#include "Random.h"
 #include <vector>
 using namespace std;
 
@@ -38,6 +39,13 @@ class Road
 		Lane southBound;
 		Lane eastBound;
 		Lane westBound;
+                vector<Lane*> laneVec;
+                vector<double> probNewVehicle;
+                vector<double> probVehicleType;
+                vector<double> probRightTurn;
+                VehicleBase* genNewVehicle(Direction dir);
+                       void addNewVehicles();
+
 
 };
 #endif
