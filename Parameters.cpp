@@ -13,6 +13,10 @@ Parameters parameters("input_file_format.txt");
 
 #include "Parameters.h"
 
+
+Parameters::Parameters(){
+	//empty and could possibly be removed if Parameters member variable is taken out of Road
+}
 	
 
 Parameters::Parameters(string filename){

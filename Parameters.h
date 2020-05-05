@@ -27,6 +27,7 @@ private:
 public:
 
 Parameters(string filename);
+Parameters();
 
 int get_max_simulated_time();
 
