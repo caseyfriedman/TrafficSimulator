@@ -15,7 +15,8 @@ int VehicleBase::vehicleCount = 0;
 VehicleBase::VehicleBase(VehicleType type, Direction dir)
     : vehicleID(VehicleBase::vehicleCount++),
       vehicleType(type),
-      vehicleDirection(dir)
+      vehicleDirection(dir),
+      turnRight(false)
 {
    //set vehicle size based on vehicle type
    switch(vehicleType)
