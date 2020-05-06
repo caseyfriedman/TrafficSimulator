@@ -1,3 +1,15 @@
+/**
+
+Created by Casey, Mikaela, and Aidan
+
+5/5/20
+
+This header file contains the random number generator object and its methods
+
+Seed must be set using setSeed() at some point.
+
+*/
+
 #ifndef __RANDOM_H__
 #define __RANDOM_H__
 

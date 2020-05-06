@@ -1,8 +1,16 @@
-#ifndef __RANDOM_CPP__
-#define __RANDOM_CPP__
+/**
 
-#include <iostream>
-#include <random>
+Created by Casey, Mikaela, and Aidan
+
+5/5/20
+
+This file contains the random number generator object and its methods.
+
+It contains a static method that generates a random number.
+
+*/
+
+
 #include "Random.h"
 
 std::mt19937 Random::rng; // Mersenne twister
@@ -14,5 +22,4 @@ double Random::generateNum()
    return rand_double(rng);
 }
 
-#endif
 

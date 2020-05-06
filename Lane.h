@@ -1,3 +1,15 @@
+/**
+
+Created by Casey, Mikaela, and Aidan
+
+5/5/20
+
+Lane constructor takes in Parameters, Direction, and a pointer to a Traffic light
+
+A Lane contains a vector of sections* and a corresponding light.
+
+*/
+
 #ifndef __LANE_H__
 #define __LANE_H__
 
@@ -26,7 +38,6 @@ class Lane
         bool canMakeLight(VehicleBase* vehicle);
         int timeToCross(VehicleBase* vehicle);
         bool determineHead(int vehicleIndex);    
-        bool shouldNewCarCome(); // I THINK THIS CAN BE DELETED
     public:
         Lane();
         Lane(Parameters params, Direction type, TrafficLight* light); 

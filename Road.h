@@ -1,3 +1,14 @@
+/**
+
+Created by Casey, Mikaela, and Aidan
+
+5/5/20
+
+Road constructor takes in Parameters, and it creates and holds TrafficLights, Lanes, and the intersections.
+Road handles random vehicle generation.
+
+*/
+
 #ifndef ROAD_H
 #define ROAD_H
 
@@ -9,67 +20,77 @@
 #include <iostream>
 #include <vector>
 
-
 using namespace std;
 
 class Road
 {
-	private:
-		Section neIntersection;
-		Section nwIntersection;
-		Section seIntersection;
-		Section swIntersection;
+private:
+    Section neIntersection;
+    Section nwIntersection;
+    Section seIntersection;
+    Section swIntersection;
 
+    Lane northBound;
+    Lane southBound;
+    Lane eastBound;
+    Lane westBound;
 
-		Lane northBound;
-		Lane southBound;
-		Lane eastBound;
-		Lane westBound;
+    Parameters param;
+    int roadSize;
 
+    vector<Section*> intersections;
 
-		Parameters param;
-		int roadSize;
-		
-		vector<Section*> intersections;
-		
-		TrafficLight nsLight;
-		TrafficLight ewLight;
+    TrafficLight nsLight;
+    TrafficLight ewLight;
 
-		vector<Lane*> laneVec;
-        vector<double> probNewVehicle;
-        vector<double> probVehicleType;
-        vector<double> probRightTurn;
-		void createVectors(Parameters params);
-		void setLanes();	
-		VehicleBase* genNewVehicle(Direction dir);
-		void addNewVehicles();
-	public:
-		
-		int vehicleCount; //NOT REALLY USED OTHER THAN IN TESTS
-        Road();
-        Road(Parameters params);
-        
-		void advanceRoad();
-		void addVehicle(VehicleBase* vehicle, Direction type);
-		void setIntersections();
-		void moveTraffic(int currentTime);
-		
-		
-		TrafficLight getNsLight(){return nsLight;}
-		TrafficLight getEwLight(){return ewLight;}
+    vector<Lane*> laneVec;
+    vector<double> probNewVehicle;
+    vector<double> probVehicleType;
+    vector<double> probRightTurn;
+    void createVectors(Parameters params);
+    void setLanes();
+    VehicleBase* genNewVehicle(Direction dir);
+    void addNewVehicles();
+public:
+    
+    Road();
+    Road(Parameters params);
 
-		Lane getNB(){return northBound;}
-		Lane getSB(){return southBound;}
-		Lane getEB(){return eastBound;}
-		Lane getWB(){return westBound;}
+    void advanceRoad();
 
-		int getRoadsize() {return roadSize + 2;}
+    void setIntersections();
+    void moveTraffic(int currentTime);
 
-		
-                
-       	
-        
+    TrafficLight getNsLight()
+    {
+        return nsLight;
+    }
+    TrafficLight getEwLight()
+    {
+        return ewLight;
+    }
 
+    Lane getNB()
+    {
+        return northBound;
+    }
+    Lane getSB()
+    {
+        return southBound;
+    }
+    Lane getEB()
+    {
+        return eastBound;
+    }
+    Lane getWB()
+    {
+        return westBound;
+    }
+
+    int getRoadsize()
+    {
+        return roadSize + 2;
+    }
 
 };
 #endif

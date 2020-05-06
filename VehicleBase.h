@@ -1,3 +1,13 @@
+/**
+
+Created by Casey, Mikaela, and Aidan
+
+5/5/20
+
+VehicleBase constructor takes in a type and a direction.
+
+*/
+
 #ifndef __VEHICLE_BASE_H__
 #define __VEHICLE_BASE_H__
 
@@ -11,33 +21,53 @@ enum class LightColor  {green, yellow, red};
 
 class VehicleBase
 {
-   public:
-      static int vehicleCount;
+public:
+    static int vehicleCount;
 
-   private:
-      int         vehicleID;
-      VehicleType vehicleType;
-      Direction   vehicleDirection;
-      int         vehicleSize;
-      bool        turnRight;
-      int         headSet;   
- 
-    public:
-       VehicleBase(VehicleType type, Direction dir);
-       VehicleBase(VehicleType type, Direction originalDirection, Parameters param);
-       VehicleBase(const VehicleBase& other);
-       ~VehicleBase();
+private:
+    int         vehicleID;
+    VehicleType vehicleType;
+    Direction   vehicleDirection;
+    int         vehicleSize;
+    bool        turnRight;
+    int         headSet;
 
-       inline int getVehicleID() const { return this->vehicleID; }
+public:
+    VehicleBase(VehicleType type, Direction dir);
+    VehicleBase(const VehicleBase &other);
+    ~VehicleBase();
 
-       inline void setVehicleID(int num) {vehicleID=num;}
-       inline void setRightTurn() {turnRight=true;}
+    inline int getVehicleID() const
+    {
+        return this->vehicleID;
+    }
 
-       inline VehicleType getVehicleType() const { return this->vehicleType; }
-       inline Direction   getVehicleOriginalDirection() const { return this->vehicleDirection; }
+    inline void setVehicleID(int num)
+    {
+        vehicleID = num;
+    }
+    inline void setRightTurn()
+    {
+        turnRight = true;
+    }
 
-       inline int getVehicleSize() {return this->vehicleSize;}
-       inline bool getTurn() {return this->turnRight;}
+    inline VehicleType getVehicleType() const
+    {
+        return this->vehicleType;
+    }
+    inline Direction   getVehicleOriginalDirection() const
+    {
+        return this->vehicleDirection;
+    }
+
+    inline int getVehicleSize()
+    {
+        return this->vehicleSize;
+    }
+    inline bool getTurn()
+    {
+        return this->turnRight;
+    }
 };
 
 #endif
