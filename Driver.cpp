@@ -81,4 +81,6 @@ int main(int argc, char *argv[])
         std::cin.get(dummy);
     }
 
+    return 0;
+
 }
