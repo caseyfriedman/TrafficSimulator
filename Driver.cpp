@@ -68,7 +68,6 @@ int main(int argc, char *argv[])
             southbound[i - 3] = road.getSB().getLane()[i]->getVehicle();
             eastbound[i - 3] = road.getEB().getLane()[i]->getVehicle();
             westbound[i - 3] = road.getWB().getLane()[i]->getVehicle();
-
         }
         anim.setVehiclesNorthbound(northbound);
         anim.setVehiclesSouthbound(southbound);

@@ -23,8 +23,6 @@ Road::Road(Parameters params) : nsLight(LightDirection::NS, params),
                 params, Direction::east, &ewLight), westBound(params, Direction::west,
                         &ewLight)
 {
-
-
     roadSize = params.compute_total_size();
 
     createVectors(params);
@@ -49,7 +47,6 @@ void Road::setIntersections()
 
 void Road::setLanes()
 {
-
     for(int i = 0; i < 4; i++)
     {
         laneVec[i]->addIntersections(intersections);
@@ -68,10 +65,8 @@ void Road::advanceRoad()
     //call the appropriate methods for right turns to occur for all lanes- only lanes with green light should be
     if(!ewLight.getIsRed()) //if east west light is not red, these cars may be turning
     {
-
         if (eastBound.getTurningVehicle())
         {
-
             southBound.addAtTurnIndex(eastBound.getTurningVehicle());
 
             eastBound.setTurningVehicle(nullptr); //reset turning vehicle pointer
@@ -79,7 +74,6 @@ void Road::advanceRoad()
         }
         if (westBound.getTurningVehicle())
         {
-
             northBound.addAtTurnIndex(westBound.getTurningVehicle());
 
             westBound.setTurningVehicle(nullptr); //reset turning vehicle pointer
@@ -90,8 +84,6 @@ void Road::advanceRoad()
     {
         if (northBound.getTurningVehicle())
         {
-
-
             eastBound.addAtTurnIndex(northBound.getTurningVehicle());
 
             northBound.setTurningVehicle(nullptr); //reset turning vehicle pointer
@@ -99,7 +91,6 @@ void Road::advanceRoad()
         }
         if (southBound.getTurningVehicle())
         {
-
             westBound.addAtTurnIndex(southBound.getTurningVehicle());
 
             southBound.setTurningVehicle(nullptr); //reset turning vehicle pointer
@@ -131,7 +122,6 @@ VehicleBase* Road::genNewVehicle(Direction dir)
 {
     double randNum = Random::generateNum();
     VehicleType t;
-
 
     //determines whether vehicle should be car, suv, or truck based on parameter values
     if(probVehicleType[0] > randNum) 

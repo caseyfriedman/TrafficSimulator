@@ -21,8 +21,6 @@ Parameters::Parameters()
 
 Parameters::Parameters(string filename)
 {
-
-
     ifstream infile {filename};
     if (!infile)
     {
@@ -30,17 +28,14 @@ Parameters::Parameters(string filename)
 
     }
 
-
     string next;
     string param;
 
     while(!infile.eof())
     {
-
         infile >> next;
         infile >> param;
         params.push_back(param);
-
     }
 
     if (infile.fail() && !infile.eof())
@@ -172,7 +167,6 @@ int Parameters::compute_total_size()
     return total_sections;
 
 }
-
 
 
 void Parameters::error(std::string msg, string filename)

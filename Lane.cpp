@@ -34,8 +34,6 @@ Lane::Lane()
     }
 }
 
-
-
 Lane::Lane(Parameters params, Direction t, TrafficLight *light) : light(light)
 {
 
