@@ -81,6 +81,8 @@ int main(int argc, char *argv[])
         std::cin.get(dummy);
     }
 
+    road.deletePointers();
+
     return 0;
 
 }

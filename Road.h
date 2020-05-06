@@ -92,5 +92,8 @@ public:
         return roadSize + 2;
     }
 
+    void deletePointers();
+
+
 };
 #endif

@@ -57,6 +57,8 @@ class Lane
         void addIntersections(vector<Section*> intersections);
 
         vector<Section*> getLane() {return lane;}
+
+        void deletePointers();
     
 };
 #endif

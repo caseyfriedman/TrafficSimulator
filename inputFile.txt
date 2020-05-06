@@ -1,6 +1,6 @@
-maximum_simulated_time:                 1000
+maximum_simulated_time:                 30
 number_of_sections_before_intersection:    5
-green_north_south:                         6
+green_north_south:                         52
 yellow_north_south:                        2
 green_east_west:                           3
 yellow_east_west:                          4
@@ -10,9 +10,9 @@ prob_new_vehicle_eastbound:                0.15
 prob_new_vehicle_westbound:                0.15
 proportion_of_cars:                        0.6
 proportion_of_SUVs:                        0.3
-proportion_right_turn_cars:                0.5
+proportion_right_turn_cars:                1.0
 proportion_left_turn_cars:                 0.1
-proportion_right_turn_SUVs:                0.30
+proportion_right_turn_SUVs:                1.0
 proportion_left_turn_SUVs:                 0.05
-proportion_right_turn_trucks:              0.25
+proportion_right_turn_trucks:              1.0
 proportion_left_turn_trucks:               0.02

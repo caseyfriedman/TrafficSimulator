@@ -200,3 +200,13 @@ void Road::createVectors(Parameters params)
 }
 
 
+void Road::deletePointers(){
+    for(int i=0;i<4;i++){
+        laneVec[i]->deletePointers();   
+    }
+
+
+}
+
+
+

@@ -290,3 +290,13 @@ void Lane::removeVehicle(int i)
     delete vehicle;
 }
 
+
+void Lane::deletePointers(){
+    for(int i=0;i < roadSize - 1; i++){
+        if(!lane[i]->isIntersection()){
+            delete lane[i];
+        }
+    }
+}
+
+
