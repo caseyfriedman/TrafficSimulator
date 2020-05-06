@@ -3,16 +3,26 @@
 #include "VehicleBase.h"
 #include "Parameters.h"
 #include "TrafficLight.h"
+#include "Random.h"
 #include "Road.h"
+using namespace std;
 
-int main()
+int main(int argc, char *argv[])
 {
-    //Read and store parameters
-    Parameters params("inputFile.txt");
 
-    //Animator::MAX_VEHICLE_COUNT = 9999;  // vehicles will be displayed with four digits
+
+    if (argc != 3)
+    {
+        std::cerr << "Usage: " << argv[0]
+                  << " <ParameterFile> <seed number>" << std::endl;
+        exit(0);
+    }
+    //Read and store parameters
+    Parameters params(argv[1]);
+
+
+    Random::setSeed(atoi(argv[2]));
     Animator::MAX_VEHICLE_COUNT = 999;  // vehicles will be displayed with three digits
-    //Animator::MAX_VEHICLE_COUNT = 99;  // vehicles will be displayed with two digits   
  
     int halfSize = params.get_number_of_sections_before_intersection();  // number of sections before intersection
 
@@ -45,10 +55,9 @@ syncs the lanes with the VehicleBase vectors
     while (i <= params.get_max_simulated_time())
     {
        road.advanceRoad();
-       cout << "The size of this road is " << road.getRoadsize() << endl;
        for(int i=3; i < road.getRoadsize() - 3; i++){
         northbound[i-3] = road.getNB().getLane()[i]->getVehicle();
-        southbound[i-3] = road.getSB().getLane()[i]->getVehicle(); //I don't think it has to be a pointer
+        southbound[i-3] = road.getSB().getLane()[i]->getVehicle();
         eastbound[i-3] = road.getEB().getLane()[i]->getVehicle();
         westbound[i-3] = road.getWB().getLane()[i]->getVehicle();
        

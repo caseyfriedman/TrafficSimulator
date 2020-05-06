@@ -60,33 +60,35 @@ TrafficLight::~TrafficLight() {}
 
 void TrafficLight::update()
 {
+ 
    if (counter == 0)
    {
       isRed = true;  //count to red finished, light is now red
       counter = timeRed + timeGreen + timeYellow - 1;   //counter reset
-      std::cout << "Light set red" << std::endl;
+     
    }
    else if (counter == timeGreen + timeYellow)
    {
       counter--;
       isRed = false; //counter has past red portion, light is not red
-      std::cout << "Light set green" << std::endl;  
+     
    }
    else
    {
-      //counter--;
-      std::cout << counter-- << std::endl;
+    std::cout << counter << std::endl;
+      counter--;
+      
    }
 }
 
 LightColor TrafficLight::getColor(){
 
-      if(counter > 0 && counter <= timeYellow){
+     
+      if(counter >= 0 && counter < timeYellow){
         return LightColor::yellow;
       } else if (getIsRed()) {
         return LightColor::red;
 }
-
 
         return LightColor::green;
 }

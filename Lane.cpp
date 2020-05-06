@@ -54,14 +54,6 @@ Lane::Lane(Parameters params, Direction t, TrafficLight* light) : light(light)
         lane.push_back(sec);
     }
 
-    //read and store the probabilties for new vehicles for each lane
-    switch(this->type)
-    {
-       case Direction::north: probOfNewVehicle = params.get_prob_new_vehicle_northbound(); break;
-       case Direction::south: probOfNewVehicle = params.get_prob_new_vehicle_southbound(); break;
-       case Direction::east: probOfNewVehicle = params.get_prob_new_vehicle_eastbound(); break;
-       case Direction::west: probOfNewVehicle = params.get_prob_new_vehicle_westbound(); break;
-    }
 }
 
 Lane::~Lane() {}
@@ -105,6 +97,7 @@ void Lane::advanceLane()
                 if(lane[i]->getVehicle()->getTurn())
                 {
                     
+
                     setMakingRight(true); //indicate a vehicle is making a right
                     
                     
@@ -125,7 +118,7 @@ void Lane::advanceLane()
             {
                 if(vehicleHead && determineHead(i)) //vehicle heads should check if they can go
                 {
-                    
+                        
                     if(canMakeLight(lane[i]->getVehicle())) //move if can make it
                     {
                     
@@ -140,6 +133,8 @@ void Lane::advanceLane()
                 else //is a body of car, no decisions to be made (can assume its safe to move) 
                 {
                     
+
+                    cout << "Body of car detected " << lane[i]->getVehicle()->getVehicleID() << endl;
                     moveForwardTo(i);
                     
                     continue; 
@@ -273,11 +268,13 @@ bool Lane::determineHead(int vehicleIndex)
     //if null pointer directly behind, it is not a head
     if (!lane[vehicleIndex-i]->getVehicle())
     {  
+        cout << "Vehicle: " << vehicleID << ", 1st condition" << " at index " << vehicleIndex - i << endl;
         return false;
     }
     //if index ahead is not a nullptr and is the same vehicle, it is not a head
-    if (lane[vehicleIndex+1]->getVehicle() && vehicleID != lane[vehicleIndex+1]->getVehicle()->getVehicleID())
+    if (lane[vehicleIndex+1]->getVehicle() && vehicleID == lane[vehicleIndex+1]->getVehicle()->getVehicleID())
     {      
+        cout << "Vehicle: " << vehicleID << " , 2nd condition" << " at index " << vehicleIndex+1<< endl;
            return false;
     }
     //while null pointers are not found and we have not iterated for size of vehicle,
@@ -288,6 +285,7 @@ bool Lane::determineHead(int vehicleIndex)
        
        if (vehicleID != lane[vehicleIndex-i]->getVehicle()->getVehicleID())
        {  
+        cout << "Vehicle: " << vehicleID << " , 3rd condition" << "at index " << vehicleIndex -i <<  endl;
            return false;
        }
        i++;
@@ -295,20 +293,22 @@ bool Lane::determineHead(int vehicleIndex)
     //if exited loop early due to null ptr, it is not a head 
     if (i<count)
     {     
+                cout << "Vehicle: " << vehicleID << " , 4th condition at index " << vehicleIndex<< endl;
+
            return false;
     }
     //if all of the above conditions are not met, then it is head
-   
+
     return true;
 }
 
 void Lane::removeVehicle(int i){
     cout << "Deleting car " << lane[i]->getVehicle()->getVehicleID() << endl;
     VehicleBase* vehicle = lane[i]->getVehicle();
-            for(int x = i;x>(roadSize - (vehicle->getVehicleSize() - 1)); x--){
+            for(int x = i;x>(roadSize) - (vehicle->getVehicleSize() - 1); x--){
                 lane[x]->setVehicle(nullptr);
             }
 
-            delete vehicle;
+           delete vehicle;
 }
 

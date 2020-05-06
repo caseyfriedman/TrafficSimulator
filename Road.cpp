@@ -76,6 +76,7 @@ void Road::advanceRoad(){
    {
       if (northBound.getTurningVehicle())
       {
+
          
          eastBound.addAtTurnIndex(northBound.getTurningVehicle());
      
@@ -122,7 +123,7 @@ void Road::addNewVehicles()
     for(int i = 0; i < 4; i ++)
     {
         randNum = Random::generateNum();
-        if(laneVec[i]->canNewCarCome() && (probNewVehicle[i] < randNum))
+        if(laneVec[i]->canNewCarCome() && (probNewVehicle[i] > randNum))
         {
             laneVec[i]->addVehicle(genNewVehicle(laneVec[i]->getDirection()));
         }
@@ -134,11 +135,11 @@ VehicleBase* Road::genNewVehicle(Direction dir)
     double randNum = Random::generateNum();
     VehicleType t;
 
-    if(probVehicleType[0] < randNum)
+    if(probVehicleType[0] > randNum)
     {
         t = VehicleType::car;
     }
-    else if ((probVehicleType[0] = probVehicleType[1]) < randNum)
+    else if ((probVehicleType[0] + probVehicleType[1]) > randNum)
     {
         t = VehicleType::suv;
     }
@@ -154,7 +155,7 @@ VehicleBase* Road::genNewVehicle(Direction dir)
     {
        case VehicleType::car: 
          {
-            if (probRightTurn[0] <= randNum)
+            if (probRightTurn[0] >= randNum)
             {
                v->setRightTurn();
             }
@@ -162,7 +163,7 @@ VehicleBase* Road::genNewVehicle(Direction dir)
          }
        case VehicleType::suv: 
          {
-            if (probRightTurn[1] <= randNum)
+            if (probRightTurn[1] >= randNum)
             {
                v->setRightTurn();
             }
@@ -170,7 +171,7 @@ VehicleBase* Road::genNewVehicle(Direction dir)
          }
        case VehicleType::truck: 
          {
-            if (probRightTurn[2] <= randNum)
+            if (probRightTurn[2] >= randNum)
             {
                v->setRightTurn();
             }
